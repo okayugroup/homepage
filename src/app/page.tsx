@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { Header } from "@/components/Header";
+import {FaGithub} from "react-icons/fa";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -9,7 +11,7 @@ export default function Home() {
         <div className="flex flex-col relative">
           <Image className="w-screen h-screen object-cover" src="/shiga.webp" alt="滋賀県の航空写真" width="2597" height="1841"/>
           <div className="absolute inset-0 text-white flex flex-col items-center justify-end sm:justify-center sm:items-start">
-            <div className="text-shadow-lg/80 pt-3 pb-10 sm:p-6 sm:rounded-r-2xl">
+            <div className="text-shadow-lg/80 pt-3 pb-10 sm:p-6 sm:rounded-r-2xl space-y-4">
               <h1 className="text-4xl font-black text-center sm:text-left mt-4">
                 おかゆグループ
               </h1>
@@ -19,6 +21,11 @@ export default function Home() {
               <p className="text-lg text-center sm:text-left mt-2">
                 私たちは、ソフトウェア開発をはじめとした社会貢献活動を行っています。
               </p>
+              <div className="flex flex-row mt-6 mx-8 sm:mx-0 gap-4 justify-evenly sm:justify-start">
+                <Link href="https://github.com/okayugroup">
+                  <FaGithub size={32} color="white" />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
