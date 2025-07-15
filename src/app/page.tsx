@@ -5,6 +5,24 @@ export default function Home() {
   return (
     <>
       <Header currentPath="/" />
+      <main>
+        <div className="flex flex-col relative">
+          <Image className="w-screen h-screen object-cover" src="/shiga.webp" alt="滋賀県の航空写真" width="2597" height="1841"/>
+          <div className="absolute inset-0 text-white flex flex-col items-center justify-end sm:justify-center sm:items-start">
+            <div className="text-shadow-lg/80 pt-3 pb-10 sm:p-6 sm:rounded-r-2xl">
+              <h1 className="text-4xl font-black text-center sm:text-left mt-4">
+                おかゆグループ
+              </h1>
+              <p className="text-lg text-center sm:text-left mt-2">
+                おかゆグループは、滋賀県を拠点とする学生団体です。
+              </p>
+              <p className="text-lg text-center sm:text-left mt-2">
+                私たちは、ソフトウェア開発をはじめとした社会貢献活動を行っています。
+              </p>
+            </div>
+          </div>
+        </div>
+      </main>
       <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 pt-20">
         <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
           <Image
