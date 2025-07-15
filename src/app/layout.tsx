@@ -6,7 +6,7 @@ import "./globals.css";
 const mPlus1p = M_PLUS_1p({
     variable: "--font-m-plus-1p",
     subsets: ["japanese", "latin"],
-    weight: "400"
+    weight: ["400", "500", "700", "900"]
 });
 
 const mPlus1Code = M_PLUS_1_Code({
@@ -20,6 +20,7 @@ export const metadata: Metadata = {
     description: "Next app",
 };
 
+
 export default function RootLayout({
                                        children,
                                    }: Readonly<{
@@ -28,7 +29,7 @@ export default function RootLayout({
     return (
         <html lang="ja">
         <body
-            className={`${mPlus1p.variable} ${mPlus1Code.variable} antialiased`}
+            className={`${mPlus1p.className} ${mPlus1Code.className} antialiased`}
         >
         {children}
         </body>
