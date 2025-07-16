@@ -5,13 +5,13 @@ import "./globals.css";
 
 const mPlus1p = M_PLUS_1p({
     variable: "--font-m-plus-1p",
-    subsets: ["japanese", "latin"],
+    subsets: ["latin"],
     weight: ["400", "500", "700", "900"]
 });
 
 const mPlus1Code = M_PLUS_1_Code({
     variable: "--font-m-plus-1-code",
-    subsets: ["japanese", "latin"],
+    subsets: ["latin"],
     weight: "400"
 });
 
