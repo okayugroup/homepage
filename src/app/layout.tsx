@@ -29,7 +29,7 @@ export default function RootLayout({
     return (
         <html lang="ja">
         <body
-            className={`${mPlus1p.className} ${mPlus1Code.className} antialiased`}
+            className={`${mPlus1p.className} antialiased`}
         >
         {children}
         </body>
