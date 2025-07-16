@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Header } from "@/components/Header";
 import {FaGithub} from "react-icons/fa";
 import Link from "next/link";
+import ProjectCatalog from "@/app/catalog";
 
 export default function Home() {
   return (
@@ -30,103 +31,110 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 pt-20">
-        <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-          <Image
-            className="dark:invert"
-            src="/next.svg"
-            alt="Next.js logo"
-            width={180}
-            height={38}
-            priority
-          />
-          <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-            <li className="mb-2 tracking-[-.01em]">
-              まずは{" "}
-              <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-                src/app/page.tsx
-              </code>
-              を開いて、コードを編集してみましょう。
-            </li>
-            <li className="tracking-[-.01em]">
-              保存するとすぐに変更が反映されます。
-            </li>
-          </ol>
 
-          <div className="flex gap-4 items-center flex-col sm:flex-row">
-            <a
-              className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-              href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Image
-                className="dark:invert"
-                src="/vercel.svg"
-                alt="Vercel logomark"
-                width={20}
-                height={20}
-              />
-              デプロイする
-            </a>
-            <a
-              className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-              href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              ドキュメント
-            </a>
+      {/* About Section */}
+      <section className="py-16 px-8 sm:px-20 bg-white dark:bg-gray-900">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-white">
+            私たちについて
+          </h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-300">
+                ミッション
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                おかゆグループは、技術を通じて地域社会に貢献することを目指しています。
+                学生の視点から、ソフトウェア開発や社会問題の解決に取り組みます。
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-300">
+                活動拠点
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                滋賀県を中心に活動しており、地域密着型のプロジェクトから、日本全国、さらには国際的な活動まで幅広く展開しています。
+              </p>
+            </div>
           </div>
-        </main>
-        <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-          <a
-            className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              aria-hidden
-              src="/file.svg"
-              alt="File icon"
-              width={16}
-              height={16}
-            />
-            学ぶ
-          </a>
-          <a
-            className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              aria-hidden
-              src="/window.svg"
-              alt="Window icon"
-              width={16}
-              height={16}
-            />
-            例
-          </a>
-          <a
-            className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-            href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              aria-hidden
-              src="/globe.svg"
-              alt="Globe icon"
-              width={16}
-              height={16}
-            />
-            nextjs.org にジャンプ →
-          </a>
-        </footer>
+        </div>
+      </section>
+
+      {/* Activities Section */}
+      <div className="bg-gray-50 dark:bg-gray-800">
+        <section className="py-16 px-8 sm:px-20">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">
+              主な活動
+            </h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg">
+                <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">
+                  ソフトウェア開発
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Webアプリケーション、モバイルアプリ、システム開発など、
+                  様々な技術を使ったプロジェクトに取り組んでいます。
+                </p>
+              </div>
+              <div className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg">
+                <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">
+                  社会貢献活動
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  地域のイベントへの参加、ボランティア活動、
+                  技術教育など、社会に貢献する活動を行っています。
+                </p>
+              </div>
+              <div className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg">
+                <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">
+                  勉強会・交流
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  定期的な勉強会や技術交流を通じて、
+                  メンバー同士のスキルアップと知識共有を図っています。
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <ProjectCatalog/>
       </div>
+
+      {/* Contact Section */}
+      <section className="py-16 px-8 sm:px-20 bg-white dark:bg-gray-900">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-8 text-gray-800 dark:text-white">
+            お問い合わせ
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-1">
+            おかゆグループの活動に興味がある方、一緒に活動したい方は、
+            お気軽にお問い合わせください。
+          </p>
+          <p className="text-gray-600 dark:text-gray-400 mb-8 text-sm">
+            なお、おかゆグループのプロジェクト等でご不明な点がある場合については
+            <Link href="/question" className="text-blue-500 hover:underline">
+              ご質問・お問い合わせフォーム
+            </Link>
+            からご連絡ください。
+          </p>
+          <div className="flex justify-center gap-6">
+            <Link
+              href="https://github.com/okayugroup"
+              className="flex items-center gap-2 bg-gray-800 dark:bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-500 transition-colors"
+            >
+              <FaGithub size={20} />
+              GitHub
+            </Link>
+            <Link
+                href="https://okayugroup.net"
+                className="flex items-center gap-2 bg-gray-800 dark:bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-500 transition-colors"
+            >
+              Misskey
+            </Link>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
