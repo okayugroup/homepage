@@ -23,7 +23,7 @@ export default function Home() {
             <div className="pt-20 pb-5 text-center bg-blue-900">
                 <h1 className="font-semibold text-3xl">私達について</h1>
                 <p className="text-gray-300 text-sm px-5 mt-1">
-                    おかゆグループは、滋賀県を拠点に、学生を中心として活動する社会貢献のためのグループです。
+                    おかゆグループは、滋賀県を拠点にする学生のグループです。
                 </p>
             </div>
             <section className="px-10 lg:px-30 space-y-6 lg:space-y-10 mt-5">
@@ -59,6 +59,19 @@ export default function Home() {
                                     </h3>
                                     <p className="text-gray-600 dark:text-gray-400">
                                         おかゆグループの運営とプロジェクトの推進を担当するチームです。
+                                    </p>
+                                </div>
+                            </div>
+                        </Link>
+                        <Link href="/team/software" className="hover:scale-102 transition-transform duration-300">
+                            <div className="rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow duration-300">
+                                <Image alt="OkayuGroup Project Team" src="https://picsum.photos/300/200" width="300" height="200" className="w-full"/>
+                                <div className="px-6 py-4">
+                                    <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
+                                        ソフトウェア開発部
+                                    </h3>
+                                    <p className="text-gray-600 dark:text-gray-400">
+                                        ソフトウェア開発を中心に、社会の課題解決に取り組みます。
                                     </p>
                                 </div>
                             </div>
