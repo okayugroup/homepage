@@ -24,10 +24,10 @@ export default function ProjectCatalog() {
     ];
 
     const statuses = [
-        <span key="0" className="text-yellow-200">予定</span>,
-        <span key="1" className="text-green-200">進行中</span>,
-        <span key="2" className="text-blue-200">完了</span>,
-        <span key="3" className="text-red-200">中止</span>,
+        <span key="0" className="text-yellow-500 dark:text-yellow-200">予定</span>,
+        <span key="1" className="text-green-500 dark:text-green-200">進行中</span>,
+        <span key="2" className="text-blue-500 dark:text-blue-200">完了</span>,
+        <span key="3" className="text-red-500 dark:text-red-200">中止</span>,
     ]
 
     return (

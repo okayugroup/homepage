@@ -20,8 +20,8 @@ export default function Home() {
     return <>
         <Header currentPath="/about" />
         <main className="flex flex-col justify-center gap-4">
-            <div className="pt-20 pb-5 text-center bg-blue-900">
-                <h1 className="font-semibold text-3xl">私達について</h1>
+            <div className="pt-20 pb-5 text-center bg-gray-600 dark:bg-blue-900">
+                <h1 className="text-white font-semibold text-3xl">私たちについて</h1>
                 <p className="text-gray-300 text-sm px-5 mt-1">
                     おかゆグループは、滋賀県を拠点にする学生のグループです。
                 </p>
@@ -52,7 +52,7 @@ export default function Home() {
                     <div className="p-4 grid grid-cols-3 gap-4">
                         <Link href="/team/administrators" className="hover:scale-102 transition-transform duration-300">
                             <div className="rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow duration-300">
-                                <Image alt="OkayuGroup Project Team" src="https://picsum.photos/300/200" width="300" height="200" className="w-full"/>
+                                <Image alt="OkayuGroup Project Team" src="https://picsum.photos/1200/600" width="1200" height="600" className="w-full"/>
                                 <div className="px-6 py-4">
                                     <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
                                         OkayuGroup Administrators
@@ -65,7 +65,7 @@ export default function Home() {
                         </Link>
                         <Link href="/team/software" className="hover:scale-102 transition-transform duration-300">
                             <div className="rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow duration-300">
-                                <Image alt="OkayuGroup Project Team" src="https://picsum.photos/300/200" width="300" height="200" className="w-full"/>
+                                <Image alt="OkayuGroup Project Team" src="https://picsum.photos/1200/600?a=1" width="1200" height="600" className="w-full"/>
                                 <div className="px-6 py-4">
                                     <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
                                         ソフトウェア開発部
