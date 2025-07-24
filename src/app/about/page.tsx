@@ -15,6 +15,21 @@ function Card({ title, subtitle, children }: { title: string; subtitle: string; 
     </div>
 }
 
+function Team({children, title, image, alt, link}: { children: React.ReactNode, title: string, image: string, alt: string, link?: string } ) {
+    const linkAddress = link == null ? "/team/preparing" : "/team/" + link;
+    return <Link href={linkAddress} className="hover:scale-102 transition-transform duration-300">
+        <div className="rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow duration-300">
+            <Image alt={alt} src={"/" + image + "/cover.svg"} width="600" height="200" className="w-full bg-white text-black"/>
+            <div className="px-6 py-4">
+                <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
+                    {title}
+                </h3>
+                { children }
+            </div>
+        </div>
+    </Link>
+}
+
 
 export default function Home() {
     return <>
@@ -49,33 +64,30 @@ export default function Home() {
                     </ul>
                 </Card>
                 <Card title="Our Teams" subtitle="活動形態">
-                    <div className="p-4 grid grid-cols-3 gap-4">
-                        <Link href="/team/administrators" className="hover:scale-102 transition-transform duration-300">
-                            <div className="rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow duration-300">
-                                <Image alt="OkayuGroup Project Team" src="https://picsum.photos/1200/600" width="1200" height="600" className="w-full"/>
-                                <div className="px-6 py-4">
-                                    <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
-                                        OkayuGroup Administrators
-                                    </h3>
-                                    <p className="text-gray-600 dark:text-gray-400">
-                                        おかゆグループの運営とプロジェクトの推進を担当するチームです。
-                                    </p>
-                                </div>
-                            </div>
-                        </Link>
-                        <Link href="/team/software" className="hover:scale-102 transition-transform duration-300">
-                            <div className="rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow duration-300">
-                                <Image alt="OkayuGroup Project Team" src="https://picsum.photos/1200/600?a=1" width="1200" height="600" className="w-full"/>
-                                <div className="px-6 py-4">
-                                    <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
-                                        ソフトウェア開発部
-                                    </h3>
-                                    <p className="text-gray-600 dark:text-gray-400">
-                                        ソフトウェア開発を中心に、社会の課題解決に取り組みます。
-                                    </p>
-                                </div>
-                            </div>
-                        </Link>
+                    <div className="grid grid-cols-3 gap-4">
+                        <Team alt="おかゆグループ Administrators" image="admin" link="administrators" title="OkayuGroup Administrators">
+                            <p className="text-gray-600 dark:text-gray-400">
+                                おかゆグループの運営とプロジェクトの推進を担当するチームです。
+                            </p>
+                        </Team>
+                        <Team alt="com.okayugroup.SoftwareDevelopment - おかゆグループソフトウェア開発部" image="develop" link="software" title="ソフトウェア開発部">
+                            <p className="text-gray-600 dark:text-gray-400">
+                                ソフトウェア開発を中心に、社会の課題解決に取り組みます。
+                            </p>
+                        </Team>
+                        <Team alt="おかゆグループクリエイターチーム" image="creators" link="creators" title="クリエイターチーム">
+                            <p className="text-gray-600 dark:text-gray-400">
+                                動画制作やデザインなど、クリエイティブな活動を行うチームです。
+                            </p>
+                            <p className="text-gray-600 dark:text-gray-400 text-sm mt-2">
+                                → おかゆグループ公式YouTube、SNSなど
+                            </p>
+                        </Team>
+                        <Team alt="おかゆグループ 推し活応援倶楽部！（仮称）" image="favorite" title="推し活応援倶楽部！（仮）">
+                            <p className="text-gray-600 dark:text-gray-400">
+                                推しを応援するためのチームです。おかゆグループの活動とはまた別のベクトルとして、メンバーの好きなことを応援します。
+                            </p>
+                        </Team>
                     </div>
                 </Card>
             </section>
