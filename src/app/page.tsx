@@ -97,7 +97,18 @@ export default function Home() {
               </div>
             </div>
           </section>
-          <ProjectCatalog/>
+          <section className="py-16 px-8 sm:px-20">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-3xl font-bold mb-8 text-gray-800 dark:text-white">
+                プロジェクト
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
+                おかゆグループでは、様々なプロジェクトを通じて地域社会に貢献しています。
+                ここでは、現在進行中のプロジェクトの一部を紹介します。
+              </p>
+              <ProjectCatalog/>
+            </div>
+          </section>
         </div>
 
         {/* Contact Section */}
