@@ -41,11 +41,11 @@ export default function Home() {
                     おかゆグループは、滋賀県を拠点にする学生のグループです。
                 </p>
             </div>
-            <section className="px-10 lg:px-30 space-y-6 lg:space-y-10 mt-5">
+            <div className="px-10 lg:px-30 space-y-6 lg:space-y-10 mt-5">
                 <Card title="Introduction" subtitle="おかゆグループってなに？">
                     <p className="text-gray-700 dark:text-gray-300 mb-4">
-                        おかゆグループは、滋賀県を拠点に活動する学生団体。
-                        学生の視点から、地域社会に貢献することを目指しているよ！
+                        おかゆグループは、滋賀県を拠点に活動する学生団体です。
+                        学生の視点から、地域社会に貢献することを目指しています！
                     </p>
                     <p className="text-gray-700 dark:text-gray-300">
                         私たちは、ソフトウェア開発を通じて、地域の課題解決や社会貢献に取り組んでいます。
@@ -64,6 +64,10 @@ export default function Home() {
                     </ul>
                 </Card>
                 <Card title="Our Teams" subtitle="活動形態">
+                    <p className="text-gray-700 dark:text-gray-300 mb-4">
+                        おかゆグループは、複数のチームで構成されています。
+                        各チームは、それぞれの専門分野や興味に基づいて活動しています。
+                    </p>
                     <div className="grid grid-cols-3 gap-4">
                         <Team alt="おかゆグループ Administrators" image="admin" link="administrators" title="OkayuGroup Administrators">
                             <p className="text-gray-600 dark:text-gray-400">
@@ -90,7 +94,7 @@ export default function Home() {
                         </Team>
                     </div>
                 </Card>
-            </section>
+            </div>
         </main>
     </>;
 }
