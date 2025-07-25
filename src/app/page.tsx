@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import {FaGithub} from "react-icons/fa";
 import Link from "next/link";
 import ProjectCatalog from "@/app/catalog";
+import {SiMisskey} from "react-icons/si";
 
 export default function Home() {
   return (
@@ -23,8 +24,11 @@ export default function Home() {
               私たちは、ソフトウェア開発をはじめとした社会貢献活動を行っています。
             </p>
             <div className="flex flex-row mt-6 mx-8 sm:mx-0 gap-4 justify-evenly sm:justify-start">
-              <Link href="https://github.com/okayugroup">
+              <Link href="https://github.com/okayugroup" target="_blank">
                 <FaGithub size={32} color="white" />
+              </Link>
+              <Link href="https://okayugroup.net" target="_blank">
+                <SiMisskey size={32} color="white" />
               </Link>
             </div>
           </div>
@@ -140,6 +144,7 @@ export default function Home() {
                   href="https://okayugroup.net"
                   className="flex items-center gap-2 bg-gray-800 dark:bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-500 transition-colors"
               >
+                <SiMisskey size={20} />
                 Misskey
               </Link>
             </div>
