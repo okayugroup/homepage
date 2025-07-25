@@ -4,7 +4,7 @@ import {FaGithub} from "react-icons/fa";
 import Link from "next/link";
 import ProjectCatalog from "@/app/catalog";
 import {SiMisskey} from "react-icons/si";
-import {DefaultBody} from "@/app/layout";
+import {DefaultBody} from "@/components/default-body";
 
 export default function Home() {
   return (

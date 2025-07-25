@@ -2,7 +2,7 @@ import {Header} from "@/components/Header";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {DefaultBody} from "@/app/layout";
+import {DefaultBody} from "@/components/default-body";
 
 function Card({ title, subtitle, children }: { title: string; subtitle: string; children: React.ReactNode }) {
     return <div className="rounded-lg bg-white dark:bg-gray-800 p-6 shadow-md border border-gray-200 dark:border-gray-700">

@@ -1,6 +1,6 @@
 import {Header} from "@/components/Header";
 import type {Metadata} from "next";
-import {AdminBody} from "@/app/layout";
+import {AdminBody} from "@/components/admin-body";
 
 export const metadata: Metadata = {
     title: "OkayuGroup Administrators | Home",
