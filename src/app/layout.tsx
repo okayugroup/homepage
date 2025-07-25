@@ -1,5 +1,5 @@
 import type {Metadata} from "next";
-import {M_PLUS_1_Code, M_PLUS_1p} from "next/font/google";
+import {M_PLUS_1_Code, M_PLUS_1p, Noto_Sans_JP} from "next/font/google";
 import "./globals.css";
 
 
@@ -17,6 +17,13 @@ const mPlus1Code = M_PLUS_1_Code({
     display: "swap"
 });
 
+const notosansjp = Noto_Sans_JP({
+    variable: "--font-noto-sans-jp",
+    subsets: ["latin"],
+    weight: ["400", "700"],
+    display: "swap"
+});
+
 export const metadata: Metadata = {
     title: "おかゆグループ ホームページ",
     description: "Next app",
@@ -30,11 +37,31 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="ja">
-        <body
-            className={`${mPlus1p.variable} ${mPlus1Code.variable} font-sans antialiased`}
-        >
+        {children}
+        </html>
+    );
+}
+
+export function DefaultBody({
+    children,
+}: Readonly<{
+    children: React.ReactNode;
+}>) {
+    return (
+        <body className={`${mPlus1p.variable} ${mPlus1Code.variable} font-sans antialiased`}>
         {children}
         </body>
-        </html>
+    );
+}
+
+export function AdminBody({
+    children,
+}: Readonly<{
+    children: React.ReactNode;
+}>) {
+    return (
+        <body className={`${notosansjp.variable} ${notosansjp.className} antialiased`}>
+        {children}
+        </body>
     );
 }

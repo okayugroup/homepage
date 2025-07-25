@@ -4,10 +4,11 @@ import {FaGithub} from "react-icons/fa";
 import Link from "next/link";
 import ProjectCatalog from "@/app/catalog";
 import {SiMisskey} from "react-icons/si";
+import {DefaultBody} from "@/app/layout";
 
 export default function Home() {
   return (
-    <>
+    <DefaultBody>
       <Header currentPath="/" />
       <main>
         <section className="flex flex-col relative">
@@ -151,6 +152,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-    </>
+    </DefaultBody>
   );
 }
