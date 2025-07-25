@@ -1,7 +1,7 @@
-import {M_PLUS_1_Code, M_PLUS_1p} from "next/font/google";
+import {M_PLUS_1_Code, M_PLUS_1} from "next/font/google";
 
-const mPlus1p = M_PLUS_1p({
-    variable: "--font-m-plus-1p",
+const mPlus1p = M_PLUS_1({
+    variable: "--font-m-plus-1",
     subsets: ["latin"],
     weight: ["400", "500", "700", "900"],
     display: "swap"
