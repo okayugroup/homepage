@@ -87,5 +87,8 @@ export default function AdminPage() {
                 </div>
             </section>
         </main>
+        <footer className="text-center py-10 border-t border-t-gray-200 dark:border-t-gray-700">
+            <p>&copy; 2025 おかゆグループ Administrators</p>
+        </footer>
     </AdminBody>;
 }
