@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import {IAdministrators} from "@/app/team/icons";
+import {IAdministrators} from "@/components/icons";
 
 export function Header({ currentPath, pane }: { currentPath: string, pane?: "admin" }) {
     switch (pane) {

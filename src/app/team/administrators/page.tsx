@@ -1,9 +1,7 @@
 import {Header} from "@/components/Header";
 import type {Metadata} from "next";
-import Image from "next/image";
 import {AdminBody} from "@/components/admin-body";
 import {FaArrowRight} from "react-icons/fa";
-import {ContactButton} from "@/components/contact-button";
 
 export const metadata: Metadata = {
     title: "OkayuGroup Administrators | Home",

@@ -1,4 +1,5 @@
 import {M_PLUS_1_Code, M_PLUS_1} from "next/font/google";
+import React from "react";
 
 const mPlus1p = M_PLUS_1({
     variable: "--font-m-plus-1",
