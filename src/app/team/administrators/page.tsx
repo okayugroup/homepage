@@ -1,7 +1,8 @@
 import {Header} from "@/components/Header";
 import type {Metadata} from "next";
 import {AdminBody} from "@/components/admin-body";
-import {FaArrowRight} from "react-icons/fa";
+import Link from "next/link";
+import {FaArrowRight} from "react-icons/fa6";
 
 export const metadata: Metadata = {
     title: "OkayuGroup Administrators | Home",
@@ -62,27 +63,14 @@ export default function AdminPage() {
                 <p className="text-gray-500 dark:text-gray-400 mt-2">
                     OkayuGroup Administratorsでは、プロジェクト、メンバーならびにグループ全体についてのご不明点やご意見をお待ちしております。
                 </p>
-                <div
-                    className="bg-background rounded-2xl mt-8 border dark:border-2 overflow-clip flex items-center max-h-56 justify-between group transition-transform duration-200 active:scale-98"
-                >
-                    <div className="relative w-full h-30">
-                        <svg viewBox="0 0 750 224"
-                             preserveAspectRatio="none"
-                             className="w-full min-h-full transition-transform duration-400 group-hover:scale-104 "
-                        >
-                            <path className="fill-gray-200 dark:fill-gray-900" d="M0 0h740.86l-45.127 224.222H0Z"/>
-                            <path className="fill-gray-300 dark:fill-gray-800" d="M546.955 0H740.86l-45.127 224.222H501.828Z"/>
-                            <path className="fill-gray-400 dark:fill-gray-700" d="M587.491 0H740.86l-45.127 224.222H542.365Z"/>
-                            <path className="fill-gray-500 dark:fill-gray-600" d="M636.13 0h104.73l-45.127 224.222h-104.73Z"/>
-                            <path className="fill-gray-600 dark:fill-gray-500" d="M689.256 0h51.604l-45.127 224.222H644.13Z"/>
-                        </svg>
-                        <div className="absolute z-10 max-py-4 left-5 top-0 h-full flex items-center flex-wrap md:flex-nowrap space-x-2 font-black text-3xl lg:text-2xl xl:text-4xl 2xl:text-5xl">
-                            <p>おかゆグループ</p>
-                            <p>お問い合わせフォーム</p>
-                        </div>
-                    </div>
-                    <FaArrowRight size={48} className="mr-4 hidden md:block lg:block transition-transform duration-200 group-hover:translate-x-4"/>
-                </div>
+                <Link href="/contact?team=administrators" className="group">
+                    <p className="mt-4 inline-flex">
+                        <FaArrowRight size={16} className="h-auto mr-3 transition-transform group-hover:translate-x-1.5"/>
+                        <span className=" text-blue-600 dark:text-blue-400 group-hover:underline">
+                            おかゆグループ Administratorsへのお問い合わせ
+                        </span>
+                    </p>
+                </Link>
             </section>
         </main>
         <footer className="text-center py-10 border-t border-t-gray-200 dark:border-t-gray-700">
