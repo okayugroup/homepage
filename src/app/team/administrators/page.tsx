@@ -3,6 +3,7 @@ import type {Metadata} from "next";
 import {AdminBody} from "@/components/admin-body";
 import Link from "next/link";
 import {FaArrowRight} from "react-icons/fa6";
+import {getProjects, toString, toColor} from "@/db/projects";
 
 export const metadata: Metadata = {
     title: "OkayuGroup Administrators | Home",
@@ -28,8 +29,23 @@ export default function AdminPage() {
             </section>
             <section>
                 <h2 className="text-3xl font-bold">プロジェクト</h2>
-                <div className="grid grid-cols-1 gap-6 mt-8">
-                    ここには（まだ）何もありません。（めんどくさいから書いてないだけ）
+                <p className="text-gray-600 dark:text-gray-400 mt-8">
+                    ここでは子プロジェクトなどの詳しい情報を表示していません。すべてのプロジェクトは<a href="https://projects.okayugroup.com" className="text-blue-600 dark:text-blue-400 hover:underline">こちら</a>からご覧いただけます。
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 mt-8">
+                    { getProjects().map((project, i) => (
+                        <Link key={i} href={`https://projects.okayugroup.com/${project.id}`} className="rounded-2xl border overflow-hidden">
+                            <div className="flex items-center space-x-2 bg-gray-400 dark:bg-gray-700 px-4 py-1">
+                                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">{project.title}</h3>
+                                <span className={`mt-2 inline-block px-3 py-1 text-sm font-medium rounded-full ${toColor(project.status)}`}>
+                                    {toString(project.status)}
+                                </span>
+                            </div>
+                            <div className="p-3 bg-white dark:bg-gray-800">
+                                <p className="text-gray-600 dark:text-gray-400">{project.desc}</p>
+                            </div>
+                        </Link>
+                    )) }
                 </div>
             </section>
             <section>

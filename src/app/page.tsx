@@ -122,7 +122,7 @@ export default function Home() {
                       <span key="3" className="text-red-500 dark:text-red-200">中止</span>,
                     ];
 
-                    return getProjectAll().filter((p, _n, _a) => p.status == ProjectStatus.InProgress).map((p, i) => (
+                    return getProjectAll().filter(p => p.status == ProjectStatus.InProgress).map((p, i) => (
                         <div
                             key={i}
                             className="min-w-[220px] snap-center bg-white dark:bg-gray-800 rounded-lg shadow p-6 flex-shrink-0"
