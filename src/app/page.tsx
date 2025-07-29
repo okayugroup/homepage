@@ -5,6 +5,7 @@ import Link from "next/link";
 import ProjectCatalog from "@/app/catalog";
 import {SiMisskey} from "react-icons/si";
 import {DefaultBody} from "@/components/default-body";
+import {getProjectAll, projects, ProjectStatus} from "@/db/projects";
 
 export default function Home() {
   return (
@@ -111,7 +112,33 @@ export default function Home() {
                 おかゆグループでは、様々なプロジェクトを通じて地域社会に貢献しています。
                 ここでは、現在進行中のプロジェクトの一部を紹介します。
               </p>
-              <ProjectCatalog/>
+              <ProjectCatalog>
+                {
+                  (() => {
+                    const statuses = [
+                      <span key="0" className="text-yellow-500 dark:text-yellow-200">予定</span>,
+                      <span key="1" className="text-green-500 dark:text-green-200">進行中</span>,
+                      <span key="2" className="text-blue-500 dark:text-blue-200">完了</span>,
+                      <span key="3" className="text-red-500 dark:text-red-200">中止</span>,
+                    ];
+
+                    return getProjectAll().filter((p, _n, _a) => p.status == ProjectStatus.InProgress).map((p, i) => (
+                        <div
+                            key={i}
+                            className="min-w-[220px] snap-center bg-white dark:bg-gray-800 rounded-lg shadow p-6 flex-shrink-0"
+                        >
+                          <h3 className="font-bold text-lg mb-2">{p.title}</h3>
+                          <p className="text-gray-600 dark:text-gray-300 text-sm">{p.desc}</p>
+                          <div className="mt-4">
+                        <span className="text-sm text-gray-500 dark:text-gray-400">
+                          ステータス: {statuses[p.status]}
+                        </span>
+                          </div>
+                        </div>
+                    ))
+                  })()
+                }
+              </ProjectCatalog>
             </div>
           </section>
         </div>

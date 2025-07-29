@@ -1,4 +1,4 @@
-enum ProjectStatus {
+export enum ProjectStatus {
     NotStarted,   // 未着手
     InProgress,   // 進行中
     InReview,     // レビュー待ち
@@ -11,14 +11,14 @@ enum ProjectStatus {
     WaitingApproval // 承認待ち
 }
 
-type Project = {
+export type Project = {
     title: string;
     desc: string;
     status: ProjectStatus;
     children?: Project[];  // 子プロジェクトへの参照
 }
 
-const projects: Project[] = [
+export const projects: Project[] = [
     {
         title: "OGSP",
         desc: "おかゆグループによる災害対策プロジェクト",
@@ -47,3 +47,17 @@ const projects: Project[] = [
         ]
     },
 ];
+
+/// プロジェクトの全てを取得する関数
+/// この関数は、プロジェクトの階層構造をフラット化して、全てのプロジェクトを1次元配列として返します。
+export function getProjectAll(): Project[] {
+    const flattened: Project[] = [];
+    const flatten = (project: Project) => {
+        flattened.push(project);
+        if (project.children) {
+            project.children.forEach(flatten);
+        }
+    }
+    projects.forEach(flatten);
+    return flattened;
+}

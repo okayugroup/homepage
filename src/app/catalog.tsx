@@ -1,9 +1,8 @@
 "use client";
 
 import {useRef} from "react";
-import {getProjectsHome} from "@/app/projects";
 
-export default function ProjectCatalog() {
+export default function ProjectCatalog({ children }: { children: React.ReactNode }) {
     const scrollRef = useRef<HTMLDivElement | null>(null);
 
     const scroll = (direction: "left" | "right") => {
@@ -29,7 +28,7 @@ export default function ProjectCatalog() {
                 className="flex overflow-x-auto gap-6 py-4 px-1 hidden-scrollbar"
                 style={{ scrollSnapType: "x mandatory", maxWidth: 600 }}
             >
-                {getProjectsHome()}
+                {children}
             </div>
             <button
                 onClick={() => scroll("right")}
