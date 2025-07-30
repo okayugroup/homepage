@@ -3,7 +3,7 @@ import type {Metadata} from "next";
 import {AdminBody} from "@/components/admin-body";
 import Link from "next/link";
 import {FaArrowRight} from "react-icons/fa6";
-import {getProjects, toString, toColor} from "@/db/projects";
+import {getProjects, toString, toColor, Project} from "@/db/projects";
 
 export const metadata: Metadata = {
     title: "OkayuGroup Administrators | Home",
@@ -32,19 +32,42 @@ export default function AdminPage() {
                 <p className="text-gray-600 dark:text-gray-400 mt-8">
                     ここでは子プロジェクトなどの詳しい情報を表示していません。すべてのプロジェクトは<a href="https://projects.okayugroup.com" className="text-blue-600 dark:text-blue-400 hover:underline">こちら</a>からご覧いただけます。
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 mt-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-6 mt-8">
                     { getProjects().map((project, i) => (
-                        <Link key={i} href={`https://projects.okayugroup.com/${project.id}`} className="rounded-2xl border overflow-hidden">
-                            <div className="flex items-center space-x-2 bg-gray-400 dark:bg-gray-700 px-4 py-1">
-                                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">{project.title}</h3>
+                        <div key={i} className="rounded-xl border overflow-hidden">
+                            <div className="flex items-center space-x-2 bg-gray-200 dark:bg-gray-700 px-4 py-2">
+                                <Link href={`https://projects.okayugroup.com/${project.id}`} className="hover:underline">
+                                    <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">{project.title}</h3>
+                                </Link>
                                 <span className={`mt-2 inline-block px-3 py-1 text-sm font-medium rounded-full ${toColor(project.status)}`}>
                                     {toString(project.status)}
                                 </span>
                             </div>
-                            <div className="p-3 bg-white dark:bg-gray-800">
+                            <div className="p-3 bg-background dark:bg-gray-800">
                                 <p className="text-gray-600 dark:text-gray-400">{project.desc}</p>
+                                { (() => {
+                                    if (!project.children) {
+                                        return <></>
+                                    } else {
+                                        return <div className="mt-3">
+                                            <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-200">子プロジェクト</h4>
+                                            <ul className="list-disc pl-5 mt-2 space-y-1">
+                                                {project.children.map((child, index) => (
+                                                    <li key={index} className="text-gray-600 dark:text-gray-400">
+                                                        <Link href={`https://projects.okayugroup.com/${child.id}`} className="hover:underline">
+                                                            {child.title}
+                                                        </Link>
+                                                        <span className={`ml-1 inline-block px-2 py-1 text-xs font-medium rounded-full ${toColor(child.status)}`}>
+                                                            ({toString(child.status)})
+                                                        </span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    }
+                                })()}
                             </div>
-                        </Link>
+                        </div>
                     )) }
                 </div>
             </section>
