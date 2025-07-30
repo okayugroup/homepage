@@ -3,13 +3,29 @@ import type {Metadata} from "next";
 import {AdminBody} from "@/components/admin-body";
 import Link from "next/link";
 import {FaArrowRight} from "react-icons/fa6";
-import {getProjects, toString, toColor, Project} from "@/db/projects";
+import {getProjects, toString, toColor} from "@/db/projects";
+import {JSX} from "react";
 
 export const metadata: Metadata = {
     title: "OkayuGroup Administrators | Home",
     description: "おかゆグループのプロジェクト管理とグループ全体の指揮・統括を行っています。",
 };
 
+function ServerUptimeCard({title}: { title: string }): JSX.Element {
+    return (
+        <div className="flex flex-col md:flex-row xl:flex-col 2xl:flex-row gap-2 bg-gray-100 dark:bg-gray-800 p-2 rounded-xl border-2 border-green-500">
+            <div className="flex p-3 space-x-4
+            flex-col sm:flex-row md:flex-col xl:flex-row 2xl:flex-col
+            w-full md:w-2/5 xl:w-full 2xl:w-1/3">
+                <h3 className="text-xl font-semibold">{title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 mt-2">正常に動作しています。</p>
+            </div>
+            <div className="flex items-center justify-center bg-white/80 dark:bg-gray-700 rounded-md p-8 flex-1 mt-2 md:mt-0">
+                <span>ここにグラフ入れたいやんね🤔</span>
+            </div>
+        </div>
+    );
+}
 
 export default function AdminPage() {
     return <AdminBody>
@@ -77,24 +93,8 @@ export default function AdminPage() {
                     <p className="text-gray-500 dark:text-gray-400 text-sm">最終更新: 2025/07/26<span className="text-rose-700"> っていうふうに見せかけてるだけ</span></p>
                 </div>
                 <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-8">
-                    <div className="flex flex-row gap-2 bg-gray-100 dark:bg-gray-800 p-2 rounded-xl border-2 border-green-500">
-                        <div className="p-3 w-2/5">
-                            <h3 className="text-xl font-semibold">Misskeyサーバー</h3>
-                            <p className="text-gray-600 dark:text-gray-400 mt-2">正常に動作しています。</p>
-                        </div>
-                        <div className="flex items-center justify-center bg-white/80 dark:bg-gray-700 rounded-md flex-1 p-4">
-                            <span>ここにグラフ入れたいやんね🤔</span>
-                        </div>
-                    </div>
-                    <div className="flex flex-row gap-2 bg-gray-100 dark:bg-gray-800 p-2 rounded-xl border-2 border-green-500">
-                        <div className="p-3 w-2/5">
-                            <h3 className="text-xl font-semibold">統合APIサーバー</h3>
-                            <p className="text-gray-600 dark:text-gray-400 mt-2">正常に動作しています。</p>
-                        </div>
-                        <div className="flex items-center justify-center bg-white/80 dark:bg-gray-700 rounded-md flex-1 p-4">
-                            <span>ここにグラフ入れたいやんね🤔</span>
-                        </div>
-                    </div>
+                    <ServerUptimeCard title="Misskeyサーバー"/>
+                    <ServerUptimeCard title="プロジェクト管理サーバー"/>
                 </div>
             </section>
             <section>
