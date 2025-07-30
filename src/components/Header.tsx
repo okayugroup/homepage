@@ -6,7 +6,7 @@ export function Header({ currentPath, pane }: { currentPath: string, pane?: "adm
     switch (pane) {
         case "admin":
             return (
-                <header className="flex items-center justify-between p-2 px-5 sm:px-30 bg-background fixed top-0 left-0 right-0 z-50 border-b border-b-gray-200 dark:border-b-gray-700">
+                <header className="flex items-center justify-between p-2 px-5 lg:px-30 bg-background fixed top-0 left-0 right-0 z-50 border-b border-b-gray-200 dark:border-b-gray-700">
                     <IAdministrators width={144} height={48} className="fill-foreground"/>
                     <nav className="flex items-center justify-between">
                         <ul className="flex space-x-6">
