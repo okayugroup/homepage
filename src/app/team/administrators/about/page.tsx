@@ -4,7 +4,7 @@ import {BlogFindByDate} from "@/components/blog-finder";
 import {SharedBody} from "@/components/shared-body";
 
 export default function About() {
-    return <SharedBody type="admin">
+    return <SharedBody>
         <Header currentPath="/team/administrators/about" pane="admin" />
         <main className="mt-18 py-20 px-8 lg:px-60">
             <div className="mb-8">

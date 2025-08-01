@@ -33,7 +33,7 @@ function Team({children, title, image, alt, link}: { children: React.ReactNode, 
 
 
 export default function Home() {
-    return <SharedBody type="default">
+    return <SharedBody>
         <Header currentPath="/about" />
         <main className="flex flex-col justify-center gap-4">
             <div className="pt-20 pb-5 text-center bg-gray-600 dark:bg-blue-900">

@@ -9,7 +9,7 @@ import {SharedBody} from "@/components/shared-body";
 
 export default function Home() {
   return (
-    <SharedBody type="default">
+    <SharedBody>
       <Header currentPath="/" />
       <main>
         <section className="flex flex-col relative">
