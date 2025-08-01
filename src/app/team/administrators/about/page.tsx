@@ -1,7 +1,7 @@
 import {AdminBody} from "@/components/admin-body";
 import {Header} from "@/components/Header";
 import Link from "next/link";
-import {BlogFindByDate} from "@/components/blog-find-by-date";
+import {BlogFindByDate} from "@/components/blog-finder";
 
 export default function About() {
     return <AdminBody>
@@ -11,7 +11,7 @@ export default function About() {
                 <h1 className="text-3xl font-bold mb-2">おかゆグループ Administratorsについて</h1>
                 <div>
                     <span className="text-gray-400">最終更新: </span>
-                    <BlogFindByDate className="text-gray-600 dark:text-gray-300 hover:" date={new Date("2025-07-26")}/>
+                    <BlogFindByDate className="text-gray-600 dark:text-gray-300 hover:" date={new Date("2025-08-01")}/>
                 </div>
             </div>
             <h2 className="text-2xl font-bold mb-2">概要</h2>
