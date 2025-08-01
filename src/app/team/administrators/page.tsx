@@ -1,10 +1,10 @@
 import {Header} from "@/components/Header";
 import type {Metadata} from "next";
-import {AdminBody} from "@/components/admin-body";
 import Link from "next/link";
 import {FaArrowRight} from "react-icons/fa6";
 import {getProjects, toString, toColor} from "@/db/projects";
 import {JSX} from "react";
+import {SharedBody} from "@/components/shared-body";
 
 export const metadata: Metadata = {
     title: "OkayuGroup Administrators | Home",
@@ -28,7 +28,7 @@ function ServerUptimeCard({title}: { title: string }): JSX.Element {
 }
 
 export default function AdminPage() {
-    return <AdminBody>
+    return <SharedBody type="admin">
         <Header currentPath="/team/administrators" pane="admin" />
         <main className="mt-18 py-30 px-5 lg:px-60 space-y-40">
             <section>
@@ -115,5 +115,5 @@ export default function AdminPage() {
         <footer className="text-center py-10 border-t border-t-gray-200 dark:border-t-gray-700">
             <p>&copy; 2025 おかゆグループ Administrators</p>
         </footer>
-    </AdminBody>;
+    </SharedBody>;
 }

@@ -2,7 +2,7 @@ import {Header} from "@/components/Header";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {DefaultBody} from "@/components/default-body";
+import {SharedBody} from "@/components/shared-body";
 
 function Card({ title, subtitle, children }: { title: string; subtitle: string; children: React.ReactNode }) {
     return <div className="rounded-lg bg-white dark:bg-gray-800 p-6 shadow-md border border-gray-200 dark:border-gray-700">
@@ -33,7 +33,7 @@ function Team({children, title, image, alt, link}: { children: React.ReactNode, 
 
 
 export default function Home() {
-    return <DefaultBody>
+    return <SharedBody type="default">
         <Header currentPath="/about" />
         <main className="flex flex-col justify-center gap-4">
             <div className="pt-20 pb-5 text-center bg-gray-600 dark:bg-blue-900">
@@ -97,5 +97,5 @@ export default function Home() {
                 </Card>
             </div>
         </main>
-    </DefaultBody>;
+    </SharedBody>;
 }
