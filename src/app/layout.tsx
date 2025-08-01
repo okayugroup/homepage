@@ -1,21 +1,6 @@
 import type {Metadata} from "next";
-import {M_PLUS_1_Code, M_PLUS_1p} from "next/font/google";
 import "./globals.css";
-
-
-const mPlus1p = M_PLUS_1p({
-    variable: "--font-m-plus-1p",
-    subsets: ["latin"],
-    weight: ["400", "500", "700", "900"],
-    display: "swap"
-});
-
-const mPlus1Code = M_PLUS_1_Code({
-    variable: "--font-m-plus-1-code",
-    subsets: ["latin"],
-    weight: "400",
-    display: "swap"
-});
+import React from "react";
 
 export const metadata: Metadata = {
     title: "おかゆグループ ホームページ",
@@ -30,11 +15,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="ja">
-        <body
-            className={`${mPlus1p.variable} ${mPlus1Code.variable} font-sans antialiased`}
-        >
         {children}
-        </body>
         </html>
     );
 }
