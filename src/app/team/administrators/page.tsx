@@ -101,57 +101,13 @@ export default function AdminPage() {
                 <section>
                     <h2 className="text-3xl font-bold">お知らせ</h2>
                     <ul className="list-inside gap-6 mt-8 ml-4">
-                        <li>おかゆグループ Administratorsを立ち上げました<span className="text-sm">（2025/07/26更新）</span></li>
+                        <li>おかゆグループ Administratorsを立ち上げました<span className="text-sm">（2025/07/26）</span></li>
                     </ul>
                 </section>
                 <section>
                     <h2 className="text-3xl font-bold">ブログ</h2>
                     <div className="grid grid-cols-1 gap-6 mt-8">
                         ここには（まだ）何もありません。
-                    </div>
-                </section>
-                <section>
-                    <h2 className="text-3xl font-bold">プロジェクト</h2>
-                    <p className="text-gray-600 dark:text-gray-400 mt-8">
-                        ここでは子プロジェクトなどの詳しい情報を表示していません。すべてのプロジェクトは<a href="https://projects.okayugroup.com" className="text-blue-600 dark:text-blue-400 hover:underline">こちら</a>からご覧いただけます。
-                    </p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-6 mt-8">
-                        { getProjects().map((project, i) => (
-                            <div key={i} className="rounded-xl border overflow-hidden">
-                                <div className="flex items-center space-x-2 bg-gray-200 dark:bg-gray-700 px-4 py-2">
-                                    <Link href={`https://projects.okayugroup.com/${project.id}`} className="hover:underline">
-                                        <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">{project.title}</h3>
-                                    </Link>
-                                    <span className={`mt-2 inline-block px-3 py-1 text-sm font-medium rounded-full ${toColor(project.status)}`}>
-                                        {toString(project.status)}
-                                    </span>
-                                </div>
-                                <div className="p-3 bg-background dark:bg-gray-800">
-                                    <p className="text-gray-600 dark:text-gray-400">{project.desc}</p>
-                                    { (() => {
-                                        if (!project.children) {
-                                            return <></>
-                                        } else {
-                                            return <div className="mt-3">
-                                                <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-200">子プロジェクト</h4>
-                                                <ul className="list-disc pl-5 mt-2 space-y-1">
-                                                    {project.children.map((child, index) => (
-                                                        <li key={index} className="text-gray-600 dark:text-gray-400">
-                                                            <Link href={`https://projects.okayugroup.com/${child.id}`} className="hover:underline">
-                                                                {child.title}
-                                                            </Link>
-                                                            <span className={`ml-1 inline-block px-2 py-1 text-xs font-medium rounded-full ${toColor(child.status)}`}>
-                                                                ({toString(child.status)})
-                                                            </span>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        }
-                                    })()}
-                                </div>
-                            </div>
-                        )) }
                     </div>
                 </section>
                 <section>
