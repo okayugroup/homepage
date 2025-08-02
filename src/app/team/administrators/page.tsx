@@ -32,8 +32,8 @@ function ServerUptimeCard({title}: { title: string }): JSX.Element {
 export default function AdminPage() {
     return <SharedBody type="admin">
         <Header currentPath="/team/administrators" />
-        <main className="mt-18 px-5 xl:px-60">
-            <div className="mt-10 py-5 mx-4 mb-2">
+        <main className="my-18 px-5 xl:px-60">
+            <div className="mt-10 py-5 mx-4 mb-4">
                 <div className="flex items-end mb-2">
                     <h1 className="text-3xl font-extrabold">Administrators</h1>
                     <Link href="/team/" title="ほかのチームを見る" className="hover:underline">
@@ -49,7 +49,7 @@ export default function AdminPage() {
                     </p>
                 </div>
             </div>
-            <div className="flex gap-12 mb-10">
+            <div className="flex gap-6 mb-30">
                 <section className="flex-3/5 space-y-6">
                     <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl p-4">
                         <IAdministrators className="fill-foreground"/>
@@ -62,6 +62,7 @@ export default function AdminPage() {
                         </div>
                     </section>
                 </section>
+                <div className="border-l-2 -my-4 border-l-gray-400 dark:border-gray-600"/>
                 <section className="flex-2/5 space-y-4">
                     <section>
                         <h2 className="font-bold text-lg mb-2">設立</h2>
@@ -179,8 +180,5 @@ export default function AdminPage() {
                 </section>
             </div>
         </main>
-        <footer className="text-center py-10 border-t border-t-gray-200 dark:border-t-gray-700">
-            <p>&copy; 2025 おかゆグループ Administrators</p>
-        </footer>
     </SharedBody>;
 }
