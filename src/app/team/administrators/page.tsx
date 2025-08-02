@@ -50,13 +50,12 @@ export default function AdminPage() {
                 <section className="flex-1/2 space-y-4">
                     <section>
                         <h2 className="font-bold text-lg mb-2">設立</h2>
-                        <div className="rounded-lg overflow-hidden my-4  bg-blue-50 border-2 border-blue-300 dark:bg-blue-950 dark:border-blue-600 p-3 space-y-2">
-                            <h3 className="font-bold text-blue-500">きっかけ</h3>
-                            <p>おかゆグループの管理を階層化するために設立されました。</p>
-                        </div>
+                        <p className="mb-2">おかゆグループの管理を階層化するために設立されました。</p>
                         <div className="mx-1">
-                            <p>2025/07/16 - 設立を検討開始</p>
-                            <p>2025/08/01 - 公式設立</p>
+                            <ul className="list-disc list-inside">
+                                <li>2025/07/16 - 設立を検討開始</li>
+                                <li>2025/08/01 - 公式設立</li>
+                            </ul>
                         </div>
                     </section>
                     <section>
