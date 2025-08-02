@@ -5,6 +5,7 @@ import {FaArrowRight} from "react-icons/fa6";
 import {getProjects, toString, toColor} from "@/db/projects";
 import {JSX} from "react";
 import {SharedBody} from "@/components/shared-body";
+import {IAdministrators} from "@/components/icons";
 
 export const metadata: Metadata = {
     title: "OkayuGroup Administrators | Home",
@@ -29,8 +30,53 @@ function ServerUptimeCard({title}: { title: string }): JSX.Element {
 
 export default function AdminPage() {
     return <SharedBody type="admin">
-        <Header currentPath="/team/administrators" pane="admin" />
-        <main className="mt-18 py-30 px-5 lg:px-60 space-y-40">
+        <Header currentPath="/team/administrators" />
+        <main className="mt-18 px-5 lg:px-60">
+            <div className="mt-10 py-5 mx-4 mb-2">
+                <div className="flex items-end mb-2">
+                    <h1 className="text-3xl font-extrabold">Administrators</h1>
+                    <Link href="/team/" title="ほかのチームを見る" className="hover:underline">
+                        <small className="px-2 text-lg font-bold">チーム</small>
+                    </Link>
+                </div>
+                <p className="text-gray-700 dark:text-gray-300">おかゆグループの総合的な管理</p>
+            </div>
+            <div className="flex gap-12">
+                <section className="flex-1/2">
+                    <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl p-4">
+                        <IAdministrators className="fill-foreground"/>
+                    </div>
+                </section>
+                <section className="flex-1/2 space-y-4">
+                    <section>
+                        <h2 className="font-bold text-lg mb-2">設立</h2>
+                        <div className="rounded-lg overflow-hidden my-4  bg-blue-50 border-2 border-blue-300 dark:bg-blue-950 dark:border-blue-600 p-3 space-y-2">
+                            <h3 className="font-bold text-blue-500">きっかけ</h3>
+                            <p>おかゆグループの管理を階層化するために設立されました。</p>
+                        </div>
+                        <div className="mx-1">
+                            <p>2025/07/16 - 設立を検討開始</p>
+                            <p>2025/08/01 - 公式設立</p>
+                        </div>
+                    </section>
+                    <section>
+                        <h2 className="font-bold text-lg mb-2">役割</h2>
+                        <div className="mx-1">
+                            <ul className="list-disc list-inside">
+                                <li>プロジェクトの管理</li>
+                                <li>メンバーのサポート</li>
+                                <li>グループの方針の決定</li>
+                                <li>お問い合わせの振り分け</li>
+                                <li>サーバーの管理</li>
+                                <li>スケジュールの調整</li>
+                            </ul>
+                            <p>など</p>
+                        </div>
+                    </section>
+                </section>
+            </div>
+            <section className="my-10 py-5">
+            </section>
             <section>
                 <h2 className="text-3xl font-bold">お知らせ</h2>
                 <ul className="list-inside gap-6 mt-8 ml-4">

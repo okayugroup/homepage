@@ -5,7 +5,7 @@ import React from "react";
 const mPlus1p = M_PLUS_1({
     variable: "--font-m-plus-1",
     subsets: ["latin"],
-    weight: ["400", "500", "700", "900"],
+    weight: ["400", "500", "700", "800", "900"],
     display: "swap"
 });
 
