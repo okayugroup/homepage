@@ -6,6 +6,7 @@ import ProjectCatalog from "@/app/catalog";
 import {SiMisskey} from "react-icons/si";
 import {getProjectAll, ProjectStatus} from "@/db/projects";
 import {SharedBody} from "@/components/shared-body";
+import {Footer} from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -179,6 +180,7 @@ export default function Home() {
           </div>
         </section>
       </main>
+      <Footer/>
     </SharedBody>
   );
 }

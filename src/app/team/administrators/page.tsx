@@ -1,8 +1,8 @@
 import {Header} from "@/components/Header";
+import {Footer} from "@/components/Footer";
 import type {Metadata} from "next";
 import Link from "next/link";
-import {FaArrowRight, FaClock, FaRegClock} from "react-icons/fa6";
-import {getProjects, toString, toColor} from "@/db/projects";
+import {FaArrowRight, FaRegClock} from "react-icons/fa6";
 import {JSX} from "react";
 import {SharedBody} from "@/components/shared-body";
 import {IAdministrators} from "@/components/icons";
@@ -140,5 +140,6 @@ export default function AdminPage() {
                 <h2 className="text-xl font-semibold">ここに書くことが思いつかないよおおおお</h2>
             </aside>
         </div>
+        <Footer/>
     </SharedBody>;
 }

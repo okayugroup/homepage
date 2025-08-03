@@ -1,4 +1,5 @@
 import {Header} from "@/components/Header";
+import {Footer} from "@/components/Footer";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,7 +36,7 @@ function Team({children, title, image, alt, link}: { children: React.ReactNode, 
 export default function Home() {
     return <SharedBody>
         <Header currentPath="/about" />
-        <main className="flex flex-col justify-center gap-4">
+        <main className="flex flex-col justify-center gap-4 mb-16">
             <div className="pt-20 pb-5 text-center bg-gray-600 dark:bg-blue-900">
                 <h1 className="text-white font-semibold text-3xl">私たちについて</h1>
                 <p className="text-gray-300 text-sm px-5 mt-1">
@@ -97,5 +98,6 @@ export default function Home() {
                 </Card>
             </div>
         </main>
+        <Footer/>
     </SharedBody>;
 }
