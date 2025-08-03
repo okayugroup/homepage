@@ -1,5 +1,5 @@
-import {M_PLUS_1, Noto_Sans_JP} from "next/font/google";
-import React from "react";
+import {M_PLUS_1} from "next/font/google";
+import React, {JSX} from "react";
 
 
 const mPlus1p = M_PLUS_1({
@@ -9,11 +9,11 @@ const mPlus1p = M_PLUS_1({
     display: "swap"
 });
 
-export function SharedBody({ children, type }: Readonly<{ children: React.ReactNode; type?: string }>) {
+export function SharedBody({ children, type, className }: Readonly<{ children: React.ReactNode; type?: string; className?: string }>): JSX.Element {
     switch (type) {
         default:
         return (
-            <div className={`${mPlus1p.variable} ${mPlus1p.className}`}>
+            <div className={`${mPlus1p.variable} ${mPlus1p.className} ${className}`}>
                 {children}
             </div>
         );
