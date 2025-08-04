@@ -1,5 +1,6 @@
 import type {Metadata} from "next";
 import { Team } from "@/db/teams";
+import {JSX} from "react";
 
 export const metadata: Metadata = {
     title: "OkayuGroup Administrators | Home",
