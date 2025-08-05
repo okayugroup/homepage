@@ -85,8 +85,8 @@ export function TeamIcon({id, width, height, className}: {id: string; width?: nu
                     </filter>
                     <radialGradient id="e" cx="68.8" cy="187.474" r="2.29" fx="68.8" fy="187.474"
                                     gradientTransform="matrix(1 0 0 .96029 0 7.594)" gradientUnits="userSpaceOnUse">
-                        <stop offset="0" stopColor="#fff" stop-opacity=".187"/>
-                        <stop offset="1" stopColor="#fff" stop-opacity="0"/>
+                        <stop offset="0" stopColor="#fff" stopOpacity=".187"/>
+                        <stop offset="1" stopColor="#fff" stopOpacity="0"/>
                     </radialGradient>
                 </defs>
                 <path fill="#3b2207"
