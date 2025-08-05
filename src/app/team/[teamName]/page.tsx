@@ -1,22 +1,30 @@
-import {AdminPage} from "@/app/team/administrators/const";
+import {AdminPage} from "@/app/team/[teamName]/admin";
+import {SoftwareDevelopmentPage} from "@/app/team/[teamName]/software";
 import NotFound from "next/dist/client/components/builtin/not-found";
 
-export async function generateStaticParams(): Promise<Props[]> {
-    return [
-        { params: { teamName: "administrators" } }
-    ];
+export async function generateStaticParams() {
+    const a = [
+        "administrators",
+        "software"
+    ]
+    return a.map(teamName => {
+        return ({ teamName })
+    });
 }
 
 type Props = {
-    params: { teamName: string };
+    params: Promise<{ teamName: string }>;
 };
 
-export default function TeamPage({ params }: Props) {
-    const { teamName } = params;
+export default async function TeamPage({ params }: Props) {
+    const { teamName } = await params;
     let team;
     switch (teamName) {
         case "administrators":
             team = AdminPage();
+            break;
+        case "software":
+            team = SoftwareDevelopmentPage();
             break;
     }
 
