@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {SharedBody} from "@/components/shared-body";
+import {TeamIcon} from "@/components/team-icon";
 
 function Card({ title, subtitle, children }: { title: string; subtitle: string; children: React.ReactNode }) {
     return <div className="rounded-lg bg-white dark:bg-gray-800 p-6 shadow-md border border-gray-200 dark:border-gray-700">
@@ -17,11 +18,11 @@ function Card({ title, subtitle, children }: { title: string; subtitle: string; 
     </div>
 }
 
-function Team({children, title, image, alt, link}: { children: React.ReactNode, title: string, image: string, alt: string, link?: string } ) {
+function Team({children, title, image, link}: { children: React.ReactNode, title: string, image: string, alt: string, link?: string } ) {
     const linkAddress = link == null ? "/team/preparing" : "/team/" + link;
     return <Link href={linkAddress} className="hover:scale-102 transition-transform duration-300">
         <div className="rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow duration-300">
-            <Image alt={alt} src={"/" + image + "/cover.svg"} width="600" height="200" className="w-full bg-white text-black"/>
+            <TeamIcon id={image} width={600} height={200} className="w-full bg-white text-black"/>
             <div className="px-6 py-4">
                 <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
                     {title}
@@ -71,12 +72,12 @@ export default function Home() {
                         各チームは、それぞれの専門分野や興味に基づいて活動しています。
                     </p>
                     <div className="grid grid-cols-3 gap-4">
-                        <Team alt="おかゆグループ Administrators" image="admin" link="administrators" title="OkayuGroup Administrators">
+                        <Team alt="おかゆグループ Administrators" image="administrators" link="administrators" title="OkayuGroup Administrators">
                             <p className="text-gray-600 dark:text-gray-400">
                                 おかゆグループの運営とプロジェクトの推進を担当するチームです。
                             </p>
                         </Team>
-                        <Team alt="com.okayugroup.SoftwareDevelopment - おかゆグループソフトウェア開発部" image="develop" link="software" title="ソフトウェア開発部">
+                        <Team alt="com.okayugroup.SoftwareDevelopment - おかゆグループソフトウェア開発部" image="software" link="software" title="ソフトウェア開発部">
                             <p className="text-gray-600 dark:text-gray-400">
                                 ソフトウェア開発を中心に、社会の課題解決に取り組みます。
                             </p>

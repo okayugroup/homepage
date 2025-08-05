@@ -4,7 +4,7 @@ import {Header} from "@/components/Header";
 import Link from "next/link";
 import {FaArrowRight, FaRegClock} from "react-icons/fa6";
 import {BlogFindByDate} from "@/components/blog-finder";
-import {IAdministrators} from "@/components/icons";
+import {TeamIcon} from "@/components/team-icon";
 import {Footer} from "@/components/Footer";
 
 export class Team {
@@ -69,7 +69,7 @@ export class Team {
                     <div className="flex gap-6 mb-30">
                         <section className="flex-3/5 space-y-6">
                             <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl p-4">
-                                <IAdministrators className="fill-foreground"/>
+                                <TeamIcon id={this.id} className="fill-foreground"/>
                             </div>
                             <section>
                                 <h2 className="text-2xl font-bold">概要</h2>
