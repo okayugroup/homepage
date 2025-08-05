@@ -63,6 +63,7 @@ export function AdminPage(): Team {
                 <ServerUptimeCard title="Misskeyサーバー"/>
                 <ServerUptimeCard title="プロジェクト管理サーバー"/>
             </div>
-        </section>
+        </section>,
+        [ { date: new Date("2025-07-16"), description: "設立を検討開始" } ],
     );
 }

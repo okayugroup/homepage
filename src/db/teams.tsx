@@ -7,6 +7,11 @@ import {BlogFindByDate} from "@/components/blog-finder";
 import {TeamIcon} from "@/components/team-icon";
 import {Footer} from "@/components/Footer";
 
+export type History = {
+    date: Date;
+    description: string;
+}
+
 export class Team {
     id: string;
     name: string;
@@ -21,6 +26,7 @@ export class Team {
     }[];
     roles: (string | JSX.Element)[];
     addition?: JSX.Element;
+    history?: History[];
     constructor(
         id: string,
         name: string,
@@ -31,7 +37,8 @@ export class Team {
         founded: Date,
         links: { url: string; label: string }[],
         roles: (string | JSX.Element)[],
-        addition?: JSX.Element
+        addition?: JSX.Element,
+        history?: History[]
     ) {
         this.id = id;
         this.name = name;
@@ -43,6 +50,7 @@ export class Team {
         this.links = links;
         this.roles = roles;
         this.addition = addition;
+        this.history = history;
     }
 
     getHtml(): JSX.Element {
@@ -84,8 +92,30 @@ export class Team {
                                 <h2 className="font-bold text-lg mb-2">設立</h2>
                                 <div className="mx-1">
                                     <ul className="list-disc list-inside">
-                                        <li>2025/07/16 - 設立を検討開始</li>
-                                        <li>2025/08/01 - 公式設立</li>
+                                        {
+                                            (() => {
+                                                if (!this.history) {
+                                                    return <li className="font-semibold">
+                                                        {this.founded.toLocaleDateString()} - 設立
+                                                    </li>;
+                                                } else {
+                                                    return <>{this.history.filter(h => h.date < this.founded).map((h, i) =>
+                                                        <li key={i}>
+                                                            {h.date.toLocaleDateString()} - {h.description}
+                                                        </li>
+                                                    )}
+                                                        <li className="font-semibold">
+                                                            {this.founded.toLocaleDateString()} - 設立
+                                                        </li>
+                                                        {this.history.filter(h => h.date >= this.founded).map((h, i) =>
+                                                            <li key={i}>
+                                                                {h.date.toLocaleDateString()} - {h.description}
+                                                            </li>
+                                                        )}
+                                                    </>
+                                                }
+                                            })()
+                                        }
                                     </ul>
                                 </div>
                             </section>
