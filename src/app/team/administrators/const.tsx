@@ -1,5 +1,5 @@
 import type {Metadata} from "next";
-import { Team } from "@/db/teams";
+import {Team} from "@/db/teams";
 import {JSX} from "react";
 
 export const metadata: Metadata = {
@@ -23,14 +23,15 @@ function ServerUptimeCard({title}: { title: string }): JSX.Element {
     );
 }
 
-export default function AdminPage() {
+export function AdminPage(): Team {
     const updated = new Date("2025-08-04");
-    const team = new Team(
+    return new Team(
         "administrators",
-    "Administrators",
+        "Administrators",
         "おかゆグループの総合的な管理",
         <>
-            <p>おかゆグループ Administratorsは、グループ全体の運営を行うチームです。私たちは、プロジェクトの管理やメンバーのサポートを通じて、グループの活動を円滑に進めることを目指しています。</p>
+            <p>おかゆグループ
+                Administratorsは、グループ全体の運営を行うチームです。私たちは、プロジェクトの管理やメンバーのサポートを通じて、グループの活動を円滑に進めることを目指しています。</p>
             <p>新しいプロジェクトの企画や、イベントの運営などにも積極的にチャレンジしています。</p>
         </>,
         [
@@ -55,13 +56,13 @@ export default function AdminPage() {
         <section>
             <div className="flex items-end justify-between">
                 <h2 className="text-3xl font-bold">動作状況</h2>
-                <p className="text-gray-500 dark:text-gray-400 text-sm">最終更新: 2025/07/26<span className="text-rose-700"> っていうふうに見せかけてるだけ</span></p>
+                <p className="text-gray-500 dark:text-gray-400 text-sm">最終更新: 2025/07/26<span
+                    className="text-rose-700"> っていうふうに見せかけてるだけ</span></p>
             </div>
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-8">
                 <ServerUptimeCard title="Misskeyサーバー"/>
                 <ServerUptimeCard title="プロジェクト管理サーバー"/>
             </div>
         </section>
-    )
-    return team.getHtml();
+    );
 }
