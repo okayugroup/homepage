@@ -1,3 +1,5 @@
+import {JSX} from "react";
+
 export default function IKnewCSSPage(): JSX.Element {
     return (
         <div className="flex justify-center items-center w-screen h-screen">
