@@ -76,11 +76,11 @@ export function TeamIcon({id, width, height, className}: {id: string; width?: nu
                     </linearGradient>
                     <filter id="i" width="136.135" height="30.437" x="1296.461" y="170.538"
                             filterUnits="userSpaceOnUse">
-                        <feGaussianBlur color-interpolation-filters="sRGB" in="SourceGraphic" result="result1"
+                        <feGaussianBlur colorInterpolationFilters="sRGB" in="SourceGraphic" result="result1"
                                         stdDeviation="1.1554472 1.1554472"/>
                     </filter>
                     <filter id="k" width="25.058" height="39.274" x="1553.388" y="156.52" filterUnits="userSpaceOnUse">
-                        <feGaussianBlur color-interpolation-filters="sRGB" in="SourceGraphic" result="result1"
+                        <feGaussianBlur colorInterpolationFilters="sRGB" in="SourceGraphic" result="result1"
                                         stdDeviation="0.42637807 0.42637807"/>
                     </filter>
                     <radialGradient id="e" cx="68.8" cy="187.474" r="2.29" fx="68.8" fy="187.474"
