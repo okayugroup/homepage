@@ -6,10 +6,11 @@ import ProjectCatalog from "@/app/catalog";
 import {SiMisskey} from "react-icons/si";
 import {getProjectAll, ProjectStatus} from "@/db/projects";
 import {SharedBody} from "@/components/shared-body";
+import {Footer} from "@/components/Footer";
 
 export default function Home() {
   return (
-    <SharedBody type="default">
+    <SharedBody>
       <Header currentPath="/" />
       <main>
         <section className="flex flex-col relative">
@@ -179,6 +180,7 @@ export default function Home() {
           </div>
         </section>
       </main>
+      <Footer/>
     </SharedBody>
   );
 }
