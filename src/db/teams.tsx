@@ -12,13 +12,11 @@ export type History = {
     description: string;
 }
 
-export class Team {
-    id: string;
+export type TeamData = {
     name: string;
     description: string;
     summary: JSX.Element;
     members: string[];
-    lastUpdated: Date;
     founded: Date;
     links: {
         url: string;
@@ -27,30 +25,20 @@ export class Team {
     roles: (string | JSX.Element)[];
     addition?: JSX.Element;
     history?: History[];
+}
+
+export class Team {
+    id: string;
+    data: TeamData;
+    lastUpdated: Date;
     constructor(
         id: string,
-        name: string,
-        description: string,
-        summary: JSX.Element,
-        members: string[],
+        data: TeamData,
         lastUpdated: Date,
-        founded: Date,
-        links: { url: string; label: string }[],
-        roles: (string | JSX.Element)[],
-        addition?: JSX.Element,
-        history?: History[]
     ) {
         this.id = id;
-        this.name = name;
-        this.description = description;
-        this.summary = summary;
-        this.members = members;
+        this.data = data;
         this.lastUpdated = lastUpdated;
-        this.founded = founded;
-        this.links = links;
-        this.roles = roles;
-        this.addition = addition;
-        this.history = history;
     }
 
     getHtml(): JSX.Element {
@@ -60,12 +48,12 @@ export class Team {
                 <main className="flex-3/4">
                     <div className="mt-10 py-5 mx-4 mb-4">
                         <div className="flex items-end mb-2">
-                            <h1 className="text-3xl font-extrabold">{this.name}</h1>
+                            <h1 className="text-3xl font-extrabold">{this.data.name}</h1>
                             <Link href="/team/" title="ほかのチームを見る" className="hover:underline">
                                 <small className="px-2 text-lg font-bold">チーム</small>
                             </Link>
                         </div>
-                        <p className="text-gray-700 dark:text-gray-300 mb-4">{this.description}</p>
+                        <p className="text-gray-700 dark:text-gray-300 mb-4">{this.data.description}</p>
                         <div className="flex items-center gap-2">
                             <FaRegClock size={14} className="h-full fill-gray-600 dark:text-gray-300" />
                             <p className="text-sm">
@@ -82,7 +70,7 @@ export class Team {
                             <section>
                                 <h2 className="text-2xl font-bold">概要</h2>
                                 <div className="space-y-4 text-gray-700 dark:text-gray-300 mt-2">
-                                    {this.summary}
+                                    {this.data.summary}
                                 </div>
                             </section>
                         </section>
@@ -94,20 +82,20 @@ export class Team {
                                     <ul className="list-disc list-inside">
                                         {
                                             (() => {
-                                                if (!this.history) {
+                                                if (!this.data.history) {
                                                     return <li className="font-semibold">
-                                                        {this.founded.toLocaleDateString()} - 設立
+                                                        {this.data.founded.toLocaleDateString()} - 設立
                                                     </li>;
                                                 } else {
-                                                    return <>{this.history.filter(h => h.date < this.founded).map((h, i) =>
+                                                    return <>{this.data.history.filter(h => h.date < this.data.founded).map((h, i) =>
                                                         <li key={i}>
                                                             {h.date.toLocaleDateString()} - {h.description}
                                                         </li>
                                                     )}
                                                         <li className="font-semibold">
-                                                            {this.founded.toLocaleDateString()} - 設立
+                                                            {this.data.founded.toLocaleDateString()} - 設立
                                                         </li>
-                                                        {this.history.filter(h => h.date >= this.founded).map((h, i) =>
+                                                        {this.data.history.filter(h => h.date >= this.data.founded).map((h, i) =>
                                                             <li key={i}>
                                                                 {h.date.toLocaleDateString()} - {h.description}
                                                             </li>
@@ -123,7 +111,7 @@ export class Team {
                                 <h2 className="font-bold text-lg mb-2">役割</h2>
                                 <div className="mx-1">
                                     <ul className="list-disc list-inside">
-                                        {this.roles.map((role, i) => <li key={i}>{role}</li>)}
+                                        {this.data.roles.map((role, i) => <li key={i}>{role}</li>)}
                                     </ul>
                                     <p>など</p>
                                 </div>
@@ -132,15 +120,15 @@ export class Team {
                                 <h2 className="font-bold text-lg mb-2">メンバー</h2>
                                 <div className="mx-1">
                                     <ul className="list-disc list-inside">
-                                        <li><span className="font-semibold">{this.members[0]}</span> - 代表</li>
-                                        {this.members.slice(1).map((member, i) => <li key={i}>{member}</li>)}
+                                        <li><span className="font-semibold">{this.data.members[0]}</span> - 代表</li>
+                                        {this.data.members.slice(1).map((member, i) => <li key={i}>{member}</li>)}
                                     </ul>
                                 </div>
                             </section>
                             <section>
                                 <h2 className="font-bold text-lg mb-2">リンク</h2>
                                 <nav className="mx-1 list-none">
-                                    {this.links.map(({url, label}, i) =>
+                                    {this.data.links.map(({url, label}, i) =>
                                         <li key={i}>
                                             <Link href={url} className="group inline-flex">
                                                 <FaArrowRight size={14} className="h-auto mr-2 transition-transform group-hover:translate-x-1"/>
@@ -167,7 +155,7 @@ export class Team {
                                 ここには（まだ）何もありません。
                             </div>
                         </section>
-                        { this.addition }
+                        { this.data.addition }
                     </div>
                 </main>
                 <aside className="mt-20 rounded-l-2xl bg-gray-50 flex-1/4 p-8">

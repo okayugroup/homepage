@@ -21,10 +21,10 @@ export default async function TeamPage({ params }: Props) {
     let team;
     switch (teamName) {
         case "administrators":
-            team = AdminPage();
+            team = AdminPage;
             break;
         case "software":
-            team = SoftwareDevelopmentPage();
+            team = SoftwareDevelopmentPage;
             break;
     }
 

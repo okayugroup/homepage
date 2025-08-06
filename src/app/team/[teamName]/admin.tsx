@@ -23,47 +23,45 @@ function ServerUptimeCard({title}: { title: string }): JSX.Element {
     );
 }
 
-export function AdminPage(): Team {
-    const updated = new Date("2025-08-04");
-    return new Team(
+export const AdminPage =
+    new Team(
         "administrators",
-        "Administrators",
-        "おかゆグループの総合的な管理",
-        <>
-            <p>おかゆグループ
-                Administratorsは、グループ全体の運営を行うチームです。私たちは、プロジェクトの管理やメンバーのサポートを通じて、グループの活動を円滑に進めることを目指しています。</p>
-            <p>新しいプロジェクトの企画や、イベントの運営などにも積極的にチャレンジしています。</p>
-        </>,
-        [
-            "yossy4411",
-        ],
-        updated,
-        new Date("2025-08-01"),
-        [
-            {
-                label: "お問い合わせ",
-                url: "/contact?team=administrators"
-            }
-        ],
-        [
-            "プロジェクトの管理",
-            "メンバーのサポート",
-            "グループの方針の決定",
-            "お問い合わせの振り分け",
-            "サーバーの管理",
-            "スケジュールの調整"
-        ],
-        <section>
-            <div className="flex items-end justify-between">
-                <h2 className="text-3xl font-bold">動作状況</h2>
-                <p className="text-gray-500 dark:text-gray-400 text-sm">最終更新: 2025/07/26<span
-                    className="text-rose-700"> っていうふうに見せかけてるだけ</span></p>
-            </div>
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-8">
-                <ServerUptimeCard title="Misskeyサーバー"/>
-                <ServerUptimeCard title="プロジェクト管理サーバー"/>
-            </div>
-        </section>,
-        [ { date: new Date("2025-07-16"), description: "設立を検討開始" } ],
+        {
+            name: "Administrators",
+            description: "おかゆグループの総合的な管理",
+            summary: <>
+                <p>おかゆグループ
+                    Administratorsは、グループ全体の運営を行うチームです。私たちは、プロジェクトの管理やメンバーのサポートを通じて、グループの活動を円滑に進めることを目指しています。</p>
+                <p>新しいプロジェクトの企画や、イベントの運営などにも積極的にチャレンジしています。</p>
+            </>,
+            members: ["yossy4411"],
+            founded: new Date("2025-08-01"),
+            links: [
+                {
+                    label: "お問い合わせ",
+                    url: "/contact?team=administrators"
+                }
+            ],
+            roles: [
+                "プロジェクトの管理",
+                "メンバーのサポート",
+                "グループの方針の決定",
+                "お問い合わせの振り分け",
+                "サーバーの管理",
+                "スケジュールの調整"
+            ],
+            addition: <section>
+                <div className="flex items-end justify-between">
+                    <h2 className="text-3xl font-bold">動作状況</h2>
+                    <p className="text-gray-500 dark:text-gray-400 text-sm">最終更新: 2025/07/26<span
+                        className="text-rose-700"> っていうふうに見せかけてるだけ</span></p>
+                </div>
+                <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-8">
+                    <ServerUptimeCard title="Misskeyサーバー"/>
+                    <ServerUptimeCard title="プロジェクト管理サーバー"/>
+                </div>
+            </section>,
+            history: [{date: new Date("2025-07-16"), description: "設立を検討開始"}],
+        },
+        new Date("2025-08-04"),
     );
-}
