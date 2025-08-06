@@ -63,7 +63,7 @@ export class Team {
                         </div>
                     </div>
                     <div className="flex gap-6 mb-30">
-                        <section className="flex-3/5 space-y-6">
+                        <section className="flex-1 space-y-6">
                             <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl p-4">
                                 <TeamIcon id={this.id} className="fill-foreground"/>
                             </div>
@@ -75,7 +75,7 @@ export class Team {
                             </section>
                         </section>
                         <div className="border-l-2 -my-4 border-l-gray-400 dark:border-gray-600"/>
-                        <section className="flex-2/5 space-y-4">
+                        <section className="w-60 space-y-4">
                             <section>
                                 <h2 className="font-bold text-lg mb-2">設立</h2>
                                 <div className="mx-1">
