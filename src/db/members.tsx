@@ -75,26 +75,27 @@ export class Member {
                     </section>
 
                 </div>
-                <div className="flex-1 text-center">
-
-                    <p>{this.data.description}</p>
-                    <ul>
-                        {Object.entries(this.data.links).map(([key, value]) => (
-                            <li key={key}>
-                                <a href={value} target="_blank" rel="noopener noreferrer">{key}</a>
-                            </li>
-                        ))}
-                    </ul>
-                    {this.data.languages && (
-                        <div className="skills">
-                            <h3>Skills</h3>
-                            <ul>
-                                {Object.entries(this.data.languages).map(([skill, level]) => (
-                                    <li key={skill}>{skill}: {level}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
+                <div className="flex-1">
+                    <section className="w-full p-8 rounded-2xl border border-gray-300">
+                        <p>{this.data.description}</p>
+                        <ul>
+                            {Object.entries(this.data.links).map(([key, value]) => (
+                                <li key={key}>
+                                    <a href={value} target="_blank" rel="noopener noreferrer">{key}</a>
+                                </li>
+                            ))}
+                        </ul>
+                        {this.data.languages && (
+                            <div className="skills">
+                                <h3>Skills</h3>
+                                <ul>
+                                    {Object.entries(this.data.languages).map(([skill, level]) => (
+                                        <li key={skill}>{skill}: {level}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                    </section>
                 </div>
             </div>
         );
