@@ -51,7 +51,7 @@ export class Member {
                 properties.push("その他");
                 break;
         }
-        const ageYear = Math.floor((Date.now() - this.data.additionalTags?.birthday.getTime()) / (1000 * 60 * 60 * 24 * 365.25))
+        const innerProperty = properties.join(" · ")
         return (
             <div className="flex flex-row gap-6 px-60">
                 <div className="p-1">
@@ -61,12 +61,14 @@ export class Member {
                         <div className="text-sm mb-3 text-gray-700">
                             <p>
                                 {(()=> {
-                                    const inner = properties.join(" · ")
                                     if (this.data.additionalTags?.birthday) {
+                                        const birthElapsed = Date.now() - this.data.additionalTags?.birthday.getTime();
+                                        const ageYear = Math.floor(birthElapsed / (1000 * 60 * 60 * 24 * 365.25))
+                                        const ageMonth = Math.floor((birthElapsed % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30));
                                         return <>
-                                            <span>{inner + " · "}</span>
+                                            <span>{innerProperty + " · "}</span>
                                             <span className="relative group">
-                                                {ageYear}歳
+                                                {ageYear}歳{ ageMonth > 0 ? ` ${ageMonth}ヶ月` : ""}
                                                 <span className="absolute opacity-0 group-hover:opacity-100 left-0 top-5 transition-opacity duration-150 text-xs flex items-center">
                                                     <LiaBirthdayCakeSolid size={14}/><span className="ml-1">{this.data.additionalTags.birthday.toLocaleDateString("ja-JP")}</span>
                                                 </span>
