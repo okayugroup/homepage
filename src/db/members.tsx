@@ -51,6 +51,7 @@ export class Member {
                 properties.push("その他");
                 break;
         }
+        const ageYear = Math.floor((Date.now() - this.data.additionalTags?.birthday.getTime()) / (1000 * 60 * 60 * 24 * 365.25))
         return (
             <div className="flex flex-row gap-6 px-60">
                 <div className="p-1">
@@ -65,9 +66,9 @@ export class Member {
                                         return <>
                                             <span>{inner + " · "}</span>
                                             <span className="relative group">
-                                                {this.data.additionalTags?.birthday!.getFullYear()}年生
-                                                <span className="text-gray-800 absolute opacity-0 group-hover:opacity-100 backdrop-blur-xs left-1 top-1 p-2 max-w-max rounded-xl shadow border border-gray-100 transition-opacity duration-150 bg-white/20">
-                                                    <LiaBirthdayCakeSolid />{this.data.additionalTags.birthday.toLocaleDateString("ja-JP")}
+                                                {ageYear}歳
+                                                <span className="absolute opacity-0 group-hover:opacity-100 left-0 top-5 transition-opacity duration-150 text-xs flex items-center">
+                                                    <LiaBirthdayCakeSolid size={14}/><span className="ml-1">{this.data.additionalTags.birthday.toLocaleDateString("ja-JP")}</span>
                                                 </span>
                                             </span>
                                         </>
