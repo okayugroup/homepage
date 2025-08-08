@@ -8,6 +8,10 @@ import {FaBluesky, FaKeybase, FaMarkdown, FaMastodon, FaTwitter, FaXTwitter} fro
 import Link from "next/link";
 import {FaGithub} from "react-icons/fa";
 import {SiMisskey, SiQiita} from "react-icons/si";
+import {Lang} from "@/components/lang";
+
+export type Languages = { [lang: string]: number }
+
 
 export type MemberData = {
     name: string;
@@ -15,7 +19,7 @@ export type MemberData = {
     links: {
         [key: string]: string;
     };
-    languages?: { [lang: string]: number };
+    languages?: Languages;
     additionalTags?: {
         birthday?: Date;
         sex?: "male" | "female" | "other";
@@ -122,18 +126,12 @@ export class Member {
                             </ReactMarkdown>
                         </div>
                     </section>
-                    <section>
-                        {this.data.languages && (
-                            <div className="skills">
-                                <h3>Skills</h3>
-                                <ul>
-                                    {Object.entries(this.data.languages).map(([skill, level]) => (
-                                        <li key={skill}>{skill}: {level}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )}
-                    </section>
+                    <div className="mt-8 px-6 space-y-10">
+                        {this.data.languages ? <section>
+                            <h2 className="text-2xl font-bold">Skills</h2>
+                            <Lang languages={this.data.languages!}/>
+                        </section> : <></>}
+                    </div>
                 </div>
             </div>
         );
