@@ -4,7 +4,10 @@ import {Roboto_Mono} from "next/font/google";
 import {LiaBirthdayCakeSolid} from "react-icons/lia";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import {FaMarkdown} from "react-icons/fa6";
+import {FaBluesky, FaKeybase, FaMarkdown, FaMastodon, FaTwitter, FaXTwitter} from "react-icons/fa6";
+import Link from "next/link";
+import {FaGithub} from "react-icons/fa";
+import {SiMisskey, SiQiita} from "react-icons/si";
 
 export type MemberData = {
     name: string;
@@ -74,13 +77,39 @@ export class Member {
                                 })()}
                             </p>
                         </div>
-
-                        <p className="">{this.data.description}</p>
+                        <p className="mb-4">{this.data.description}</p>
+                        <div className="flex gap-2 flex-wrap">
+                            {Object.entries(this.data.links).map(([key, value], i) => (
+                                <Link href={value} key={i}>
+                                    {(() => {
+                                        switch (key.toLowerCase()) {
+                                            case "github":
+                                                return <FaGithub size={20}/>;
+                                            case "twitter":
+                                            case "x":
+                                                return <FaXTwitter size={20}/>;
+                                            case "misskey":
+                                                return <SiMisskey size={20}/>;
+                                            case "mastodon":
+                                                return <FaMastodon size={20}/>;
+                                            case "bluesky":
+                                                return <FaBluesky size={20}/>;
+                                            case "qiita":
+                                                return <SiQiita size={20}/>;
+                                            case "keybase":
+                                                return <FaKeybase size={20}/>;
+                                            default:
+                                                return <span className="text-gray-800 hover:underline">{key}</span>;
+                                        }
+                                    })()}
+                                </Link>)
+                            )}
+                        </div>
                     </section>
 
                 </div>
                 <div className="flex-1">
-                    <section className="w-full px-6 py-4 rounded-lg border border-gray-300">
+                    <section className="px-6 py-4 rounded-lg border border-gray-300">
                         <div className="flex justify-between">
                             <p className={`${codeFont.className} text-xs`}>about-me<span className="text-gray-500">.md</span></p>
                             <FaMarkdown size={16} className="text-gray-500" />
@@ -92,13 +121,6 @@ export class Member {
                         </div>
                     </section>
                     <section>
-                        <ul>
-                            {Object.entries(this.data.links).map(([key, value]) => (
-                                <li key={key}>
-                                    <a href={value} target="_blank" rel="noopener noreferrer">{key}</a>
-                                </li>
-                            ))}
-                        </ul>
                         {this.data.languages && (
                             <div className="skills">
                                 <h3>Skills</h3>
@@ -124,7 +146,9 @@ export const Members: { [key: string]: Member } = {
             description: "おかゆグループ創設者・代表。",
             links: {
                 "GitHub": "https://github.com/yossy4411",
-                "Twitter": "https://twitter.com/yossy4411",
+                "Twitter": "https://x.com/yossy4411_dev",
+                "Misskey": "https://okayugroup.net/@yossy4411",
+                "Keybase": "https://keybase.io/yossy4411",
             },
             languages: {
                 "Rust": 8,
