@@ -2,6 +2,9 @@ import {JSX} from "react";
 import Image from "next/image";
 import {Roboto_Mono} from "next/font/google";
 import {LiaBirthdayCakeSolid} from "react-icons/lia";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import {FaMarkdown} from "react-icons/fa6";
 
 export type MemberData = {
     name: string;
@@ -14,7 +17,8 @@ export type MemberData = {
         birthday?: Date;
         sex?: "male" | "female" | "other";
         location?: string;
-    }
+    },
+    aboutMe: string;  // Markdown形式の自己紹介
 }
 
 const codeFont = Roboto_Mono({
@@ -46,7 +50,7 @@ export class Member {
         }
         return (
             <div className="flex flex-row gap-6 px-60">
-                <div className="w-1/3 max-w-120 p-1">
+                <div className="p-1">
                     <Image alt={`${this.data.name}のアイコン`} src={`/members/${this.id}.webp`} width={256} height={256} className="rounded-full border border-gray-300 mb-4" />
                     <section>
                         <h2 className="text-2xl font-bold mb-1">{this.data.name}</h2>
@@ -76,8 +80,18 @@ export class Member {
 
                 </div>
                 <div className="flex-1">
-                    <section className="w-full p-8 rounded-2xl border border-gray-300">
-                        <p>{this.data.description}</p>
+                    <section className="w-full px-6 py-4 rounded-lg border border-gray-300">
+                        <div className="flex justify-between">
+                            <p className={`${codeFont.className} text-xs`}>about-me<span className="text-gray-500">.md</span></p>
+                            <FaMarkdown size={16} className="text-gray-500" />
+                        </div>
+                        <div className="markdown-body">
+                            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                {this.data.aboutMe}
+                            </ReactMarkdown>
+                        </div>
+                    </section>
+                    <section>
                         <ul>
                             {Object.entries(this.data.links).map(([key, value]) => (
                                 <li key={key}>
@@ -125,7 +139,13 @@ export const Members: { [key: string]: Member } = {
                 birthday: new Date("2010-08-16"),
                 location: "Shiga, Japan",
                 sex: "male",
-            }
+            },
+            aboutMe: (
+`# yossy4411
+こんにちは！おかゆグループの代表を務めているおかゆです。
+
+私は趣味のプログラミングを通じて、社会をより良いものにするための活動をしています。`
+            )
         }
     )
 }
