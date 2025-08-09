@@ -10,7 +10,6 @@ import {
     Tooltip,
     Legend
 } from 'chart.js';
-import {Languages} from "@/db/members";
 
 Chart.register(
     CategoryScale,
@@ -22,7 +21,7 @@ Chart.register(
     Legend
 );
 
-export function Lang({ languages }: Readonly<{ languages: Languages }>) {
+export function Lang({ languages }: Readonly<{ languages: { [_: string]: number } }>) {
     const data = {
         labels: Object.keys(languages),
         datasets: [

@@ -9,8 +9,8 @@ import Link from "next/link";
 import {FaGithub} from "react-icons/fa";
 import {SiMisskey, SiQiita} from "react-icons/si";
 import {Lang} from "@/components/lang";
+import {Skills} from "@/components/skills";
 
-export type Languages = { [lang: string]: number }
 
 
 export type MemberData = {
@@ -19,7 +19,8 @@ export type MemberData = {
     links: {
         [key: string]: string;
     };
-    languages?: Languages;
+    skills?: [string, number][];
+    languages?: { [lang: string]: number };
     additionalTags?: {
         birthday?: Date;
         sex?: "male" | "female" | "other";
@@ -114,7 +115,7 @@ export class Member {
                     </section>
 
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 max-w-full">
                     <section className="px-6 py-4 rounded-lg border border-gray-300">
                         <div className="flex justify-between">
                             <p className={`${codeFont.className} text-xs`}>about-me<span className="text-gray-500">.md</span></p>
@@ -127,9 +128,12 @@ export class Member {
                         </div>
                     </section>
                     <div className="mt-8 px-6 space-y-10">
-                        {this.data.languages ? <section>
+                        {(this.data.languages || this.data.skills) ? <section>
                             <h2 className="text-2xl font-bold">Skills</h2>
-                            <Lang languages={this.data.languages!}/>
+                            <div className="flex overflow-x-scroll max-w-full">
+                                {this.data.skills ? <Skills skills={this.data.skills!}/> : <></>}
+                                {this.data.languages ? <Lang languages={this.data.languages!}/> : <></>}
+                            </div>
                         </section> : <></>}
                     </div>
                 </div>
@@ -150,6 +154,20 @@ export const Members: { [key: string]: Member } = {
                 "Misskey": "https://okayugroup.net/@yossy4411",
                 "Keybase": "https://keybase.io/yossy4411",
             },
+            skills: [
+                ["Web開発", 8],
+                ["ネイティブアプリ開発", 9],
+                ["プロジェクト管理", 7],
+                ["チームビルディング", 8],
+                ["バックエンド開発", 6],
+                ["フロントエンド開発", 7],
+                ["データベース設計", 4],
+                ["UI/UXデザイン", 5],
+                ["DevOps", 6],
+                ["セキュリティ", 6],
+                ["CI/CD", 6],
+                ["API設計", 7],
+            ],
             languages: {
                 "Rust": 8,
                 "TypeScript": 6.5,
