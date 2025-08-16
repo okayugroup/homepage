@@ -120,8 +120,8 @@ export class Team {
                                 <h2 className="font-bold text-lg mb-2">メンバー</h2>
                                 <div className="mx-1">
                                     <ul className="list-disc list-inside">
-                                        <li><span className="font-semibold">{this.data.members[0]}</span> - 代表</li>
-                                        {this.data.members.slice(1).map((member, i) => <li key={i}>{member}</li>)}
+                                        <li><Link href={`/member/${this.data.members[0]}`} className="hover:underline"><span className="font-semibold">{this.data.members[0]}</span> - 代表</Link></li>
+                                        {this.data.members.slice(1).map((member, i) => <li key={i}><Link href={`/member/${this.data.members[0]}`} className="hover:underline">{member}</Link></li>)}
                                     </ul>
                                 </div>
                             </section>
