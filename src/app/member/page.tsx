@@ -18,13 +18,13 @@ export default function MembersPage() {
                         <Link key={i} href={`/member/${member.id}`}>
                             <div className="rounded-lg bg-white dark:bg-gray-800 p-6 shadow-md border border-gray-200 dark:border-gray-700">
                                 <div className="flex items-center gap-2">
-                                    <Image width={32} height={32} src={`/members/${member.id}.webp`} alt={`${member.id}'s icon`} className="rounded-full border-1 border-gray-400 dark:border-gray-600"/>
+                                    <Image width={32} height={32} src={`/members/${member.id}.webp`} alt={`${member.id}'s icon`} className="rounded-full border-1 border-gray-400 dark:border-gray-600 dark:drop-shadow drop-shadow-white"/>
                                     <h2 className="text-xl font-bold">{member.data.name}</h2>
                                 </div>
                                 <p className="text-gray-600 dark:text-gray-400">{member.data.description}</p>
                                 {!member.data.skills ? <></> :
                                     <div className="flex flex-wrap space-x-1 space-y-0.5 text-xs mt-3">
-                                        {member.data.skills.filter(elem => elem[1] > 5).map((elem, i) => <p key={i} className="bg-fuchsia-200 py-1 px-2 rounded-full border-1 border-pink-300 shadow">{elem[0]}</p>)}
+                                        {member.data.skills.filter(elem => elem[1] > 5).map((elem, i) => <p key={i} className="bg-fuchsia-200 dark:bg-pink-600/70 py-1 px-2 rounded-full border-1 dark:border-0 border-pink-300 shadow dark:shadow-none">{elem[0]}</p>)}
                                     </div>
                                 }
                             </div>

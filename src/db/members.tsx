@@ -60,10 +60,10 @@ export class Member {
         return (
             <div className="flex flex-row gap-6">
                 <div className="p-1 ml-20">
-                    <Image alt={`${this.data.name}のアイコン`} src={`/members/${this.id}.webp`} width={256} height={256} className="rounded-full border border-gray-300 mb-4" />
+                    <Image alt={`${this.data.name}のアイコン`} src={`/members/${this.id}.webp`} width={256} height={256} className="rounded-full mb-4 border border-gray-300 dark:border-gray-600"/>
                     <section>
                         <h2 className="text-2xl font-bold mb-1">{this.data.name}</h2>
-                        <div className="text-sm mb-3 text-gray-700">
+                        <div className="text-sm mb-3 text-gray-700 dark:text-gray-400">
                             <p>
                                 {(()=> {
                                     if (this.data.additionalTags?.birthday) {
@@ -85,7 +85,7 @@ export class Member {
                             </p>
                         </div>
                         <p className="mb-4">{this.data.description}</p>
-                        <div className="flex gap-2 flex-wrap">
+                        <div className="flex gap-2 flex-wrap dark:text-gray-200 text-gray-800">
                             {Object.entries(this.data.links).map(([key, value], i) => (
                                 <Link href={value} key={i}>
                                     {(() => {
@@ -116,9 +116,9 @@ export class Member {
 
                 </div>
                 <div className="flex-1 mr-40">
-                    <section className="px-6 py-4 rounded-lg border border-gray-300">
+                    <section className="px-6 py-4 rounded-lg border border-gray-300 dark:border-gray-600">
                         <div className="flex justify-between">
-                            <p className={`${codeFont.className} text-xs`}>about-me<span className="text-gray-500">.md</span></p>
+                            <p className={`${codeFont.className} text-xs`}>about-me<span className="text-gray-500 dark:text-gray-400">.md</span></p>
                             <FaMarkdown size={16} className="text-gray-500" />
                         </div>
                         <div className="markdown-body">
