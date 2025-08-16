@@ -58,8 +58,8 @@ export class Member {
         }
         const innerProperty = properties.join(" · ")
         return (
-            <div className="flex flex-row gap-6 px-60">
-                <div className="p-1">
+            <div className="flex flex-row gap-6">
+                <div className="p-1 ml-20">
                     <Image alt={`${this.data.name}のアイコン`} src={`/members/${this.id}.webp`} width={256} height={256} className="rounded-full border border-gray-300 mb-4" />
                     <section>
                         <h2 className="text-2xl font-bold mb-1">{this.data.name}</h2>
@@ -115,7 +115,7 @@ export class Member {
                     </section>
 
                 </div>
-                <div className="flex-1 max-w-full">
+                <div className="flex-1 mr-40">
                     <section className="px-6 py-4 rounded-lg border border-gray-300">
                         <div className="flex justify-between">
                             <p className={`${codeFont.className} text-xs`}>about-me<span className="text-gray-500">.md</span></p>
@@ -127,14 +127,20 @@ export class Member {
                             </ReactMarkdown>
                         </div>
                     </section>
-                    <div className="mt-8 px-6 space-y-10">
-                        {(this.data.languages || this.data.skills) ? <section>
-                            <h2 className="text-2xl font-bold">Skills</h2>
-                            <div className="flex overflow-x-scroll max-w-full">
-                                {this.data.skills ? <Skills skills={this.data.skills!}/> : <></>}
-                                {this.data.languages ? <Lang languages={this.data.languages!}/> : <></>}
+                    <div className="mt-8 px-6 space-y-10 mb-12">
+                        {(this.data.languages || this.data.skills) ? <section className="max-w-full">
+                            <h2 className="text-2xl font-bold">開発</h2>
+                            <div className="flex flex-nowrap w-full h-120">
+                                {this.data.skills ? <div className={"flex-2/3"}><Skills skills={this.data.skills!}/></div> : <></>}
+                                {this.data.languages ? <div className={"flex-1/3"}><Lang languages={this.data.languages!}/></div> : <></>}
                             </div>
                         </section> : <></>}
+                        <section>
+                            <h2 className="text-2xl font-bold mb-4">ブログ</h2>
+                            <div className="text-gray-700 dark:text-gray-300">
+                                <p className="text-sm">このメンバーのブログはまだありません。</p>
+                            </div>
+                        </section>
                     </div>
                 </div>
             </div>

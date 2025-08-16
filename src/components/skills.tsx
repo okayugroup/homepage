@@ -1,51 +1,23 @@
 "use client"
-import {Bar, Radar} from "react-chartjs-2";
-import {
-    Chart,
-    RadarController,
-    RadialLinearScale,
-    PointElement,
-    LineElement,
-    Filler,
-    Tooltip,
-    Legend
-} from "chart.js";
 
-// レーダーチャート用の要素をregister！
-Chart.register(
-    RadarController,
-    RadialLinearScale,
-    PointElement,
-    LineElement,
-    Filler,
-    Tooltip,
-    Legend
-);
 
+import {Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 
 export function Skills({ skills }: Readonly<{ skills: [string, number][] }>) {
-    const data = {
-        labels: skills.map(a => a[0]),
-        datasets: [
-            {
-                data: skills.map(a => a[1]),
-                backgroundColor: "rgba(75, 192, 192, 0.2)", // 全ての言語に同じ色を適用
-            },
-        ],
-    };
-    const options = {
-        plugins: {
-            legend: {
-                display: false
-            }
-        },
-        scales: {
-            r: {
-                min: 0,
-                max: 10,
-            }
-        },
-        responsive: true,
-    }
-    return <Radar data={data} options={options} height={200} width={200}/>;
+    const data = skills.map(([skill, score]) => ({
+        name: skill,
+        score: score
+    }));
+    return (
+        <ResponsiveContainer width="100%" height="100%" >
+            <BarChart data={data} layout="vertical">
+                <Legend/>
+                <CartesianGrid strokeDasharray="3 3" />
+                <Tooltip/>
+                <XAxis type="number" domain={[0, 10]} ticks={[0, 5, 10]}/>
+                <YAxis dataKey="name" type="category" fontSize={10}/>
+                <Bar dataKey="score" fill="#8884d8" />
+            </BarChart>
+        </ResponsiveContainer>
+    );
 }
