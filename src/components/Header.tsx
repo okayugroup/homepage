@@ -8,6 +8,7 @@ export function Header({ currentPath, pane }: { currentPath: string, pane?: stri
                 {path: "/", label: "ホーム"},
                 {path: "/about", label: "おかゆグループについて"},
                 {path: "/contact", label: "お問い合わせ"},
+                {path: "/blog", label: "ブログ"},
             ]
             return (
                 <header className="flex items-center justify-between p-2 bg-gray-100/75 dark:bg-gray-800/60 fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-b-gray-200 dark:border-b-gray-700">
