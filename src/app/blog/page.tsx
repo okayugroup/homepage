@@ -4,6 +4,15 @@ import {SharedBody} from "@/components/shared-body";
 import {Header} from "@/components/Header";
 import {Members} from "@/db/members";
 import Image from "next/image";
+import {JetBrains_Mono} from "next/font/google";
+
+
+const jetBrainsMono = JetBrains_Mono({
+    subsets: ["latin"],
+    weight: ["500"],
+    display: "swap",
+    variable: "--font-jetbrains-mono"
+})
 
 export default function BlogPage() {
     const today = new Date();
@@ -44,8 +53,16 @@ export default function BlogPage() {
                         }
                     </ul>
                 </section>
+                <section>
+                    <section>
+                    </section>
+                </section>
             </aside>
-            <main>
+            <main className="ml-88 mt-20 pt-4">
+                <div className="flex items-end ml-5">
+                    <h1 className="font-extrabold text-3xl">ブログ</h1>
+                    <span className={`ml-2 text-gray-400 ${jetBrainsMono.className}`}>?a=202508</span>
+                </div>
             </main>
         </SharedBody>
     );
