@@ -5,8 +5,9 @@ import {Header} from "@/components/Header";
 import Link from "next/link";
 
 export default function BlogPage() {
-    const year = new Date().getFullYear();
-    const month = new Date().getMonth() + 1; // 月は0から
+    const today = new Date();
+    const lastMonth = new Date();
+    lastMonth.setMonth(today.getMonth() - 1);
     return (
         <SharedBody>
             <Header currentPath={"/blog/"} pane={"blog"}/>
@@ -27,11 +28,19 @@ export default function BlogPage() {
                 <section>
                     <h2 className="font-bold text-xl mx-4 mb-2">アーカイブ</h2>
                     <div className="mx-4 space-x-1">
-                        <input type="number" min={2024} max={2025} defaultValue={year} className="w-20 bg-gray-100 p-0.5 rounded text-center border border-gray-400" />
+                        <input type="number" min={2024} max={2025} defaultValue={lastMonth.getFullYear()} className="w-20 bg-gray-100 p-0.5 rounded text-center border border-gray-400" />
                         <span className="mr-2">年</span>
-                        <input type="number" min="1" max="12" defaultValue={month} className="w-10 bg-gray-100 p-0.5 rounded text-center border border-gray-400" />
+                        <input type="number" min={1} max={12} defaultValue={lastMonth.getMonth() + 1} className="w-10 bg-gray-100 p-0.5 rounded text-center border border-gray-400" />
                         <span>月</span>
                     </div>
+{/*                    <div className="mx-4 space-x-1">
+                        <input type="number" min={2024} max={2025} defaultValue={today.getFullYear()} className="w-20 bg-gray-100 p-0.5 rounded text-center border border-gray-400" />
+                        <span className="mr-2">年</span>
+                        <input type="number" min={1} max={12} defaultValue={today.getMonth() + 1} className="w-10 bg-gray-100 p-0.5 rounded text-center border border-gray-400" />
+                        <span>月</span>
+                    </div>*/}
+                {/* 月範囲で検索できるようにしようと思ったけど逆にめんどくさくなったからやめます */}
+
                 </section>
             </aside>
             <main>
