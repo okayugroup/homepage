@@ -34,11 +34,26 @@ export default function BlogPage() {
                 </section>
                 <section className="mb-6">
                     <h2 className="font-bold text-xl mx-4 mb-2">アーカイブ</h2>
-                    <div className="mx-4 space-x-1">
-                        <input type="number" min={2024} max={2025} defaultValue={today.getFullYear()} className="w-20 bg-gray-100 p-0.5 rounded text-center border border-gray-400" />
-                        <span className="mr-2">年</span>
-                        <input type="number" min={1} max={12} defaultValue={today.getMonth() + 1} className="w-10 bg-gray-100 p-0.5 rounded text-center border border-gray-400" />
-                        <span>月</span>
+                    <div className="mx-4 space-x-1 flex flex-col space-y-1">
+                        <label className="inline-flex items-center px-2 py-1 rounded-md bg-gray-300/80 hover:bg-gray-300 cursor-pointer text-sm font-medium select-none transition-colors w-full">
+                            <input
+                                type="radio"
+                                name="archive"
+                                className="peer h-4 w-4 accent-gray-600 rounded border border-gray-500/60 bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500/60 focus:ring-offset-1 disabled:opacity-40 disabled:cursor-not-allowed"
+                            />
+                            <span className="ml-2 text-gray-500 peer-checked:text-gray-900">全期間</span>
+                        </label>
+                        <label className="inline-flex items-center px-2 py-1 rounded-md bg-gray-300/80 hover:bg-gray-300 cursor-pointer text-sm font-medium select-none transition-colors w-full">
+                            <input
+                                type="radio"
+                                name="archive"
+                                className="peer h-4 w-4 accent-gray-600 rounded border border-gray-500/60 bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500/60 focus:ring-offset-1 disabled:opacity-40 disabled:cursor-not-allowed"
+                            />
+                            <input type="number" min={2024} max={2025} defaultValue={today.getFullYear()} className="ml-2 w-20 p-0.5 rounded text-center border border-gray-200 peer-checked:border-gray-400 bg-gray-200 peer-checked:bg-gray-100" />
+                            <span className="mx-2 text-gray-500 peer-checked:text-gray-900">年</span>
+                            <input type="number" min={1} max={12} defaultValue={today.getMonth() + 1} className="w-10 p-0.5 rounded text-center border border-gray-200 peer-checked:border-gray-400 bg-gray-200 peer-checked:bg-gray-100" />
+                            <span className="mx-2 text-gray-500 peer-checked:text-gray-900">月</span>
+                        </label>
                     </div>
                 </section>
                 <section className="mb-6">
