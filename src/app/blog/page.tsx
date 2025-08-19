@@ -2,7 +2,6 @@
 
 import {SharedBody} from "@/components/shared-body";
 import {Header} from "@/components/Header";
-import Link from "next/link";
 import {Members} from "@/db/members";
 import Image from "next/image";
 
@@ -17,11 +16,9 @@ export default function BlogPage() {
                     <h2 className="font-bold text-xl mx-4 mb-4">カテゴリ</h2>
                     <ul className="pr-2 flex flex-col space-y-1">
                         {["お知らせ", "イベント", "技術", "地域貢献"].map((category, i) => (
-                            <Link key={i} href={`/blog/${category}`} className="p-0.5 pl-8 bg-gray-500 text-gray-200 rounded-r-full -mr-4 -translate-x-3 hover:translate-x-0 shadow-none hover:shadow-md shadow-black/20 transition-all duration-200">
-                                <li>
-                                    {category}
-                                </li>
-                            </Link>
+                            <li key={i} className="p-0.5 pl-8 bg-gray-500 text-gray-200 rounded-r-full -mr-4 -translate-x-3 hover:translate-x-0 shadow-none hover:shadow-md shadow-black/20 transition-all duration-200">
+                                {category}
+                            </li>
                         ))
                         }
                     </ul>
