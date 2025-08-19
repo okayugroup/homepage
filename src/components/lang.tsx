@@ -11,7 +11,7 @@ export function Lang({ languages }: Readonly<{ languages: { [_: string]: number 
             }))}>
             <PolarGrid />
             <PolarAngleAxis dataKey="lang" fontSize={13} />
-            <PolarRadiusAxis domain={[0, 10]} ticks={[0, 5, 10]} />
+            <PolarRadiusAxis domain={[0, 10]} tickCount={3} />
             <Tooltip />
             <Radar name="Language" dataKey="score" stroke="#8884d8" fill="#f8e863" fillOpacity={0.6} />
         </RadarChart>

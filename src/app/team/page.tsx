@@ -5,17 +5,6 @@ import Link from "next/link";
 import {SharedBody} from "@/components/shared-body";
 import {TeamIcon} from "@/components/team-icon";
 
-function Card({ title, subtitle, children }: { title: string; subtitle: string; children: React.ReactNode }) {
-    return <div className="rounded-lg bg-white dark:bg-gray-800 p-6 shadow-md border border-gray-200 dark:border-gray-700">
-        <h2 className="text-2xl font-bold mb-4 pl-5 border-l-8 border-l-cyan-300 dark:border-l-cyan-950">
-            {title}
-            <span className="text-gray-500 dark:text-gray-400 ml-2 text-xl font-light">
-                - {subtitle}
-            </span>
-        </h2>
-        {children}
-    </div>
-}
 
 function Team({children, title, image, link}: { children: React.ReactNode, title: string, image: string, alt: string, link?: string } ) {
     const linkAddress = link == null ? "/team/preparing" : "/team/" + link;

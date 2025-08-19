@@ -1,7 +1,6 @@
 import {Header} from "@/components/Header";
 import {Footer} from "@/components/Footer";
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import {SharedBody} from "@/components/shared-body";
 import {TeamIcon} from "@/components/team-icon";

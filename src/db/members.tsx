@@ -4,13 +4,12 @@ import {Roboto_Mono} from "next/font/google";
 import {LiaBirthdayCakeSolid} from "react-icons/lia";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import {FaBluesky, FaKeybase, FaMarkdown, FaMastodon, FaTwitter, FaXTwitter} from "react-icons/fa6";
+import {FaBluesky, FaKeybase, FaMarkdown, FaMastodon, FaXTwitter} from "react-icons/fa6";
 import Link from "next/link";
 import {FaGithub} from "react-icons/fa";
 import {SiMisskey, SiQiita} from "react-icons/si";
 import {Lang} from "@/components/lang";
 import {Skills} from "@/components/skills";
-
 
 
 export type MemberData = {
