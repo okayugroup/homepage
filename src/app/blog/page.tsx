@@ -14,8 +14,41 @@ const jetBrainsMono = JetBrains_Mono({
     variable: "--font-jetbrains-mono"
 })
 
+
+let searchQuery = {
+    time: "all" as "all" | Date,
+    categories: [] as string[],
+    groups: [] as string[],
+    search: "" as string,
+    sort: "new" as const, // "new" or "old"
+    author: [] as string[],
+    limit: 10 as number,
+    page: 1 as number,
+}
+
+function searchQueryToString(query: typeof searchQuery): string {
+    const params = new URLSearchParams();
+    if (query.time !== "all") {
+        params.set("t", query.time.toISOString());
+    }
+    if (query.categories.length > 0) {
+        params.set("cat", query.categories.join(","));
+    }
+    if (query.groups.length > 0) {
+        params.set("groups", query.groups.join(","));
+    }
+    if (query.search) {
+        params.set("search", query.search);
+    }
+    if (query.author.length > 0) {
+        params.set("author", query.author.join(","));
+    }
+    return params.toString();
+}
+
 export default function BlogPage() {
     const today = new Date();
+    const queryUrlText = searchQueryToString(searchQuery);
 
     return (
         <SharedBody>
@@ -74,10 +107,24 @@ export default function BlogPage() {
                 </section>
             </aside>
             <main className="ml-88 mt-20 pt-4">
-                <div className="flex items-end ml-5">
-                    <h1 className="font-extrabold text-3xl">ブログ</h1>
-                    <span className={`ml-2 text-gray-400 ${jetBrainsMono.className}`}>?a=202508</span>
+                <div className="ml-5">
+                    <div className="flex items-end mb-2">
+                        <h1 className="font-extrabold text-3xl">ブログ</h1>
+                        {queryUrlText ?
+                            <span className={`ml-2 text-gray-400 ${jetBrainsMono.className}`}>
+                            {`?${queryUrlText}`}
+                        </span>
+                            : <></>
+                        }
+                    </div>
+                    {
+                        (()=>{
+                            return <p className="text-gray-700">34件のうち10件 (1ページ)</p>
+                        })()
+                    }
+
                 </div>
+
             </main>
         </SharedBody>
     );
