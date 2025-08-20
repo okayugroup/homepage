@@ -5,6 +5,8 @@ import {Header} from "@/components/Header";
 import {Members} from "@/db/members";
 import Image from "next/image";
 import {JetBrains_Mono} from "next/font/google";
+import {Teams} from "@/db/teams";
+import {TeamIcon} from "@/components/team-icon";
 
 
 const jetBrainsMono = JetBrains_Mono({
@@ -53,7 +55,7 @@ export default function BlogPage() {
     return (
         <SharedBody>
             <Header currentPath={"/blog/"} pane={"blog"}/>
-            <aside className="fixed bg-gray-200 z-50 left-0 top-20 bottom-2 w-80 rounded-r-xl pr-4 py-6 overflow-y-auto">
+            <aside className="fixed bg-gray-200 z-50 left-0 top-20 bottom-2 w-80 rounded-r-xl pr-2 py-6 overflow-y-auto">
                 <section className="mb-6">
                     <h2 className="font-bold text-xl mx-4 mb-4">カテゴリ</h2>
                     <ul className="pr-2 flex flex-col space-y-1">
@@ -67,7 +69,7 @@ export default function BlogPage() {
                 </section>
                 <section className="mb-6">
                     <h2 className="font-bold text-xl mx-4 mb-2">アーカイブ</h2>
-                    <div className="mx-4 space-x-1 flex flex-col space-y-1">
+                    <div className="ml-2 space-x-1 flex flex-col space-y-1">
                         <label className="inline-flex items-center px-2 py-1 rounded-md bg-gray-300/80 hover:bg-gray-300 cursor-pointer text-sm font-medium select-none transition-colors w-full">
                             <input
                                 type="radio"
@@ -93,9 +95,21 @@ export default function BlogPage() {
                     <h2 className="font-bold text-xl mx-4 mb-4">筆者</h2>
                     <ul className="pr-2 inline-flex flex-col space-y-1 ml-2">
                         {Object.values(Members).map((author, i) => (
-                            <li key={i} className="flex items-center p-0.5 bg-gray-500 text-gray-200 rounded-full shadow-none hover:shadow-md shadow-black/20 transition-all duration-200">
+                            <li key={i} className="flex items-center p-0.5 bg-gray-500 text-gray-200 rounded-full shadow-none hover:shadow-md shadow-black/20 transition-shadow duration-200">
                                 <Image src={`/members/${author.id}.webp`} alt={`${author.id}'s icon`} width={16} height={16} className="h-8 w-8 rounded-full bg-white"/>
                                 <span className="pl-2 pr-4">{author.data.name}</span>
+                            </li>
+                        ))
+                        }
+                    </ul>
+                </section>
+                <section>
+                    <h2 className="font-bold text-xl mx-4 mb-4">チーム</h2>
+                    <ul className="pr-2 flex flex-col space-y-1 ml-2">
+                        {Object.values(Teams).map((team, i) => (
+                            <li key={i} className="bg-gray-500 text-gray-200 rounded-xl shadow-none hover:shadow-md shadow-black/20 transition-shadow duration-200 w-full overflow-hidden">
+                                <TeamIcon id={team.id} className="bg-white"/>
+                                <h3 className="px-2 py-1">{team.data.name}</h3>
                             </li>
                         ))
                         }
@@ -106,7 +120,7 @@ export default function BlogPage() {
                     </section>
                 </section>
             </aside>
-            <main className="ml-88 mt-20 pt-4">
+            <main className="ml-84 mt-20 pt-4">
                 <div className="ml-5">
                     <div className="flex items-end mb-2">
                         <h1 className="font-extrabold text-3xl">ブログ</h1>
