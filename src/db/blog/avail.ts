@@ -9,32 +9,49 @@ import {Root} from "mdast";
 export type Blog = {
     title: string;
     slug: string;
-    categories: string[];
+    categories?: string[];
     content: Root;
+    createdAt?: Date;
+    updatedAt?: Date;
+    author?: string;
+    description?: string;
+    image?: string;
+    tags?: string[];
 }
 
 
 async function readAllMarkdownFiles(dir: string = "blogs"): Promise<Blog[]> {
     let results: Blog[] = [];
-    const entries = await fs.readdir(dir, { withFileTypes: true });
-    for (const entry of entries) {
-        const fullPath = path.join(dir, entry.name);
-        if (entry.isDirectory()) {
-            const nested = await readAllMarkdownFiles(fullPath);
-            results = results.concat(nested);
-        } else if (entry.isFile() && path.extname(entry.name) === '.md') {
-            // .mdファイルなら読み込む
-            const content = await fs.readFile(fullPath, 'utf-8');
-            results.push(parseToBlog(entry.name, content));
+    try {
+        const entries = await fs.readdir(dir, {withFileTypes: true});
+        for (const entry of entries) {
+            const fullPath = path.join(dir, entry.name);
+            if (entry.isDirectory()) {
+                const nested = await readAllMarkdownFiles(fullPath);
+                results = results.concat(nested);
+            } else if (entry.isFile() && path.extname(entry.name) === '.md') {
+                // .mdファイルなら読み込む
+                const content = await fs.readFile(fullPath, 'utf-8');
+                results.push(parseToBlog(entry.name, content));
+            }
         }
+        return results;
+    } catch (error) {
+        console.error(`Error reading markdown files in directory ${dir}:`, error);
+        return results; // エラーが発生しても空の配列を返す
     }
-    return results;
 }
 
 function parseToBlog(fileName: string, fileContent: string): Blog {
     const { data, content } = matter(fileContent);
     const slug = toKebabCase((data['slug'] as string | undefined) || path.basename(fileName, '.md'));
-    const categories = (data['categories'] as string[] | undefined) || [];
+    const categories = (data['categories'] as string[] | undefined);
+    const createdAt = data['createdAt'] ? new Date(data['createdAt']) : data['created'] ? new Date(data['created']) :  undefined;
+    const updatedAt = data['updatedAt'] ? new Date(data['updatedAt']) : data['updated'] ? new Date(data['updated']) : undefined;
+    const author = data['author'] as string | undefined;
+    const description = data['description'] as string | undefined;
+    const image = data['image'] as string | undefined;
+    const tags = data['tags'] as string[] | undefined;
 
     const tree = unified()
         .use(remarkParse)
@@ -62,6 +79,12 @@ function parseToBlog(fileName: string, fileContent: string): Blog {
         title,
         categories,
         slug,
+        createdAt,
+        updatedAt,
+        author,
+        description,
+        image,
+        tags,
         content: tree,
     }
 
@@ -80,4 +103,15 @@ export function toKebabCase(input: string): string {
         .toLowerCase()
         // 先頭・末尾のハイフンを削除
         .replace(/^[-]+|[-]+$/g, '');
+}
+
+export async function getAllBlogs(): Promise<Blog[]> {
+    const blogs = await readAllMarkdownFiles();
+    // ソート: 新しい順に
+    blogs.sort((a, b) => {
+        const aDate = new Date(a.updatedAt || a.createdAt || 0);
+        const bDate = new Date(b.updatedAt || b.createdAt || 0);
+        return bDate.getTime() - aDate.getTime();
+    });
+    return blogs;
 }
