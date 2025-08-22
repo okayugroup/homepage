@@ -67,6 +67,7 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                     <div className="ml-2 space-x-1 flex flex-col space-y-1">
                         <label className="inline-flex items-center px-2 py-1 rounded-md bg-gray-300/80 dark:bg-gray-700/80 hover:bg-gray-300 dark:hover:bg-gray-600 cursor-pointer text-sm font-medium select-none transition-colors w-full">
                             <input
+                                checked
                                 type="radio"
                                 name="archive"
                                 className="peer h-4 w-4 accent-gray-600 rounded border border-gray-500/60 bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500/60 focus:ring-offset-1 disabled:opacity-40 disabled:cursor-not-allowed"
