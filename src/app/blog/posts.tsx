@@ -1,6 +1,5 @@
 "use client"
 
-
 import {Blog} from "@/db/blog/avail";
 import {SharedBody} from "@/components/shared-body";
 import {Header} from "@/components/Header";
@@ -8,7 +7,6 @@ import {Members} from "@/db/members";
 import Image from "next/image";
 import {Teams} from "@/db/teams";
 import {TeamIcon} from "@/components/team-icon";
-import {getMonoFontClass} from "./font";
 
 
 const searchQuery = {
@@ -122,7 +120,7 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                     <div className="flex items-end mb-2">
                         <h1 className="font-extrabold text-3xl">ブログ</h1>
                         {queryUrlText ?
-                            <span className={`ml-2 text-gray-400 ${getMonoFontClass()}`}>
+                            <span className={`ml-2 text-gray-400 font-mono`}>
                             {`?${queryUrlText}`}
                         </span>
                             : <></>

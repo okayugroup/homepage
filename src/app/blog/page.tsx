@@ -1,4 +1,3 @@
-import {JetBrains_Mono} from "next/font/google";
 import {getAllBlogs} from "@/db/blog/avail";
 import Posts from "./posts";
 
