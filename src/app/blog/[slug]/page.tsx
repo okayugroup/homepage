@@ -1,6 +1,5 @@
 import {SharedBody} from "@/components/shared-body";
-import {Blog, getAllBlogs, getBlogContent} from "@/db/blog";
-import * as fs from "fs/promises";
+import {getAllBlogs, getBlogContent} from "@/db/blog";
 import {Header} from "@/components/Header";
 import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
@@ -9,7 +8,7 @@ import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 import rehypeHighlight from "rehype-highlight";
 import rehypeRaw from "rehype-raw";
-
+import "./blog.css"
 
 export async function generateStaticParams() {
     return (await getAllBlogs()).map(blog => {
@@ -34,7 +33,10 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         const html = String(file);
         return <SharedBody>
             <Header currentPath={'/blog/' + slug} />
-            <main className="mt-24 m-10" dangerouslySetInnerHTML={{ __html: html }} />
+            <main className="mt-24 m-10"/>
+            <div className="blog mt-2 px-4"
+                 dangerouslySetInnerHTML={{ __html: html }}>
+            </div>
         </SharedBody>
     } catch (e) {
         return <SharedBody>
