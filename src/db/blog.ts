@@ -7,6 +7,7 @@ import {Root} from "mdast";
 
 
 export type Blog = {
+    fileName: string;
     title: string;
     slug: string;
     categories?: string[];
@@ -18,8 +19,9 @@ export type Blog = {
     tags?: string[];
 }
 
+const BLOG_DIR = "blogs/";
 
-async function readAllMarkdownFiles(dir: string = "blogs"): Promise<Blog[]> {
+async function readAllMarkdownFiles(dir: string = BLOG_DIR): Promise<Blog[]> {
     let results: Blog[] = [];
     try {
         const entries = await fs.readdir(dir, {withFileTypes: true});
@@ -75,6 +77,7 @@ function parseToBlog(fileName: string, fileContent: string): Blog {
         title = path.basename(fileName, '.md').replace(/-/g, ' ');
     }
     return {
+        fileName,
         title,
         categories,
         slug,
@@ -112,4 +115,15 @@ export async function getAllBlogs(): Promise<Blog[]> {
         return bDate.getTime() - aDate.getTime();
     });
     return blogs;
+}
+
+export async function getBlogContent(slug: string): Promise<string> {
+    const blogs = await getAllBlogs();
+    const blog = blogs.find(b => b.slug === slug);
+    if (!blog) {
+        throw new Error(`Blog with slug "${slug}" not found`);
+    }
+    const fileContent = await fs.readFile(BLOG_DIR + blog.fileName, "utf8");
+    const { content } = matter(fileContent);
+    return content;
 }
