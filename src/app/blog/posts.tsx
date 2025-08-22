@@ -134,8 +134,9 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                     }
                     <section className="mt-4">
                         {
-                            blogs.map((item, i) => (
-                                <article key={i} className="mb-6 p-4 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-lg transition-shadow duration-200">
+                            blogs.map((item, i) => {
+                                const date = item.createdAt ?? item.updatedAt;
+                                return <article key={i} className="mb-6 p-4 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-lg transition-shadow duration-200">
                                     <h2 className="text-xl font-bold mb-2">{item.title}</h2>
                                     <p className="text-gray-600 dark:text-gray-400 mb-2">{item.description || "No description available."}</p>
                                     <div className="flex items-center space-x-2 mb-2">
@@ -144,11 +145,11 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                                             <span className="text-sm text-gray-500 dark:text-gray-300">{Members[item.author]?.data.name || item.author}</span>
                                         </> : <span>匿名/未指定</span>
                                         }
-                                        { item.createdAt ? <span className="text-xs text-gray-400 dark:text-gray-500">・{new Date(item.createdAt).toLocaleDateString()}</span> : <span className="text-xs text-gray-400 dark:text-gray-500">・日付不明</span> }
+                                        { date ? <span className="text-xs text-gray-400 dark:text-gray-500">・{new Date(date).toLocaleDateString()}</span> : <span className="text-xs text-gray-400 dark:text-gray-500">・日付不明</span> }
                                     </div>
                                     <a href={`/blog/${item.slug}`} className="text-blue-600 hover:underline">続きを読む</a>
-                                </article>
-                            ))
+                                </article>;
+                            })
                         }
                     </section>
 
