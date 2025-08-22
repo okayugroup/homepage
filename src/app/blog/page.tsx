@@ -1,4 +1,4 @@
-import {getAllBlogs} from "@/db/blog/avail";
+import {getAllBlogs} from "@/db/blog";
 import Posts from "./posts";
 
 

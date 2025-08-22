@@ -1,6 +1,6 @@
 "use client"
 
-import {Blog} from "@/db/blog/avail";
+import {Blog} from "@/db/blog";
 import {SharedBody} from "@/components/shared-body";
 import {Header} from "@/components/Header";
 import {Members} from "@/db/members";
@@ -67,7 +67,7 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                     <div className="ml-2 space-x-1 flex flex-col space-y-1">
                         <label className="inline-flex items-center px-2 py-1 rounded-md bg-gray-300/80 dark:bg-gray-700/80 hover:bg-gray-300 dark:hover:bg-gray-600 cursor-pointer text-sm font-medium select-none transition-colors w-full">
                             <input
-                                checked
+                                defaultChecked
                                 type="radio"
                                 name="archive"
                                 className="peer h-4 w-4 accent-gray-600 rounded border border-gray-500/60 bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500/60 focus:ring-offset-1 disabled:opacity-40 disabled:cursor-not-allowed"
@@ -116,7 +116,7 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                     </section>
                 </section>
             </aside>
-            <main className="ml-84 mt-20 pt-4">
+            <main className="ml-84 mt-20 pt-4 mr-8">
                 <div className="ml-5">
                     <div className="flex items-end mb-2">
                         <h1 className="font-extrabold text-3xl">ブログ</h1>
@@ -132,7 +132,7 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                             return <p className="text-gray-700 dark:text-gray-400">34件のうち10件 (1ページ)</p>
                         })()
                     }
-                    <section>
+                    <section className="mt-4">
                         {
                             blogs.map((item, i) => (
                                 <article key={i} className="mb-6 p-4 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-lg transition-shadow duration-200">
