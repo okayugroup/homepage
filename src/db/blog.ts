@@ -10,7 +10,6 @@ export type Blog = {
     title: string;
     slug: string;
     categories?: string[];
-    content: Root;
     createdAt?: Date;
     updatedAt?: Date;
     author?: string;
@@ -47,7 +46,7 @@ function parseToBlog(fileName: string, fileContent: string): Blog {
     const slug = toKebabCase((data['slug'] as string | undefined) || path.basename(fileName, '.md'));
     const categories = (data['categories'] as string[] | undefined);
     const createdAt = data['createdAt'] ? new Date(data['createdAt']) : data['created'] ? new Date(data['created']) :  undefined;
-    const updatedAt = data['updatedAt'] ? new Date(data['updatedAt']) : data['updated'] ? new Date(data['updated']) : undefined;
+    const updatedAt = data['updatedAt'] ? new Date(data['updatedAt']) : (data['updated'] ? new Date(data['updated']) : (data['date'] ? new Date(data['date']) : undefined));
     const author = data['author'] as string | undefined;
     const description = data['description'] as string | undefined;
     const image = data['image'] as string | undefined;
@@ -85,7 +84,6 @@ function parseToBlog(fileName: string, fileContent: string): Blog {
         description,
         image,
         tags,
-        content: tree,
     }
 
 }
