@@ -8,7 +8,7 @@ import {Members} from "@/db/members";
 import Image from "next/image";
 import {Teams} from "@/db/teams";
 import {TeamIcon} from "@/components/team-icon";
-import {getMonoFontClass} from "@/app/blog/page";
+import {getMonoFontClass} from "./font";
 
 
 const searchQuery = {
@@ -44,7 +44,7 @@ function searchQueryToString(query: typeof searchQuery): string {
 }
 
 
-export default function Posts({blogs}: { blogs: Blog[] }) {
+export default function Posts({ blogs }: { blogs: Blog[] }) {
     const today = new Date();
     const queryUrlText = searchQueryToString(searchQuery);
 
@@ -134,7 +134,7 @@ export default function Posts({blogs}: { blogs: Blog[] }) {
                         })()
                     }
                     {
-                        params.blogs.map((item, i) => (
+                        blogs.map((item, i) => (
                             <article key={i} className="mb-6 p-4 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-lg transition-shadow duration-200">
                                 <h2 className="text-xl font-bold mb-2">{item.title}</h2>
                                 <p className="text-gray-600 dark:text-gray-400 mb-2">{item.description || "No description available."}</p>

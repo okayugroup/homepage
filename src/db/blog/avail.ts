@@ -1,4 +1,4 @@
-import * as fs from "fs/promises";
+import { promises as fs } from 'fs'
 import path from "node:path";
 import matter from "gray-matter";
 import {unified} from "unified";
