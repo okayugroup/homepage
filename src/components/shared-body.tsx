@@ -5,7 +5,7 @@ import "../app/globals.css";
 const mPlus1p = M_PLUS_1({
     variable: "--font-m-plus-1",
     subsets: ["latin"],
-    weight: ["400", "500", "600", "700", "800", "900"],
+    weight: ["500", "600", "800", "900"],
     display: "swap"
 });
 
