@@ -117,7 +117,7 @@ export async function getAllBlogs(): Promise<Blog[]> {
     return blogs;
 }
 
-export async function getBlogContent(slug: string): Promise<string> {
+export async function getBlogContent(slug: string): Promise<[Blog, string]> {
     const blogs = await getAllBlogs();
     const blog = blogs.find(b => b.slug === slug);
     if (!blog) {
@@ -125,5 +125,5 @@ export async function getBlogContent(slug: string): Promise<string> {
     }
     const fileContent = await fs.readFile(BLOG_DIR + blog.fileName, "utf8");
     const { content } = matter(fileContent);
-    return content;
+    return [blog, content];
 }
