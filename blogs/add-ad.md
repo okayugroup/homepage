@@ -1,6 +1,12 @@
 ---
 title: "【ごめん】広告を載せることにしました"
 date: 2024-11-10
+author: yossy4411
+team: administrators
+categories:
+    - お知らせ
+tags:
+    - お知らせ
 ---
 
 いつも見ていただいている皆様には非常に申し訳ないのですが、私達はこの[おかゆグループブログ](https://blog.okayugroup.com)に広告を載せることに決定いたしました。

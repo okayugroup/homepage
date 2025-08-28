@@ -1,6 +1,12 @@
 ---
 title: "Linuxでもゲームがしたい！"
 date: 2025-02-21
+author: yossy4411
+categories:
+    - 雑記
+tags:
+    - Linux
+    - ゲーム
 ---
 
 ふと思いました。Linuxではゲームはできるのか？

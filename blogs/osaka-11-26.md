@@ -1,6 +1,7 @@
 ---
 title: "11月26日に起こった大阪府北部の地震の真相とは？"
 date: 2024-11-30
+author: yossy4411
 categories: 
   - "地震"
 tags: 

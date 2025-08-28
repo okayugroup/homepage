@@ -1,6 +1,12 @@
 ---
 title: "南海トラフはいつ起こるのか？賢く予想してみる！"
 date: 2024-11-23
+author: yossy4411
+team: administrators
+tags:
+    - "地震"
+    - "南海トラフ"
+    - "防災"
 categories: 
   - "アプリ開発"
   - "地震"

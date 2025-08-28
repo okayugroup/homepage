@@ -1,6 +1,11 @@
 ---
 title: "メインPCにUbuntuを入れてみた"
 date: 2025-02-17
+author: yossy4411
+categories:
+    - 雑記
+tags:
+    - Linux
 ---
 
 ## 動画編集ってメモリ食うよね

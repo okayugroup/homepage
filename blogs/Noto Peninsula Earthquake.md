@@ -1,6 +1,11 @@
 ---
 title: "能登半島地震を被災した話"
 date: 2024-06-05
+author: yossy4411
+categories:
+  - "雑記"
+  - "体験談"
+  - "地震"
 tags: 
   - "地震"
 cover:

@@ -1,6 +1,10 @@
 ---
 title: "【朗報】広告が載りませんでした"
 date: 2024-12-15
+author: yossy4411
+team: administrators
+categories:
+    - お知らせ
 ---
 
 ↑朗報っていうのは読者目線です

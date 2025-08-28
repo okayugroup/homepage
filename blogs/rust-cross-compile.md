@@ -1,7 +1,9 @@
 ---
 title: "Rustのクロスコンパイルに振り回された話"
 date: 2025-01-11
+author: yossy4411
 categories: 
+  - "雑記"
   - "アプリ開発"
 tags: 
   - "rust"
@@ -25,7 +27,7 @@ Dockerは、PC内に仮想環境を作り、そこで動かすことのできる
 
 Crossの強みは、そのインストールの容易さにもあります。
 
-```
+```shell
 cargo install cross --git https://github.com/cross-rs/cross
 ```
 
@@ -36,7 +38,7 @@ cargo install cross --git https://github.com/cross-rs/cross
 
 ## crossでクロスコンパイルしてみよう！
 
-```
+```shell
 cargo new test-project  # 新しいプロジェクトを作る
 ```
 
@@ -189,12 +191,12 @@ docker build . -t <tag>
 
 ```toml
 [target.x86_64-unknown-linux-gnu]
-image = <tag>
+image = "<tag>"
 ```
 
 最後に、コンパイルします。
 
-```
+```sh
 cross build --release --target x86_64-unknown-linux-gnu
 ```
 

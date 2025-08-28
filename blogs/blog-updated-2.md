@@ -2,8 +2,11 @@
 title: "ブログを刷新しました"
 date: 2025-03-24
 categories: 
-  - "おかゆグループ"
   - "お知らせ"
+author: yossy4411
+team: administrators
+tags:
+  - お知らせ
 ---
 
 2025/3/24におかゆグループのブログが一新されました。

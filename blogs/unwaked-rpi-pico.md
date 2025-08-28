@@ -1,6 +1,7 @@
 ---
 title: "Raspberry Pi Picoが起動しない"
 date: 2024-06-29
+author: yossy4411
 categories: 
   - "電子工作"
 tags: 

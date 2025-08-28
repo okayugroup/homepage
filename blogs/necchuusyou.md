@@ -1,6 +1,9 @@
 ---
 title: "熱中症になった話"
 date: 2023-07-28
+author: yossy4411
+categories:
+- 雑記
 tags: 
 - 自己啓発
 ---

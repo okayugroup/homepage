@@ -1,6 +1,12 @@
 ---
 title: "超低スペPCにはungoogled-chromiumが良いぞ"
 date: 2025-05-03
+author: yossy4411
+categories:
+    - 雑記
+tags:
+    - Linux
+    - ブラウザ
 ---
 
 私にはタブレットがあります。でも、パフォーマンスがかなり悪いのです。  

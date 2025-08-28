@@ -1,6 +1,11 @@
 ---
 title: "【最低】夏休みの作文を爆速で書く方法"
 date: 2024-08-24
+author: yossy4411
+categories: 
+  - "雑記"
+tags:
+  - "GitHub Copilot"
 ---
 
 ## はじめに

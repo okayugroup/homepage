@@ -1,6 +1,7 @@
 ---
 title: "【悲報】テスト２日前ワイ、無事死亡"
 date: 2024-11-26
+author: yossy4411
 categories: 
   - "学校生活"
 tags: 
