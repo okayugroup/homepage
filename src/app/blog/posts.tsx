@@ -7,6 +7,7 @@ import {Members} from "@/db/members";
 import Image from "next/image";
 import {Teams} from "@/db/teams";
 import {TeamIcon} from "@/components/team-icon";
+import Link from "next/link";
 
 
 const searchQuery = {
@@ -140,10 +141,10 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                                     <h2 className="text-xl font-bold mb-2">{item.title}</h2>
                                     <p className="text-gray-600 dark:text-gray-400 mb-2">{item.description || "No description available."}</p>
                                     <div className="flex items-center space-x-2 mb-2">
-                                        { item.author && Members[item.author] ? <>
+                                        { item.author && Members[item.author] ? <Link href={`/member/${item.author}`} className="inline-flex items-center space-x-2 p-1 rounded transition-colors hover:bg-white/20">
                                             <Image src={`/members/${item.author}.webp`} alt={`${item.author}'s icon`} width={24} height={24} className="h-6 w-6 rounded-full bg-white"/>
                                             <span className="text-sm text-gray-500 dark:text-gray-300">{Members[item.author]?.data.name || item.author}</span>
-                                        </> : <span>匿名/未指定</span>
+                                        </Link> : <span>匿名/未指定</span>
                                         }
                                         { date ? <span className="text-xs text-gray-400 dark:text-gray-500">・{new Date(date).toLocaleDateString()}</span> : <span className="text-xs text-gray-400 dark:text-gray-500">・日付不明</span> }
                                     </div>

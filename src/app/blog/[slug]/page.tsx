@@ -11,6 +11,7 @@ import rehypeRaw from "rehype-raw";
 import "./blog.css"
 import {Root} from "mdast";
 import {FaSearch} from "react-icons/fa";
+import Link from "next/link";
 
 export async function generateStaticParams() {
     return (await getAllBlogs()).map(blog => {
@@ -61,7 +62,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                     <h1 className="text-3xl font-bold">{blog.title}</h1>
                     <div className="text-gray-500 mt-2 flex flex-row flex-wrap list-disc space-x-2 space-y-1">
                         <span>{(blog.createdAt ?? blog.updatedAt)?.toLocaleDateString() ?? "投稿時間不明"}</span>
-                        <span>{blog.author ? "投稿者: " + blog.author : "匿名"}</span>
+                        {blog.author ? <Link href={`/member/${blog.author}`} className="group">投稿者: <span className="group-hover:underline">{blog.author}</span></Link> : <span>匿名</span>}
                     </div>
                 </div>
                 <div className="blog-content mt-10"
