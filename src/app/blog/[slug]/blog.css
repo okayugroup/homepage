@@ -1,22 +1,38 @@
 /* ブログ記事用のタイポグラフィ - ピュアCSS版 */
 
+/* フォントサイズ変数 */
+:root {
+  --blog-font-scale: 1.0;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+}
+
 .blog-content {
   font-family: var(--font-sans);
   color: var(--color-foreground);
-  line-height: 1.625;
-  font-size: calc(var(--font-size-base) * var(--blog-font-scale));
+  line-height: 1.7;
+  font-size: calc(var(--font-size-lg) * var(--blog-font-scale));
+  max-width: none;
 }
 
 .blog-content p {
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
 }
 
 .blog-content h1 {
   font-size: calc(var(--font-size-3xl) * var(--blog-font-scale));
-  font-weight: 700;
-  line-height: 1.25;
-  margin-bottom: 0.75rem;
-  margin-top: 1rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+  letter-spacing: -0.025em;
 }
 
 @media (min-width: 640px) {
@@ -27,26 +43,44 @@
 
 .blog-content h2 {
   font-size: calc(var(--font-size-2xl) * var(--blog-font-scale));
-  font-weight: 600;
-  line-height: 1.375;
-  margin-bottom: 0.5rem;
-  margin-top: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e5e7eb;
+  letter-spacing: -0.025em;
+}
+
+@media (prefers-color-scheme: dark) {
+  .blog-content h2 {
+    border-bottom-color: #374151;
+  }
 }
 
 .blog-content h3 {
   font-size: calc(var(--font-size-xl) * var(--blog-font-scale));
-  font-weight: 600;
-  line-height: 1.375;
-  margin-bottom: 0.5rem;
-  margin-top: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 0.75rem;
+  margin-top: 1.5rem;
+  padding-bottom: 0.375rem;
+  border-bottom: 1px solid #e5e7eb;
+  letter-spacing: -0.025em;
+}
+
+@media (prefers-color-scheme: dark) {
+  .blog-content h3 {
+    border-bottom-color: #374151;
+  }
 }
 
 .blog-content h4 {
   font-size: calc(var(--font-size-lg) * var(--blog-font-scale));
-  font-weight: 600;
-  line-height: 1.375;
-  margin-bottom: 0.5rem;
-  margin-top: 1rem;
+  font-weight: 650;
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
+  margin-top: 1.25rem;
 }
 
 .blog-content a {
@@ -66,39 +100,41 @@
 
 .blog-content ul {
   list-style-type: disc;
-  padding-left: 1.5rem;
-  margin-bottom: 0.75rem;
+  padding-left: 1.75rem;
+  margin-bottom: 1rem;
 }
 
 .blog-content ol {
   list-style-type: decimal;
-  padding-left: 1.5rem;
-  margin-bottom: 0.75rem;
+  padding-left: 1.75rem;
+  margin-bottom: 1rem;
 }
 
 .blog-content li {
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.375rem;
+  line-height: 1.6;
 }
 
 /* 引用 */
 .blog-content blockquote {
-  margin: 1rem 0;
-  padding-left: 1rem;
-  border-left: 4px solid #d1d5db;
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid #3b82f6;
   font-style: italic;
   color: #374151;
-  background-color: rgba(249, 250, 251, 0.6);
-  border-top-right-radius: 0.375rem;
-  border-bottom-right-radius: 0.375rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  background-color: rgba(249, 250, 251, 0.8);
+  border-radius: 0.5rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  font-weight: 500;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
 @media (prefers-color-scheme: dark) {
   .blog-content blockquote {
-    border-left-color: #4b5563;
+    border-left-color: #60a5fa;
     color: #d1d5db;
-    background-color: rgba(31, 41, 55, 0.4);
+    background-color: rgba(31, 41, 55, 0.6);
   }
 }
 
@@ -160,16 +196,30 @@
 /* 表 */
 .blog-content table {
   width: 100%;
-  border-collapse: collapse;
-  margin: 1rem 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1.5rem 0;
   font-size: calc(var(--font-size-sm) * var(--blog-font-scale));
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
 .blog-content th,
 .blog-content td {
-  padding: 0.5rem;
-  border: 1px solid #e5e7eb;
+  padding: 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+  border-right: 1px solid #e5e7eb;
   vertical-align: top;
+}
+
+.blog-content th:last-child,
+.blog-content td:last-child {
+  border-right: none;
+}
+
+.blog-content tr:last-child td {
+  border-bottom: none;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -181,8 +231,9 @@
 
 .blog-content th {
   background-color: #f9fafb;
-  font-weight: 600;
+  font-weight: 650;
   text-align: left;
+  font-size: calc(var(--font-size-sm) * var(--blog-font-scale));
 }
 
 @media (prefers-color-scheme: dark) {
@@ -202,12 +253,13 @@
 /* 強調・装飾 */
 .blog-content strong,
 .blog-content b {
-  font-weight: 600;
+  font-weight: 650;
 }
 
 .blog-content em,
 .blog-content i {
   font-style: italic;
+  font-weight: 500;
 }
 
 .blog-content kbd {
