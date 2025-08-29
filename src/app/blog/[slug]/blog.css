@@ -1,4 +1,7 @@
 /* ブログ記事用のタイポグラフィ - ピュアCSS版 */
+/* rehype-highlight の GitHub Dark テーマをインポート */
+@import "highlight.js/styles/github-dark.css";
+
 
 /* フォントサイズ変数 */
 :root {
