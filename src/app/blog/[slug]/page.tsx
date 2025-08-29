@@ -1,5 +1,5 @@
 import {SharedBody} from "@/components/shared-body";
-import {getAllBlogs, getBlogContent} from "@/db/blog";
+import {Blog, getAllBlogs, getBlogContent} from "@/db/blog";
 import {Header} from "@/components/Header";
 import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
@@ -12,6 +12,8 @@ import "./blog.css"
 import {Root} from "mdast";
 import {FaSearch} from "react-icons/fa";
 import Link from "next/link";
+import rehypeSlug from "rehype-slug";
+import GithubSlugger from "github-slugger";
 
 export async function generateStaticParams() {
     return (await getAllBlogs()).map(blog => {
@@ -19,6 +21,8 @@ export async function generateStaticParams() {
     });
 }
 
+
+type Heading = { depth: 1|2|3|4|5|6, text: string, slug: string };
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
@@ -29,6 +33,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
             .use(remarkGfm)
             .use(remarkRehype, { allowDangerousHtml: true }) // raw を使う場合は allowDangerousHtml
             .use(rehypeRaw) // 生HTMLを許可する場合のみ
+            .use(rehypeSlug) // 見出しにidを自動付与
             .use(rehypeHighlight) // シンタックスハイライト
             .use(rehypeStringify)
             .process(content);
@@ -36,7 +41,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         const tree = unified()
             .use(remarkParse)
             .parse(content) as Root;
-        const headings = tree.children
+        const slugger = new GithubSlugger();
+        const headings: Heading[] = (tree.children
             .filter(node => node.type === 'heading' && (node.depth === 2 || node.depth === 3))
             .map(node => {
                 if (node.type === 'heading') {
@@ -48,13 +54,15 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                         }
                         return '';
                     }).join('');
-                    return { depth: node.depth, text };
+                    const slug = slugger.slug(text);
+                    return { depth: node.depth, text, slug } as Heading;
                 }
                 return null;
             })
-            .filter((heading)=> heading !== null);
+            .filter((h): h is Heading => h !== null));
 
         const html = String(file);
+        const latestBlogs = (await getAllBlogs()).slice(0, 5);
         return <SharedBody>
             <Header currentPath={'/blog/' + slug} />
             <main className="mt-24 pl-20 xl:pl-40 pr-88 xl:pr-94 pb-20">
@@ -76,7 +84,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                         <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                             {headings.map((heading, index) => (
                                 <li key={index} className={heading.depth === 2 ? "ml-0 font-medium" : "ml-4"}>
-                                    <a href={"#"+heading.text.replace(/\s+/g, '-').toLowerCase()} className="group">
+                                    <a href={`#${heading.slug}`} className="group">
                                         <span className="px-1 bg-orange-300 dark:bg-orange-900 rounded-md mr-2">{`h${heading.depth}`}</span>
                                         <span className="group-hover:underline">{heading.text}</span>
                                     </a>
@@ -87,13 +95,13 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                 </section>
                 <section className="mt-4">
                     <h2 className="font-bold text-xl">ブログ</h2>
-                    <div className="mt-4 bg-gray-800 flex items-center rounded-md border border-gray-600 shadow">
+                    <div className="mt-4 bg-gray-100 dark:bg-gray-800 flex items-center rounded-md border border-gray-400 dark:border-gray-600">
                         <FaSearch size={20} className="mx-2"/>
                         <input type="text" className="w-full py-1" placeholder="検索"/>
                     </div>
                     <p className="mt-4 text-gray-500 mb-2">最新5件</p>
                     <ul className="space-y-1 text-gray-700 dark:text-gray-300">
-                        {(await getAllBlogs()).slice(0, 5).map((b, i) => (
+                        {latestBlogs.map((b, i) => (
                             <li key={i}>
                                 <a href={`/blog/${b.slug}`} className="hover:underline">
                                     {b.title}
@@ -102,8 +110,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                         ))}
                     </ul>
                 </section>
-                <div className="mt-4 flex flex-col flex-1 justify-center text-center bg-gray-200 dark:bg-gray-800
-                ">ここに広告を入れようと<br/>思っています</div>
+                <div className="mt-4 flex flex-col flex-1 justify-center text-center bg-gray-200 dark:bg-gray-800">
+                    ここに広告を入れようと<br/>思っています
+                </div>
             </aside>
         </SharedBody>
     } catch (e) {

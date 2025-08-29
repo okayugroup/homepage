@@ -14,14 +14,28 @@
   --font-size-2xl: 1.5rem;
   --font-size-3xl: 1.875rem;
   --font-size-4xl: 2.25rem;
+  /* 固定ヘッダー分のオフセット（必要に応じて調整） */
+  --anchor-offset: 5rem;
 }
 
+/* スムーズスクロール */
+html { scroll-behavior: smooth; }
+
 .blog-content {
-  font-family: var(--font-sans);
   color: var(--color-foreground);
   line-height: 1.7;
   font-size: calc(var(--font-size-lg) * var(--blog-font-scale));
   max-width: none;
+}
+
+/* アンカー位置のずれ対策 */
+.blog-content h1,
+.blog-content h2,
+.blog-content h3,
+.blog-content h4,
+.blog-content h5,
+.blog-content h6 {
+  scroll-margin-top: var(--anchor-offset);
 }
 
 .blog-content p {
@@ -158,7 +172,7 @@
 
 /* インラインコードとコードブロック */
 .blog-content :not(pre) > code {
-  font-family: var(--font-mono);
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "DejaVu Sans Mono", "Courier New", monospace);
   font-size: calc(var(--font-size-sm) * var(--blog-font-scale));
   background-color: #f3f4f6;
   color: #1f2937;
@@ -174,7 +188,7 @@
 }
 
 .blog-content pre {
-  font-family: var(--font-mono);
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "DejaVu Sans Mono", "Courier New", monospace);
   font-size: calc(var(--font-size-sm) * var(--blog-font-scale));
   background-color: #111827;
   color: #f9fafb;
