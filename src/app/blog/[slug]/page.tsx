@@ -95,10 +95,10 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                 </section>
                 <section className="mt-4">
                     <h2 className="font-bold text-xl">ブログ</h2>
-                    <div className="mt-4 bg-gray-100 dark:bg-gray-800 flex items-center rounded-md border border-gray-400 dark:border-gray-600">
-                        <FaSearch size={20} className="mx-2"/>
-                        <input type="text" className="w-full py-1" placeholder="検索"/>
-                    </div>
+                    <form method="GET" action="/blog" className="mt-4 bg-gray-100 dark:bg-gray-800 flex items-center rounded-md border border-gray-400 dark:border-gray-600">
+                        <button type="submit"><FaSearch size={20} className="mx-2"/></button>
+                        <input type="text" name="word" className="w-full py-1" placeholder="検索"/>
+                    </form>
                     <p className="mt-4 text-gray-500 mb-2">最新5件</p>
                     <ul className="space-y-1 text-gray-700 dark:text-gray-300">
                         {latestBlogs.map((b, i) => (
