@@ -10,10 +10,11 @@ import rehypeHighlight from "rehype-highlight";
 import rehypeRaw from "rehype-raw";
 import "./blog.css"
 import {Root} from "mdast";
-import {FaSearch} from "react-icons/fa";
+import {FaSearch, FaTag} from "react-icons/fa";
 import Link from "next/link";
 import rehypeSlug from "rehype-slug";
 import GithubSlugger from "github-slugger";
+import {FaRegFolder} from "react-icons/fa6";
 
 export async function generateStaticParams() {
     return (await getAllBlogs()).map(blog => {
@@ -72,6 +73,24 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                         <span>{(blog.createdAt ?? blog.updatedAt)?.toLocaleDateString() ?? "投稿時間不明"}</span>
                         {blog.author ? <Link href={`/member/${blog.author}`} className="group">投稿者: <span className="group-hover:underline">{blog.author}</span></Link> : <span>匿名</span>}
                     </div>
+                    <ul className="flex flex-wrap gap-2 mt-1">
+                        { blog.categories?.map((category, index) => (
+                            <li key={index} className="text-sm bg-blue-200 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full px-2.5 py-1">
+                                <Link href={`/blog?cat=${category}`} className="inline-flex items-center hover:underline">
+                                    <FaRegFolder size={14} className="mr-1"/>
+                                    {category}
+                                </Link>
+                            </li>
+                        ))}
+                        { blog.tags?.map((tag, index) => (
+                            <li key={index} className="text-sm bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-full px-2.5 py-1">
+                                <Link href={`/blog?tag=${tag}`} className="inline-flex items-center hover:underline">
+                                    <FaTag size={14} className="mr-1"/>
+                                    {tag}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
                 <div className="blog-content mt-10"
                      dangerouslySetInnerHTML={{ __html: html }}>
