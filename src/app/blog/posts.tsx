@@ -10,53 +10,47 @@ import {TeamIcon} from "@/components/team-icon";
 import Link from "next/link";
 import {useSearchParams} from "next/navigation";
 import {ceil} from "es-toolkit/compat";
+import {router} from "next/client";
+import {useState} from "react";
 
 
-const searchQuery = {
-    time: "all" as ("all" | { year: number, month: number }),
-    categories: [] as string[],
-    teams: [] as string[],
-    word: "" as string,
-    sort: "new" as const, // "new" or "old"
-    author: [] as string[],
-    limit: 10 as number,
-    page: 1 as number,
+type SearchQuery = {
+    time: { isAll: boolean, year: number, month: number },
+    categories: string[],
+    teams: string[],
+    word: string,
+    sort: "new" | "old",
+    author: string[],
+    limit: number,
+    page: number,
 }
-
-
-function setSearchQuery(query: typeof searchQuery) {
-    const params = new useSearchParams();
-    if (query.time !== "all") {
-        params.set("m", `${query.time.year}${String(query.time.month).padStart(2, '0')}`);
-    }
-    if (query.categories.length > 0) {
-        params.set("cat", query.categories.join(","));
-    }
-    if (query.teams.length > 0) {
-        params.set("team", query.teams.join(","));
-    }
-    if (query.word) {
-        params.set("word", query.word);
-    }
-    if (query.author.length > 0) {
-        params.set("author", query.author.join(","));
-    }
-}
-
 
 export default function Posts({ blogs }: { blogs: Blog[] }) {
+
     const today = new Date();
 
     const searchParams = useSearchParams();
     const searchParamsM = searchParams.get("m");
-    searchQuery.time = searchParamsM ? {year: Number(searchParamsM.slice(0, 4)), month: Number(searchParamsM.slice(4, 6))} : "all";  // 202501の形式
+    const time = searchParamsM ? {year: Number(searchParamsM.slice(0, 4)), month: Number(searchParamsM.slice(4, 6))} : "all";  // 202501の形式
     const searchParamsCat = searchParams.get("cat");
-    searchQuery.categories = searchParamsCat ? searchParamsCat.split(",") : [];
+    const categories = searchParamsCat ? searchParamsCat.split(",") : [];
     const searchParamsGroups = searchParams.get("groups");
-    searchQuery.teams = searchParamsGroups ? searchParamsGroups.split(",") : [];
+    const teams = searchParamsGroups ? searchParamsGroups.split(",") : [];
+
+    const [searchQuery, setSearchQuery] = useState({
+        time: { isAll: time === "all", year: time === "all" ? today.getFullYear() : time.year, month: time === "all" ? today.getMonth() + 1 : time.month },
+        categories: categories,
+        teams: teams,
+        word: "",
+        sort: "new" as const, // "new" or "old"
+        author: [],
+        limit: 10,
+        page: 1,
+    } as SearchQuery);
+
 
     const blogsSearched = blogs.filter(blog => {
-        if (searchQuery.time !== "all") {
+        if (!searchQuery.time.isAll) {
             const blogDate = new Date(blog.createdAt ?? blog.updatedAt ?? "");
             if (isNaN(blogDate.getTime())) return false;
             if (blogDate.getFullYear() !== searchQuery.time.year || (blogDate.getMonth() + 1) !== searchQuery.time.month) {
@@ -94,8 +88,21 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                 <section className="mb-6">
                     <h2 className="font-bold text-xl mx-4 mb-4">カテゴリ</h2>
                     <ul className="pr-2 flex flex-col space-y-1">
-                        {["お知らせ", "イベント", "技術", "地域貢献"].map((category, i) => (
-                            <li key={i} className="p-0.5 pl-8 bg-gray-500 dark:bg-gray-700 text-gray-200 rounded-r-full -mr-4 -translate-x-3 hover:translate-x-0 shadow-none hover:shadow-md shadow-black/20 transition-all duration-200">
+                        {["お知らせ", "開発", "雑記"].map((category, i) => (
+                            <li key={i} className={`p-0.5 pl-8 text-gray-200 rounded-r-full -mr-4 -translate-x-4 hover:-translate-x-2 shadow-none hover:shadow-md shadow-black/20 transition-transform duration-200 active:scale-97 border-t-3 border-r-3 border-b-3
+                            ${searchQuery.categories.includes(category) ? "border-blue-400 dark:border-blue-400 bg-sky-600 dark:bg-sky-700 shadow" : "bg-gray-500 dark:bg-gray-700 border-transparent" }`}
+                                onClick={() => {
+                                    setSearchQuery(prev => {
+                                        const alreadySelected = prev.categories.includes(category);
+                                        return {
+                                            ...prev,
+                                            categories: alreadySelected
+                                                ? prev.categories.filter(cat => cat !== category)
+                                                : [...prev.categories, category]
+                                        };
+                                    });
+                                    console.log(searchQuery.categories.filter(cat => cat !== category));
+                                }}>
                                 {category}
                             </li>
                         ))
@@ -111,6 +118,11 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                                 type="radio"
                                 name="archive"
                                 className="peer h-4 w-4 accent-gray-600 rounded border border-gray-500/60 bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500/60 focus:ring-offset-1 disabled:opacity-40 disabled:cursor-not-allowed"
+                                onChange={(e) => {
+                                    if (e.currentTarget.checked) {
+                                        setSearchQuery(prev => ({...prev, time: {...prev.time, isAll: true}}));
+                                    }
+                                }}
                             />
                             <span className="ml-2 text-gray-500 peer-checked:text-gray-900 dark:text-gray-400 dark:peer-checked:text-gray-200">全期間</span>
                         </label>
@@ -119,10 +131,39 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                                 type="radio"
                                 name="archive"
                                 className="peer h-4 w-4 accent-gray-600 rounded border border-gray-500/60 bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500/60 focus:ring-offset-1 disabled:opacity-40 disabled:cursor-not-allowed"
+                                onChange={(e) => {
+                                    if (e.currentTarget.checked) {
+                                        setSearchQuery(prev => ({...prev, time: {...prev.time, isAll: false}}));
+                                    }
+                                }}
                             />
-                            <input type="number" min={2024} max={2025} defaultValue={today.getFullYear()} className="ml-2 w-20 p-0.5 rounded text-center border border-gray-200 peer-checked:border-gray-400 dark:border-gray-600 dark:peer-checked:border-gray-500 bg-gray-200 peer-checked:bg-gray-100 dark:bg-gray-700 dark:peer-checked:bg-gray-800 dark:text-gray-400 dark:peer-checked:text-gray-200" />
+                            <input type="number" min={2024} max={2025} value={searchQuery.time.year}
+                                   className="ml-2 w-20 p-0.5 rounded text-center border border-gray-200 peer-checked:border-gray-400 dark:border-gray-600 dark:peer-checked:border-gray-500 bg-gray-200 peer-checked:bg-gray-100 dark:bg-gray-700 dark:peer-checked:bg-gray-800 dark:text-gray-400 dark:peer-checked:text-gray-200"
+                                   onChange={e => {
+                                       const newYear = Number(e.target.value);
+                                       setSearchQuery(prev => ({
+                                           ...prev,
+                                           time: {
+                                               ...prev.time,
+                                               year: newYear,
+                                           }
+                                       }));
+                                   }}
+                            />
                             <span className="mx-2 text-gray-500 peer-checked:text-gray-900 dark:text-gray-400 dark:peer-checked:text-gray-200">年</span>
-                            <input type="number" min={1} max={12} defaultValue={today.getMonth() + 1} className="w-10 p-0.5 rounded text-center border border-gray-200 peer-checked:border-gray-400 dark:border-gray-600 dark:peer-checked:border-gray-500 bg-gray-200 peer-checked:bg-gray-100 dark:bg-gray-700 dark:peer-checked:bg-gray-800 dark:text-gray-400 dark:peer-checked:text-gray-200" />
+                            <input type="number" min={1} max={12} value={searchQuery.time.month}
+                                   className="w-10 p-0.5 rounded text-center border border-gray-200 peer-checked:border-gray-400 dark:border-gray-600 dark:peer-checked:border-gray-500 bg-gray-200 peer-checked:bg-gray-100 dark:bg-gray-700 dark:peer-checked:bg-gray-800 dark:text-gray-400 dark:peer-checked:text-gray-200"
+                                   onChange={e => {
+                                       const newMonth = Number(e.target.value);
+                                       setSearchQuery(prev => ({
+                                           ...prev,
+                                           time: {
+                                               ...prev.time,
+                                               month: newMonth,
+                                           }
+                                       }));
+                                   }}
+                            />
                             <span className="mx-2 text-gray-500 peer-checked:text-gray-900 dark:text-gray-400 dark:peer-checked:text-gray-200">月</span>
                         </label>
                     </div>
@@ -158,13 +199,9 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
             <main className="ml-84 mt-20 pt-4 mr-8">
                 <div className="ml-5">
                     <h1 className="font-extrabold text-3xl mb-2">ブログ</h1>
-                    {
-                        (()=>{
-                            return <p className="text-gray-700 dark:text-gray-400">{blogsSearched.length > searchQuery.limit ?
+                    <p className="text-gray-700 dark:text-gray-400">{blogsSearched.length > searchQuery.limit ?
                                 `${blogsSearched.length}件のうち${searchQuery.limit}件 (${searchQuery.page}/${ceil(blogsSearched.length / searchQuery.limit)}ページ)`
                             : `${blogsSearched.length}件のうちすべて (1/1ページ)`}</p>
-                        })()
-                    }
                     <section className="mt-4">
                         {
                             blogsSearched.map((item, i) => {
