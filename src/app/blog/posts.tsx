@@ -340,7 +340,7 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                                         }
                                         { date ? <span className="text-xs text-gray-400 dark:text-gray-500">・{new Date(date).toLocaleDateString()}</span> : <span className="text-xs text-gray-400 dark:text-gray-500">・日付不明</span> }
                                     </div>
-                                    <a href={`/blog/${item.slug}`} className="text-blue-600 hover:underline">続きを読む</a>
+                                    <a href={`/blog/${item.slug}`} className="text-blue-600 dark:text-blue-400 hover:underline">続きを読む</a>
                                 </article>;
                             })
                         }
