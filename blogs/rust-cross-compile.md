@@ -6,7 +6,7 @@ categories:
   - "雑記"
   - "アプリ開発"
 tags: 
-  - "rust"
+  - "Rust"
 ---
 
 ## Rust、始めました

@@ -5,8 +5,7 @@ author: yossy4411
 categories: 
   - "電子工作"
 tags: 
-  - "raspberry-pi-pico"
-  - "raspberrypi"
+  - "Raspberry Pi Pico"
   - "ラズパイ"
 ---
 
