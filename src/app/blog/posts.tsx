@@ -17,6 +17,7 @@ import {useState} from "react";
 type SearchQuery = {
     time: { isAll: boolean, year: number, month: number },
     categories: string[],
+    tags: string[],
     teams: string[],
     word: string,
     sort: "new" | "old",
@@ -32,15 +33,13 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
     const searchParams = useSearchParams();
     const searchParamsM = searchParams.get("m");
     const time = searchParamsM ? {year: Number(searchParamsM.slice(0, 4)), month: Number(searchParamsM.slice(4, 6))} : "all";  // 202501の形式
-    const searchParamsCat = searchParams.get("cat");
-    const categories = searchParamsCat ? searchParamsCat.split(",") : [];
-    const searchParamsGroups = searchParams.get("groups");
-    const teams = searchParamsGroups ? searchParamsGroups.split(",") : [];
+
 
     const [searchQuery, setSearchQuery] = useState({
         time: { isAll: time === "all", year: time === "all" ? today.getFullYear() : time.year, month: time === "all" ? today.getMonth() + 1 : time.month },
-        categories: categories,
-        teams: teams,
+        categories: searchParams.get("cat")?.split(",") ?? [],
+        teams: searchParams.get("team")?.split(",") ?? [],
+        tags: searchParams.get("tag")?.split(",") ?? [],
         word: "",
         sort: "new" as const, // "new" or "old"
         author: [],
@@ -67,6 +66,11 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
             //     return false;
             // }
         }
+        if (searchQuery.tags.length > 0) {
+            if (!blog.tags || !blog.tags.some(tag => searchQuery.tags.includes(tag))) {
+                return false;
+            }
+        }
         if (searchQuery.author.length > 0) {
             if (!blog.author || !searchQuery.author.includes(blog.author)) {
                 return false;
@@ -89,7 +93,7 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                     <h2 className="font-bold text-xl mx-4 mb-4">カテゴリ</h2>
                     <ul className="pr-2 flex flex-col space-y-1">
                         {["お知らせ", "開発", "雑記"].map((category, i) => (
-                            <li key={i} className={`p-0.5 pl-8 text-gray-200 rounded-r-full -mr-4 -translate-x-4 hover:-translate-x-2 shadow-none hover:shadow-md shadow-black/20 transition-transform duration-200 active:scale-97 border-t-3 border-r-3 border-b-3
+                            <li key={i} className={`p-0.5 pl-8 text-gray-200 rounded-r-full -mr-4 -translate-x-4 hover:-translate-x-2 shadow-none hover:shadow-md shadow-black/20 transition-transform duration-200 active:scale-97 border-t-3 border-r-3 border-b-3 cursor-pointer
                             ${searchQuery.categories.includes(category) ? "border-blue-400 dark:border-blue-400 bg-sky-600 dark:bg-sky-700 shadow" : "bg-gray-500 dark:bg-gray-700 border-transparent" }`}
                                 onClick={() => {
                                     setSearchQuery(prev => {
@@ -172,7 +176,19 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                     <h2 className="font-bold text-xl mx-4 mb-4">筆者</h2>
                     <ul className="pr-2 inline-flex flex-col space-y-1 ml-2">
                         {Object.values(Members).map((author, i) => (
-                            <li key={i} className="flex items-center p-0.5 bg-gray-500 dark:bg-gray-700 text-gray-200 rounded-full shadow-none hover:shadow-md shadow-black/20 transition-shadow duration-200">
+                            <li key={i} className={`flex items-center p-0.5 bg-gray-500 dark:bg-gray-700 text-gray-200 rounded-full shadow-none hover:shadow-md shadow-black/20 transition-all duration-200 border-3 active:scale-97 cursor-pointer
+                            ${searchQuery.author.includes(author.id) ? "border-blue-400 dark:border-blue-400 bg-sky-600 dark:bg-sky-700 shadow" : "bg-gray-500 dark:bg-gray-700 border-transparent"}`}
+                            onClick={() => {
+                                setSearchQuery(prev => {
+                                    const alreadySelected = prev.author.includes(author.id);
+                                    return {
+                                        ...prev,
+                                        author: alreadySelected
+                                            ? prev.author.filter(a => a !== author.id)
+                                            : [...prev.author, author.id]
+                                    };
+                                });
+                            }}>
                                 <Image src={`/members/${author.id}.webp`} alt={`${author.id}'s icon`} width={16} height={16} className="h-8 w-8 rounded-full bg-white"/>
                                 <span className="pl-2 pr-4">{author.data.name}</span>
                             </li>
@@ -184,7 +200,19 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                     <h2 className="font-bold text-xl mx-4 mb-4">チーム</h2>
                     <ul className="pr-2 flex flex-col space-y-1 ml-2">
                         {Object.values(Teams).map((team, i) => (
-                            <li key={i} className="bg-gray-500 dark:bg-gray-700 text-gray-200 rounded-xl shadow-none hover:shadow-md shadow-black/20 transition-shadow duration-200 w-full overflow-hidden">
+                            <li key={i} className={`bg-gray-500 dark:bg-gray-700 text-gray-200 rounded-xl shadow-none hover:shadow-md shadow-black/20 transition-all duration-200 w-full overflow-hidden border-3 active:scale-97 cursor-pointer items-center
+                            ${searchQuery.teams.includes(team.id) ? "border-blue-400 dark:border-blue-400 bg-sky-600 dark:bg-sky-700 shadow" : "bg-gray-500 dark:bg-gray-700 border-transparent"}`}
+                            onClick={() => {
+                                setSearchQuery(prev => {
+                                    const alreadySelected = prev.teams.includes(team.id);
+                                    return {
+                                        ...prev,
+                                        teams: alreadySelected
+                                            ? prev.teams.filter(t => t !== team.id)
+                                            : [...prev.teams, team.id]
+                                    };
+                                });
+                            }}>
                                 <TeamIcon id={team.id} className="bg-white"/>
                                 <h3 className="px-2 py-1">{team.data.name}</h3>
                             </li>
