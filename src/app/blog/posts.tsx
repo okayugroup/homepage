@@ -11,7 +11,7 @@ import Link from "next/link";
 import {useRouter, useSearchParams} from "next/navigation";
 import {ceil} from "es-toolkit/compat";
 import {useState} from "react";
-import {FaLongArrowAltRight} from "react-icons/fa";
+import {FaLongArrowAltRight, FaSearch} from "react-icons/fa";
 
 
 type SearchQuery = {
@@ -19,7 +19,7 @@ type SearchQuery = {
     categories: string[],
     tags: string[],
     team: string | null,
-    word: string,
+    word: string | null,
     sort: "new" | "old",
     author: string[],
     limit: number,
@@ -40,7 +40,7 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
         categories: searchParams.get("cat")?.split(",") ?? [],
         team: searchParams.get("team") ?? null,
         tags: searchParams.get("tag")?.split(",") ?? [],
-        word: "",
+        word: searchParams.get("word") ?? null,
         sort: "new" as const, // "new" or "old"
         author: [],
         limit: 10,
@@ -69,7 +69,7 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
             urlParams.append("author", newQuery.author.join(","));
         }
         if (newQuery.word) {
-            urlParams.append("q", newQuery.word);
+            urlParams.append("word", newQuery.word);
         }
         if (newQuery.sort !== "new") {
             urlParams.append("sort", newQuery.sort);
@@ -114,8 +114,11 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
             }
         }
         if (searchQuery.word) {
+            // Hello+World -> helloとworldの両方を含む
             const lowerSearch = searchQuery.word.toLowerCase();
-            if (!(blog.title.toLowerCase().includes(lowerSearch) || (blog.description && blog.description.toLowerCase().includes(lowerSearch)))) {
+            const words = lowerSearch.split(" ").map(w => w.trim()).filter(w => w.length > 0);
+            const haystack = (blog.title + " " + (blog.description ?? "") + " " /* + (blog.content ?? "")*/).toLowerCase();
+            if (!words.every(word => haystack.includes(word))) {
                 return false;
             }
         }
@@ -148,6 +151,23 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                         ))
                         }
                     </ul>
+                </section>
+                <section className="mb-6">
+                    <h2 className="font-bold text-xl mx-4 mb-2">キーワード</h2>
+                    <div className="mx-2 border border-gray-200 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 dark:text-gray-300 rounded py-1 flex items-center">
+                        <label className="mx-2"><FaSearch size={18}/></label>
+                        <input type="text" value={searchQuery.word ?? ""} placeholder="キーワードで検索"
+                               className="w-full"
+                               onChange={e => {
+                                   const newWord = e.target.value;
+                                   setSearchQuery(prev => ({
+                                       ...prev,
+                                       word: newWord.length === 0 ? null : newWord,
+                                       page: 1,
+                                   }));
+                               }}
+                        />
+                    </div>
                 </section>
                 <section className="mb-6">
                     <h2 className="font-bold text-xl mx-4 mb-2">アーカイブ</h2>
