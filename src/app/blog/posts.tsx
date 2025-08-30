@@ -8,13 +8,14 @@ import Image from "next/image";
 import {Teams} from "@/db/teams";
 import {TeamIcon} from "@/components/team-icon";
 import Link from "next/link";
+import {useSearchParams} from "next/navigation";
 
 
 const searchQuery = {
-    time: "all" as "all" | Date,
+    time: "all" as ("all" | { year: number, month: number }),
     categories: [] as string[],
-    groups: [] as string[],
-    search: "" as string,
+    teams: [] as string[],
+    word: "" as string,
     sort: "new" as const, // "new" or "old"
     author: [] as string[],
     limit: 10 as number,
@@ -23,30 +24,70 @@ const searchQuery = {
 
 
 function searchQueryToString(query: typeof searchQuery): string {
-    const params = new URLSearchParams();
+    const params = new Map<string, string>();
     if (query.time !== "all") {
-        params.set("t", query.time.toISOString());
+        params.set("m", `${query.time.year}${String(query.time.month).padStart(2, '0')}`);
     }
     if (query.categories.length > 0) {
         params.set("cat", query.categories.join(","));
     }
-    if (query.groups.length > 0) {
-        params.set("groups", query.groups.join(","));
+    if (query.teams.length > 0) {
+        params.set("team", query.teams.join(","));
     }
-    if (query.search) {
-        params.set("search", query.search);
+    if (query.word) {
+        params.set("word", query.word);
     }
     if (query.author.length > 0) {
         params.set("author", query.author.join(","));
     }
-    return params.toString();
+    return Object.entries(params).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join("&");
 }
 
 
 export default function Posts({ blogs }: { blogs: Blog[] }) {
     const today = new Date();
+
+    const searchParams = useSearchParams();
+    const searchParamsM = searchParams.get("m");
+    searchQuery.time = searchParamsM ? {year: Number(searchParamsM.slice(0, 4)), month: Number(searchParamsM.slice(4, 6))} : "all";  // 202501の形式
+    const searchParamsCat = searchParams.get("cat");
+    searchQuery.categories = searchParamsCat ? searchParamsCat.split(",") : [];
+    const searchParamsGroups = searchParams.get("groups");
+    searchQuery.teams = searchParamsGroups ? searchParamsGroups.split(",") : [];
+
     const queryUrlText = searchQueryToString(searchQuery);
 
+    const blogsSearched = blogs.filter(blog => {
+        if (searchQuery.time !== "all") {
+            const blogDate = new Date(blog.createdAt ?? blog.updatedAt ?? "");
+            if (isNaN(blogDate.getTime())) return false;
+            if (blogDate.getFullYear() !== searchQuery.time.year || (blogDate.getMonth() + 1) !== searchQuery.time.month) {
+                return false;
+            }
+        }
+        if (searchQuery.categories.length > 0) {
+            if (!blog.categories || !blog.categories.some(cat => searchQuery.categories.includes(cat))) {
+                return false;
+            }
+        }
+        if (searchQuery.teams.length > 0) {
+            // if (!blog.teams || !blog.teams.some(group => searchQuery.teams.includes(group))) {
+            //     return false;
+            // }
+        }
+        if (searchQuery.author.length > 0) {
+            if (!blog.author || !searchQuery.author.includes(blog.author)) {
+                return false;
+            }
+        }
+        if (searchQuery.word) {
+            const lowerSearch = searchQuery.word.toLowerCase();
+            if (!(blog.title.toLowerCase().includes(lowerSearch) || (blog.description && blog.description.toLowerCase().includes(lowerSearch)))) {
+                return false;
+            }
+        }
+        return true;
+    })
 
     return (
         <SharedBody>
@@ -121,7 +162,7 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                     <div className="flex items-end mb-2">
                         <h1 className="font-extrabold text-3xl">ブログ</h1>
                         {queryUrlText ?
-                            <span className={`ml-2 text-gray-400 font-mono`}>
+                            <span className="ml-2 text-gray-400 font-mono">
                             {`?${queryUrlText}`}
                         </span>
                             : <></>
@@ -129,12 +170,14 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                     </div>
                     {
                         (()=>{
-                            return <p className="text-gray-700 dark:text-gray-400">34件のうち10件 (1ページ)</p>
+                            return <p className="text-gray-700 dark:text-gray-400">{blogsSearched.length > searchQuery.limit ?
+                                `${blogsSearched.length}件のうち${searchQuery.limit}件 (${searchQuery.page}/${blogsSearched.length / searchQuery.limit}ページ)`
+                            : `${blogsSearched.length}件のうちすべて (1/1ページ)`}</p>
                         })()
                     }
                     <section className="mt-4">
                         {
-                            blogs.map((item, i) => {
+                            blogsSearched.map((item, i) => {
                                 const date = item.createdAt ?? item.updatedAt;
                                 return <article key={i} className="mb-6 p-4 bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-none">
                                     <h2 className="text-xl font-bold mb-2">{item.title}</h2>
