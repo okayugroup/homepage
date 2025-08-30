@@ -15,6 +15,7 @@ export type Blog = {
     updatedAt?: Date;
     author?: string;
     description?: string;
+    team?: string;
     image?: string;
     tags?: string[];
 }
@@ -53,6 +54,7 @@ function parseToBlog(fileName: string, fileContent: string): Blog {
     const description = data['description'] as string | undefined;
     const image = data['image'] as string | undefined;
     const tags = data['tags'] as string[] | undefined;
+    const teams = data['team'] as string | undefined;
 
     const tree = unified()
         .use(remarkParse)
@@ -84,6 +86,7 @@ function parseToBlog(fileName: string, fileContent: string): Blog {
         createdAt,
         updatedAt,
         author,
+        team: teams,
         description,
         image,
         tags,

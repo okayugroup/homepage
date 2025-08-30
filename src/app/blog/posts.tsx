@@ -10,7 +10,6 @@ import {TeamIcon} from "@/components/team-icon";
 import Link from "next/link";
 import {useSearchParams} from "next/navigation";
 import {ceil} from "es-toolkit/compat";
-import {router} from "next/client";
 import {useState} from "react";
 
 
@@ -18,7 +17,7 @@ type SearchQuery = {
     time: { isAll: boolean, year: number, month: number },
     categories: string[],
     tags: string[],
-    teams: string[],
+    team: string | null,
     word: string,
     sort: "new" | "old",
     author: string[],
@@ -38,7 +37,7 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
     const [searchQuery, setSearchQuery] = useState({
         time: { isAll: time === "all", year: time === "all" ? today.getFullYear() : time.year, month: time === "all" ? today.getMonth() + 1 : time.month },
         categories: searchParams.get("cat")?.split(",") ?? [],
-        teams: searchParams.get("team")?.split(",") ?? [],
+        team: searchParams.get("team") ?? null,
         tags: searchParams.get("tag")?.split(",") ?? [],
         word: "",
         sort: "new" as const, // "new" or "old"
@@ -61,10 +60,10 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                 return false;
             }
         }
-        if (searchQuery.teams.length > 0) {
-            // if (!blog.teams || !blog.teams.some(group => searchQuery.teams.includes(group))) {
-            //     return false;
-            // }
+        if (searchQuery.team) {
+            if (!blog.team || blog.team !== searchQuery.team) {
+                return false;
+            }
         }
         if (searchQuery.tags.length > 0) {
             if (!blog.tags || !blog.tags.some(tag => searchQuery.tags.includes(tag))) {
@@ -199,17 +198,14 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                 <section>
                     <h2 className="font-bold text-xl mx-4 mb-4">チーム</h2>
                     <ul className="pr-2 flex flex-col space-y-1 ml-2">
-                        {Object.values(Teams).map((team, i) => (
+                        {Object.entries(Teams).map(([id, team], i) => (
                             <li key={i} className={`bg-gray-500 dark:bg-gray-700 text-gray-200 rounded-xl shadow-none hover:shadow-md shadow-black/20 transition-all duration-200 w-full overflow-hidden border-3 active:scale-97 cursor-pointer items-center
-                            ${searchQuery.teams.includes(team.id) ? "border-blue-400 dark:border-blue-400 bg-sky-600 dark:bg-sky-700 shadow" : "bg-gray-500 dark:bg-gray-700 border-transparent"}`}
+                            ${searchQuery.team === id ? "border-blue-400 dark:border-blue-400 bg-sky-600 dark:bg-sky-700 shadow" : "bg-gray-500 dark:bg-gray-700 border-transparent"}`}
                             onClick={() => {
                                 setSearchQuery(prev => {
-                                    const alreadySelected = prev.teams.includes(team.id);
                                     return {
                                         ...prev,
-                                        teams: alreadySelected
-                                            ? prev.teams.filter(t => t !== team.id)
-                                            : [...prev.teams, team.id]
+                                        team: prev.team === id ? null : id
                                     };
                                 });
                             }}>
