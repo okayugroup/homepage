@@ -50,7 +50,7 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
 
     return (
         <SharedBody>
-            <Header currentPath={"/blog/"} pane={"blog"}/>
+            <Header currentPath={"/blog/"} pane="blog"/>
             <aside className="fixed bg-gray-200 dark:bg-gray-800 z-50 left-0 top-20 bottom-2 w-80 rounded-r-xl pr-2 py-6 overflow-y-auto">
                 <section className="mb-6">
                     <h2 className="font-bold text-xl mx-4 mb-4">カテゴリ</h2>
@@ -108,8 +108,7 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                                 <TeamIcon id={team.id} className="bg-white"/>
                                 <h3 className="px-2 py-1">{team.data.name}</h3>
                             </li>
-                        ))
-                        }
+                        ))}
                     </ul>
                 </section>
                 <section>
@@ -137,11 +136,11 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                         {
                             blogs.map((item, i) => {
                                 const date = item.createdAt ?? item.updatedAt;
-                                return <article key={i} className="mb-6 p-4 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-lg transition-shadow duration-200">
+                                return <article key={i} className="mb-6 p-4 bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-none">
                                     <h2 className="text-xl font-bold mb-2">{item.title}</h2>
                                     <p className="text-gray-600 dark:text-gray-400 mb-2">{item.description || "No description available."}</p>
                                     <div className="flex items-center space-x-2 mb-2">
-                                        { item.author && Members[item.author] ? <Link href={`/member/${item.author}`} className="inline-flex items-center space-x-2 p-1 rounded transition-colors hover:bg-white/20">
+                                        { item.author && Members[item.author] ? <Link href={`/member/${item.author}`} className="inline-flex items-center space-x-2 p-1 rounded-md transition-colors hover:bg-gray-400/20 dark:hover:bg-white/20">
                                             <Image src={`/members/${item.author}.webp`} alt={`${item.author}'s icon`} width={24} height={24} className="h-6 w-6 rounded-full bg-white"/>
                                             <span className="text-sm text-gray-500 dark:text-gray-300">{Members[item.author]?.data.name || item.author}</span>
                                         </Link> : <span>匿名/未指定</span>

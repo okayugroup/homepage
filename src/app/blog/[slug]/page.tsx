@@ -65,7 +65,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         const html = String(file);
         const latestBlogs = (await getAllBlogs()).slice(0, 5);
         return <SharedBody>
-            <Header currentPath={'/blog/' + slug} />
+            <Header currentPath={'/blog/' + slug} pane="blog"/>
             <main className="mt-24 pl-20 xl:pl-40 pr-88 xl:pr-94 pb-20">
                 <div>
                     <h1 className="text-3xl font-bold">{blog.title}</h1>
