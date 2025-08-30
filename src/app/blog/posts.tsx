@@ -9,6 +9,7 @@ import {Teams} from "@/db/teams";
 import {TeamIcon} from "@/components/team-icon";
 import Link from "next/link";
 import {useSearchParams} from "next/navigation";
+import {ceil} from "es-toolkit/compat";
 
 
 const searchQuery = {
@@ -23,8 +24,8 @@ const searchQuery = {
 }
 
 
-function searchQueryToString(query: typeof searchQuery): string {
-    const params = new Map<string, string>();
+function setSearchQuery(query: typeof searchQuery) {
+    const params = new useSearchParams();
     if (query.time !== "all") {
         params.set("m", `${query.time.year}${String(query.time.month).padStart(2, '0')}`);
     }
@@ -40,7 +41,6 @@ function searchQueryToString(query: typeof searchQuery): string {
     if (query.author.length > 0) {
         params.set("author", query.author.join(","));
     }
-    return Object.entries(params).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join("&");
 }
 
 
@@ -54,8 +54,6 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
     searchQuery.categories = searchParamsCat ? searchParamsCat.split(",") : [];
     const searchParamsGroups = searchParams.get("groups");
     searchQuery.teams = searchParamsGroups ? searchParamsGroups.split(",") : [];
-
-    const queryUrlText = searchQueryToString(searchQuery);
 
     const blogsSearched = blogs.filter(blog => {
         if (searchQuery.time !== "all") {
@@ -159,19 +157,11 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
             </aside>
             <main className="ml-84 mt-20 pt-4 mr-8">
                 <div className="ml-5">
-                    <div className="flex items-end mb-2">
-                        <h1 className="font-extrabold text-3xl">ブログ</h1>
-                        {queryUrlText ?
-                            <span className="ml-2 text-gray-400 font-mono">
-                            {`?${queryUrlText}`}
-                        </span>
-                            : <></>
-                        }
-                    </div>
+                    <h1 className="font-extrabold text-3xl mb-2">ブログ</h1>
                     {
                         (()=>{
                             return <p className="text-gray-700 dark:text-gray-400">{blogsSearched.length > searchQuery.limit ?
-                                `${blogsSearched.length}件のうち${searchQuery.limit}件 (${searchQuery.page}/${blogsSearched.length / searchQuery.limit}ページ)`
+                                `${blogsSearched.length}件のうち${searchQuery.limit}件 (${searchQuery.page}/${ceil(blogsSearched.length / searchQuery.limit)}ページ)`
                             : `${blogsSearched.length}件のうちすべて (1/1ページ)`}</p>
                         })()
                     }
