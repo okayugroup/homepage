@@ -35,7 +35,7 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
     const time = searchParamsM ? {year: Number(searchParamsM.slice(0, 4)), month: Number(searchParamsM.slice(4, 6))} : "all";  // 202501の形式
 
 
-    const [searchQuery, setSearchQuery] = useState({
+    const [searchQuery, _setSearchQuery] = useState({
         time: { isAll: time === "all", year: time === "all" ? today.getFullYear() : time.year, month: time === "all" ? today.getMonth() + 1 : time.month },
         categories: searchParams.get("cat")?.split(",") ?? [],
         team: searchParams.get("team") ?? null,
@@ -47,37 +47,42 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
         page: 1,
     } as SearchQuery);
 
-    const urlParams = new URLSearchParams();
-    if (!searchQuery.time.isAll) {
-        const monthStr = searchQuery.time.month < 10 ? `0${searchQuery.time.month}` : `${searchQuery.time.month}`;
-        urlParams.append("m", `${searchQuery.time.year}${monthStr}`);
+    function setSearchQuery(query: SearchQuery | ((_prev: SearchQuery) => SearchQuery)) {
+        const newQuery = typeof query === "function" ? query(searchQuery) : query;
+        _setSearchQuery(newQuery);
+        // URL書き換え
+        const urlParams = new URLSearchParams();
+        if (!newQuery.time.isAll) {
+            const monthStr = newQuery.time.month < 10 ? `0${newQuery.time.month}` : `${newQuery.time.month}`;
+            urlParams.append("m", `${newQuery.time.year}${monthStr}`);
+        }
+        if (newQuery.categories.length > 0) {
+            urlParams.append("cat", newQuery.categories.join(","));
+        }
+        if (newQuery.team) {
+            urlParams.append("team", newQuery.team);
+        }
+        if (newQuery.tags.length > 0) {
+            urlParams.append("tag", newQuery.tags.join(","));
+        }
+        if (newQuery.author.length > 0) {
+            urlParams.append("author", newQuery.author.join(","));
+        }
+        if (newQuery.word) {
+            urlParams.append("q", newQuery.word);
+        }
+        if (newQuery.sort !== "new") {
+            urlParams.append("sort", newQuery.sort);
+        }
+        if (newQuery.limit !== 10) {
+            urlParams.append("limit", String(newQuery.limit));
+        }
+        if (newQuery.page !== 1) {
+            urlParams.append("page", String(newQuery.page));
+        }
+        const paramString = urlParams.toString();
+        window.history.replaceState(null, "", `/blog?${paramString}`);
     }
-    if (searchQuery.categories.length > 0) {
-        urlParams.append("cat", searchQuery.categories.join(","));
-    }
-    if (searchQuery.team) {
-        urlParams.append("team", searchQuery.team);
-    }
-    if (searchQuery.tags.length > 0) {
-        urlParams.append("tag", searchQuery.tags.join(","));
-    }
-    if (searchQuery.author.length > 0) {
-        urlParams.append("author", searchQuery.author.join(","));
-    }
-    if (searchQuery.word) {
-        urlParams.append("q", searchQuery.word);
-    }
-    if (searchQuery.sort !== "new") {
-        urlParams.append("sort", searchQuery.sort);
-    }
-    if (searchQuery.limit !== 10) {
-        urlParams.append("limit", String(searchQuery.limit));
-    }
-    if (searchQuery.page !== 1) {
-        urlParams.append("page", String(searchQuery.page));
-    }
-    const paramString = urlParams.toString();
-    window.history.replaceState(null, "", `/blog?${paramString}`);
 
 
     const blogsSearched = blogs.filter(blog => {
