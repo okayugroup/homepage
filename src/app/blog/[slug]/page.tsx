@@ -15,6 +15,7 @@ import Link from "next/link";
 import rehypeSlug from "rehype-slug";
 import GithubSlugger from "github-slugger";
 import {FaRegFolder} from "react-icons/fa6";
+import {format} from "date-fns";
 
 export async function generateStaticParams() {
     return (await getAllBlogs()).map(blog => {
@@ -64,13 +65,22 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
         const html = String(file);
         const latestBlogs = (await getAllBlogs()).slice(0, 5);
+        const time = blog.createdAt ?? blog.updatedAt;
         return <SharedBody>
             <Header currentPath={'/blog/' + slug} pane="blog"/>
             <main className="mt-24 pl-20 xl:pl-40 pr-88 xl:pr-94 pb-20">
                 <div>
                     <h1 className="text-3xl font-bold">{blog.title}</h1>
                     <div className="text-gray-500 mt-2 flex flex-row flex-wrap list-disc space-x-2 space-y-1">
-                        <span>{(blog.createdAt ?? blog.updatedAt)?.toLocaleDateString() ?? "投稿時間不明"}</span>
+                        {time?
+                            <span>
+                                <Link className="group" href={`/blog?m=${format(time, "yyyyMM")}`}>
+                                    <span className="group-hover:underline">{format(time, "y/M")}</span>
+                                    /{time.getDate()}
+                                </Link>
+
+                            </span>
+                            : <span>投稿時間不明</span>}
                         {blog.author ? <Link href={`/member/${blog.author}`} className="group">投稿者: <span className="group-hover:underline">{blog.author}</span></Link> : <span>匿名</span>}
                     </div>
                     <ul className="flex flex-wrap gap-2 mt-1">
