@@ -176,8 +176,8 @@ export default async function TeamPage({ params }: Props) {
                         { team.data.addition }
                     </div>
                 </main>
-                <aside className="mt-20 rounded-l-2xl bg-gray-50 flex-1/4 p-8">
-                    <h2 className="text-xl font-semibold">ここに書くことが思いつかないよおおおお</h2>
+                <aside className="mt-20 rounded-l-2xl bg-gray-50 dark:bg-gray-800 flex-1/4 p-8">
+                    <h2 className="text-xl font-semibold">ここにはたぶんプロジェクトとかを書くことになると思う</h2>
                 </aside>
             </div>
             <Footer/>
