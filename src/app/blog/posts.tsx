@@ -12,6 +12,8 @@ import {useRouter, useSearchParams} from "next/navigation";
 import {ceil} from "es-toolkit/compat";
 import {useState} from "react";
 import {FaLongArrowAltRight, FaSearch} from "react-icons/fa";
+import {FaArrowLeftLong, FaArrowRight, FaArrowRightLong} from "react-icons/fa6";
+import {Footer} from "@/components/Footer";
 
 
 type SearchQuery = {
@@ -49,6 +51,12 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
 
     function setSearchQuery(query: SearchQuery | ((_prev: SearchQuery) => SearchQuery)) {
         const newQuery = typeof query === "function" ? query(searchQuery) : query;
+        if (newQuery.page > pages) {
+            newQuery.page = pages;
+        }
+        if (newQuery.page < 1) {
+            newQuery.page = 1;
+        }
         _setSearchQuery(newQuery);
         // URL書き換え
         const urlParams = new URLSearchParams();
@@ -85,7 +93,7 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
     }
 
 
-    const blogsSearched = blogs.filter(blog => {
+    const blogsSearchedAll = blogs.filter(blog => {
         if (!searchQuery.time.isAll) {
             const blogDate = new Date(blog.createdAt ?? blog.updatedAt ?? "");
             if (isNaN(blogDate.getTime())) return false;
@@ -123,7 +131,10 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
             }
         }
         return true;
-    })
+    });
+
+    const blogsSearched = blogsSearchedAll.slice(searchQuery.limit * (searchQuery.page - 1), searchQuery.limit * searchQuery.page);
+    const pages = ceil(blogsSearchedAll.length / searchQuery.limit);
 
     return (
         <SharedBody>
@@ -342,14 +353,32 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                     </ul>
                 </section>
             </aside>
-            <main className="ml-84 mt-20 pt-4 mr-8">
-                <div className="ml-5">
-                    <h1 className="font-extrabold text-3xl mb-2">ブログ</h1>
-                    <p className="text-gray-700 dark:text-gray-400">{
-                        blogsSearched.length == 0 ? "検索クエリに該当する記事がありません。" :
-                        blogsSearched.length > searchQuery.limit ?
-                                `${blogsSearched.length}件のうち${searchQuery.limit}件 (${searchQuery.page}/${ceil(blogsSearched.length / searchQuery.limit)}ページ)`
-                            : `${blogsSearched.length}件のうちすべて (1/1ページ)`}</p>
+            <div className="ml-88 mt-20 pt-4 mr-8">
+                <main className="pt-4">
+                    <div className="justify-between flex items-center mb-4">
+                        <div>
+                            <h1 className="font-extrabold text-3xl mb-2">ブログ</h1>
+                            <p className="text-gray-700 dark:text-gray-400">{
+                                blogsSearchedAll.length == 0 ? "検索クエリに該当する記事がありません。" :
+                                    blogsSearchedAll.length > searchQuery.limit ?
+                                        `${blogsSearchedAll.length}件のうち${searchQuery.limit}件 (${searchQuery.page}/${pages}ページ)`
+                                        : `${blogsSearchedAll.length}件のうちすべて (1/1ページ)`}</p>
+                        </div>
+                        <div className="flex space-x-2">
+                            <div className="p-2 rounded bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 hover:dark:bg-gray-600" onClick={() => {
+                                if (searchQuery.page > 1) {
+                                    setSearchQuery({...searchQuery, page: searchQuery.page - 1});
+                                }
+                            }}><FaArrowLeftLong size={18}/></div>
+
+                            <div className="p-2 rounded bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 hover:dark:bg-gray-600" onClick={() => {
+                                if (searchQuery.page < pages) {
+                                    setSearchQuery({...searchQuery, page: searchQuery.page + 1});
+                                }
+                            }}><FaArrowRightLong size={18}/></div>
+                        </div>
+
+                    </div>
                     <section className="mt-4">
                         {
                             blogsSearched.map((item, i) => {
