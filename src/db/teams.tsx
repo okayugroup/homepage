@@ -41,10 +41,6 @@ export class Team {
         this.data = data;
         this.lastUpdated = lastUpdated;
     }
-
-    getHtml(): JSX.Element {
-        return ;
-    }
 }
 
 

@@ -165,7 +165,7 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                 </section>
                 <section className="mb-6">
                     <h2 className="font-bold text-xl mx-4 mb-2">キーワード</h2>
-                    <div className="mx-2 border border-gray-200 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 dark:text-gray-300 rounded py-1 flex items-center">
+                    <div className="mx-2 border border-gray-400 dark:border-gray-600 bg-gray-100 dark:bg-gray-700 dark:text-gray-300 rounded py-1 flex items-center">
                         <label className="mx-2"><FaSearch size={18}/></label>
                         <input type="text" value={searchQuery.word ?? ""} placeholder="キーワードで検索"
                                className="w-full"
@@ -354,24 +354,24 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                 </section>
             </aside>
             <div className="ml-88 mt-20 pt-4 mr-8">
-                <main className="pt-4">
+                <main className="pt-4 min-h-[68vh]">
                     <div className="justify-between flex items-center mb-4">
                         <div>
                             <h1 className="font-extrabold text-3xl mb-2">ブログ</h1>
                             <p className="text-gray-700 dark:text-gray-400">{
                                 blogsSearchedAll.length == 0 ? "検索クエリに該当する記事がありません。" :
                                     blogsSearchedAll.length > searchQuery.limit ?
-                                        `${blogsSearchedAll.length}件のうち${searchQuery.limit}件 (${searchQuery.page}/${pages}ページ)`
+                                        `${blogsSearchedAll.length}件のうち${blogsSearched.length}件 (${searchQuery.page}/${pages}ページ)`
                                         : `${blogsSearchedAll.length}件のうちすべて (1/1ページ)`}</p>
                         </div>
                         <div className="flex space-x-2">
-                            <div className="p-2 rounded bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 hover:dark:bg-gray-600" onClick={() => {
+                            <div className={`p-2 rounded bg-gray-200 dark:bg-gray-800 ${(1 >= searchQuery.page) ? "opacity-50" : "hover:bg-gray-300 hover:dark:bg-gray-600"}`} onClick={() => {
                                 if (searchQuery.page > 1) {
                                     setSearchQuery({...searchQuery, page: searchQuery.page - 1});
                                 }
                             }}><FaArrowLeftLong size={18}/></div>
 
-                            <div className="p-2 rounded bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 hover:dark:bg-gray-600" onClick={() => {
+                            <div className={`p-2 rounded bg-gray-200 dark:bg-gray-800 ${(pages <= searchQuery.page) ? "opacity-50" : "hover:bg-gray-300 hover:dark:bg-gray-600"}`} onClick={() => {
                                 if (searchQuery.page < pages) {
                                     setSearchQuery({...searchQuery, page: searchQuery.page + 1});
                                 }
