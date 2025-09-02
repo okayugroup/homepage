@@ -68,7 +68,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         const time = blog.createdAt ?? blog.updatedAt;
         return <SharedBody>
             <Header currentPath={'/blog/' + slug} pane="blog"/>
-            <div className="pl-20 xl:pl-40 pr-88 xl:pr-94">
+            <div className="pl-4 lg:pl-20 xl:pl-40 pr-4 lg:pr-88 xl:pr-94">
                 <main className="mt-24 pb-14">
                     <div>
                         <h1 className="text-3xl font-bold">{blog.title}</h1>
@@ -107,6 +107,25 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                          dangerouslySetInnerHTML={{ __html: html }}>
                     </div>
 
+                    {/* モバイル用: 目次（LG未満で表示） */}
+                    {headings.length > 0 && (
+                        <section className="mt-10 block lg:hidden">
+                            <h2 className="font-bold text-xl mb-2">目次</h2>
+                            <nav className="rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 p-4">
+                                <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                                    {headings.map((heading, index) => (
+                                        <li key={index} className={heading.depth === 2 ? "ml-0 font-medium" : "ml-4"}>
+                                            <a href={`#${heading.slug}`} className="group">
+                                                <span className="px-1 bg-orange-300 dark:bg-orange-900 rounded-md mr-2">{`h${heading.depth}`}</span>
+                                                <span className="group-hover:underline">{heading.text}</span>
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </nav>
+                        </section>
+                    )}
+
                 </main>
                 <footer className="mb-8 space-y-4 text-center">
                     <p className="text-gray-600 dark:text-gray-300 text-sm text-center">
@@ -114,7 +133,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                     </p>
                 </footer>
             </div>
-            <aside className="fixed right-0 top-16 bottom-0 m-4 w-80 rounded-lg border border-gray-600 backdrop-blur-sm py-4 px-6 flex flex-col">
+            <aside className="hidden lg:fixed lg:right-0 lg:top-16 lg:bottom-0 lg:m-4 lg:w-80 rounded-lg border border-gray-600 backdrop-blur-sm py-4 px-6 flex-col lg:flex overflow-y-auto">
                 <h2 className="font-bold text-xl mb-2">目次</h2>
                 <section className="overflow-y-auto max-h-60 pb-4 border-b border-gray-600">
                     <nav>
