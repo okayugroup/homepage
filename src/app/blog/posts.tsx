@@ -406,7 +406,7 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                             <p className="mb-1">これらのブログ記事はおかゆグループのメンバーによって書かれていますが、内容は各著者の個人的な意見を反映しており、おかゆグループ自体の公式見解を必ずしも代表するものではありません。</p>
                             <p>このブログはGitHubで管理され、その後Next.jsを用いてビルドされてCloudflareで公開されています。</p>
                         </div>
-                        <p><Link href="/blog/policy" className="text-blue-500 dark:text-blue-600 hover:underline">詳しくはこちら。</Link></p>
+                        <p><Link href="/blog/policy" className="text-blue-500 dark:text-blue-400 hover:underline">詳しくはこちら。</Link></p>
                     </div>
                     <p className="text-gray-600 dark:text-gray-300 text-sm text-center">
                         &copy; 2024-{new Date().getFullYear()} おかゆグループ. All rights reserved.

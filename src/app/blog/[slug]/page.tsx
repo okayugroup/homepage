@@ -68,44 +68,52 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         const time = blog.createdAt ?? blog.updatedAt;
         return <SharedBody>
             <Header currentPath={'/blog/' + slug} pane="blog"/>
-            <main className="mt-24 pl-20 xl:pl-40 pr-88 xl:pr-94 pb-20">
-                <div>
-                    <h1 className="text-3xl font-bold">{blog.title}</h1>
-                    <div className="text-gray-500 mt-2 flex flex-row flex-wrap list-disc space-x-2 space-y-1">
-                        {time?
-                            <span>
-                                <Link className="group" href={`/blog?m=${format(time, "yyyyMM")}`}>
-                                    <span className="group-hover:underline">{format(time, "y/M")}</span>
-                                    /{time.getDate()}
-                                </Link>
+            <div className="pl-20 xl:pl-40 pr-88 xl:pr-94">
+                <main className="mt-24 pb-14">
+                    <div>
+                        <h1 className="text-3xl font-bold">{blog.title}</h1>
+                        <div className="text-gray-500 mt-2 flex flex-row flex-wrap list-disc space-x-2 space-y-1">
+                            {time?
+                                <span>
+                                    <Link className="group" href={`/blog?m=${format(time, "yyyyMM")}`}>
+                                        <span className="group-hover:underline">{format(time, "y/M")}</span>
+                                        /{time.getDate()}
+                                    </Link>
 
-                            </span>
-                            : <span>投稿時間不明</span>}
-                        {blog.author ? <Link href={`/member/${blog.author}`} className="group">投稿者: <span className="group-hover:underline">{blog.author}</span></Link> : <span>匿名</span>}
+                                </span>
+                                : <span>投稿時間不明</span>}
+                            {blog.author ? <Link href={`/member/${blog.author}`} className="group">投稿者: <span className="group-hover:underline">{blog.author}</span></Link> : <span>匿名</span>}
+                        </div>
+                        <ul className="flex flex-wrap gap-2 mt-1">
+                            { blog.categories?.map((category, index) => (
+                                <li key={index} className="text-sm bg-blue-200 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full px-2.5 py-1">
+                                    <Link href={`/blog?cat=${category}`} className="inline-flex items-center hover:underline">
+                                        <FaRegFolder size={14} className="mr-1"/>
+                                        {category}
+                                    </Link>
+                                </li>
+                            ))}
+                            { blog.tags?.map((tag, index) => (
+                                <li key={index} className="text-sm bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-full px-2.5 py-1">
+                                    <Link href={`/blog?tag=${tag}`} className="inline-flex items-center hover:underline">
+                                        <FaTag size={14} className="mr-1"/>
+                                        {tag}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
-                    <ul className="flex flex-wrap gap-2 mt-1">
-                        { blog.categories?.map((category, index) => (
-                            <li key={index} className="text-sm bg-blue-200 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full px-2.5 py-1">
-                                <Link href={`/blog?cat=${category}`} className="inline-flex items-center hover:underline">
-                                    <FaRegFolder size={14} className="mr-1"/>
-                                    {category}
-                                </Link>
-                            </li>
-                        ))}
-                        { blog.tags?.map((tag, index) => (
-                            <li key={index} className="text-sm bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-full px-2.5 py-1">
-                                <Link href={`/blog?tag=${tag}`} className="inline-flex items-center hover:underline">
-                                    <FaTag size={14} className="mr-1"/>
-                                    {tag}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-                <div className="blog-content mt-10"
-                     dangerouslySetInnerHTML={{ __html: html }}>
-                </div>
-            </main>
+                    <div className="blog-content mt-10"
+                         dangerouslySetInnerHTML={{ __html: html }}>
+                    </div>
+
+                </main>
+                <footer className="mb-8 space-y-4 text-center">
+                    <p className="text-gray-600 dark:text-gray-300 text-sm text-center">
+                        &copy; 2024-{new Date().getFullYear()} おかゆグループ. All rights reserved.
+                    </p>
+                </footer>
+            </div>
             <aside className="fixed right-0 top-16 bottom-0 m-4 w-80 rounded-lg border border-gray-600 backdrop-blur-sm py-4 px-6 flex flex-col">
                 <h2 className="font-bold text-xl mb-2">目次</h2>
                 <section className="overflow-y-auto max-h-60 pb-4 border-b border-gray-600">
