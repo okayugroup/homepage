@@ -35,6 +35,7 @@ export function Header({ currentPath, pane }: { currentPath: string, pane?: stri
         case "blog": {
             const urls = [
                 {path: "/", label: "ブログ一覧"},
+                {path: "/policy", label: "利用規約"},
             ]
             return (
                 <header
