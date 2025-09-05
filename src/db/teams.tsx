@@ -1,12 +1,4 @@
 import {JSX} from "react";
-import {SharedBody} from "@/components/shared-body";
-import {Header} from "@/components/Header";
-import Link from "next/link";
-import {FaArrowRight, FaRegClock} from "react-icons/fa6";
-import {BlogFindByDate} from "@/components/blog-finder";
-import {TeamIcon} from "@/components/team-icon";
-import {Footer} from "@/components/Footer";
-import {getAllBlogs} from "@/db/blog";
 
 export type History = {
     date: Date;

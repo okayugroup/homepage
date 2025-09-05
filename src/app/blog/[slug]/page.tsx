@@ -1,5 +1,5 @@
 import {SharedBody} from "@/components/shared-body";
-import {Blog, getAllBlogs, getBlogContent} from "@/db/blog";
+import {getAllBlogs, getBlogContent} from "@/db/blog";
 import {Header} from "@/components/Header";
 import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";

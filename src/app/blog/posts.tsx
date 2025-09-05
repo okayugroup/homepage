@@ -8,12 +8,11 @@ import Image from "next/image";
 import {Teams} from "@/db/teams";
 import {TeamIcon} from "@/components/team-icon";
 import Link from "next/link";
-import {useRouter, useSearchParams} from "next/navigation";
+import {useSearchParams} from "next/navigation";
 import {ceil} from "es-toolkit/compat";
 import {useState} from "react";
 import {FaLongArrowAltRight, FaSearch, FaBars, FaTimes} from "react-icons/fa";
-import {FaArrowLeftLong, FaArrowRight, FaArrowRightLong} from "react-icons/fa6";
-import {Footer} from "@/components/Footer";
+import {FaArrowLeftLong, FaArrowRightLong} from "react-icons/fa6";
 
 
 type SearchQuery = {
@@ -381,7 +380,7 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
             </aside>
 
             {/* メイン: 左マージンをレスポンシブに */}
-            <div className="lg:ml-88 mx-6 mt-30 lg:mt-20 pt-4 mx-4 lg:mr-8">
+            <div className="lg:ml-88 mt-30 lg:mt-20 pt-4 mx-4 lg:mr-8">
                 <main className="pt-4 min-h-[68vh]">
                     <div className="justify-between flex items-center mb-4">
                         <div>
