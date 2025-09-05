@@ -6,6 +6,7 @@ import {useSearchParams} from "next/navigation";
 import {useState} from "react";
 import {Members} from "@/db/members";
 import {Teams} from "@/db/teams";
+import Link from "next/link";
 
 export default function ContactPage() {
     const params = useSearchParams();
@@ -36,8 +37,8 @@ export default function ContactPage() {
                         おかゆグループへのお問い合わせはこちらから
                     </p>
                 </div>
-                <div className="px-10 lg:px-30 space-y-6 lg:space-y-10 mt-5">
-                    <form className="bg-gray-200 dark:bg-gray-800 p-6 rounded-lg shadow-md max-w-2xl mx-auto space-y-4" method="POST" onSubmit={
+                <div className="px-10 lg:px-15 space-y-6 lg:space-y-10 mt-5 lg:flex gap-6">
+                    <form className="bg-gray-200 dark:bg-gray-800 p-6 rounded-lg shadow-md space-y-4" method="POST" onSubmit={
                         (e) => {
                             e.preventDefault();
                             const form = e.target as HTMLFormElement;
@@ -160,13 +161,56 @@ export default function ContactPage() {
                         <div className="text-sm text-gray-600 dark:text-gray-400">
                             ※ 送信前に、もう一度内容をご確認ください。<br />
                             ※ 返信にはお時間をいただく場合があります。ご了承ください。<br />
-                            ※ 個人情報の取り扱いについては、プライバシーポリシーをご覧ください。
+                            ※ 個人情報の取り扱いについては、<Link className="hover:underline" href="#policy">プライバシーポリシー</Link>をご覧ください。
                         </div>
                         <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                             送信
                         </button>
 
+
+
                     </form>
+                    <div className="bg-gray-200 dark:bg-gray-800 p-6 rounded-lg flex-1/2">
+                        <h2 className="text-xl font-bold" id="policy">プライバシーポリシー</h2>
+                        <p className="mt-4 text-gray-700 dark:text-gray-300">
+                            おかゆグループ（以下、「当グループ」）は、お問い合わせフォームを通じて収集する個人情報の保護に努めています。
+                            以下に、当グループのプライバシーポリシーを示します。
+                        </p>
+                        <h3 className="text-lg font-semibold mt-4">1. 収集する情報</h3>
+                        <p className="mt-2 text-gray-700 dark:text-gray-300">
+                            お問い合わせフォームを通じて、以下の情報を収集することがあります。
+                        </p>
+                        <ul className="list-disc list-inside mt-2 text-gray-700 dark:text-gray-300">
+                            <li>お名前（任意）</li>
+                            <li>連絡先（メールアドレス、SNSアカウントなど）</li>
+                            <li>お問い合わせ内容</li>
+                            <li>その他、提供いただく情報</li>
+                        </ul>
+                        <h3 className="text-lg font-semibold mt-4">2. 利用目的</h3>
+                        <p className="mt-2 text-gray-700 dark:text-gray-300">
+                            収集した情報は、以下の目的で利用します。
+                        </p>
+                        <ul className="list-disc list-inside mt-2 text-gray-700 dark:text-gray-300">
+                            <li>お問い合わせへの対応</li>
+                            <li>サービスの改善および新サービスの開発</li>
+                            <li>法令遵守および規約違反の防止</li>
+                        </ul>
+                        <h3 className="text-lg font-semibold mt-4">3. 第三者提供</h3>
+                        <p className="mt-2 text-gray-700 dark:text-gray-300">
+                            当グループは、<Link href="https://laws.e-gov.go.jp/law/415AC0000000057" className="underline">法令</Link>に基づく場合を除き、収集した個人情報を第三者に提供することはありません。
+                        </p>
+                        <h3 className="text-lg font-semibold mt-4">4. 保護措置</h3>
+                        <p className="mt-2 text-gray-700 dark:text-gray-300">
+                            当グループは、個人情報の漏洩、紛失、改ざんなどを防止するため、適切な技術的および組織的な措置を講じます。
+                        </p>
+                        <h3 className="text-lg font-semibold mt-4">5. お問い合わせ</h3>
+                        <p className="mt-2 text-gray-700 dark:text-gray-300">
+                            個人情報の取り扱いに関するお問い合わせは、<a href="/contact" className="text-blue-600 dark:text-blue-400 underline">お問い合わせフォーム</a>からご連絡ください。
+                        </p>
+                        <p className="mt-4 text-gray-700 dark:text-gray-300">
+                            最終更新日: 2025年8月4日
+                        </p>
+                    </div>
                 </div>
             </main>
         </SharedBody>
