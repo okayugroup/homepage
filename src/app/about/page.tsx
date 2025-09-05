@@ -38,7 +38,7 @@ export default function Home() {
         <Header currentPath="/about" />
         <main className="flex flex-col justify-center gap-4 mb-16">
             <div className="pt-20 pb-5 text-center bg-gray-600 dark:bg-blue-900">
-                <h1 className="text-white font-semibold text-3xl">私たちについて</h1>
+                <h1 className="text-white font-extrabold text-3xl">私たちについて</h1>
                 <p className="text-gray-300 text-sm px-5 mt-1">
                     おかゆグループは、滋賀県を拠点にする学生のグループです。
                 </p>
