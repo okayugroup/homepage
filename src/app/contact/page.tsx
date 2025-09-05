@@ -7,6 +7,7 @@ import {useState} from "react";
 import {Members} from "@/db/members";
 import {Teams} from "@/db/teams";
 import Link from "next/link";
+import {Footer} from "@/components/Footer";
 
 export default function ContactPage() {
     const params = useSearchParams();
@@ -213,6 +214,7 @@ export default function ContactPage() {
                     </div>
                 </div>
             </main>
+            <Footer/>
         </SharedBody>
     );
 }
