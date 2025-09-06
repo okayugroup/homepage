@@ -22,7 +22,7 @@
 @media (max-width: 640px) {
     :root {
         --blog-font-scale: 0.9;
-        font-size: 80% !important;
+        font-size: 90% !important;
     }
 }
 

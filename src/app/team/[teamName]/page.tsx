@@ -3,11 +3,11 @@ import {Teams} from "@/db/teams";
 import {Header} from "@/components/Header";
 import Link from "next/link";
 import {FaArrowRight, FaRegClock} from "react-icons/fa6";
-import {BlogFindByDate} from "@/components/blog-finder";
 import {TeamIcon} from "@/components/team-icon";
 import {getAllBlogs} from "@/db/blog";
 import {Footer} from "@/components/Footer";
 import {SharedBody} from "@/components/shared-body";
+import {format} from "date-fns";
 
 export async function generateStaticParams() {
     const a = Object.keys(Teams);
@@ -60,7 +60,7 @@ export default async function TeamPage({ params }: Props) {
                             <FaRegClock size={14} className="h-full fill-gray-600 dark:text-gray-300" />
                             <p className="text-sm">
                                 <span className="text-gray-400">最終更新: </span>
-                                <BlogFindByDate className="text-gray-600 dark:text-gray-300" date={team.lastUpdated}/>
+                                <Link className="hover:underline" href={`/blog?m=${format(team.lastUpdated, "yyyy-MM-dd")}`}><time dateTime={team.lastUpdated.toISOString()} className="text-gray-600 dark:text-gray-300">{format(team.lastUpdated, "yyyy年MM月dd日")}</time></Link>
                             </p>
                         </div>
                     </div>
