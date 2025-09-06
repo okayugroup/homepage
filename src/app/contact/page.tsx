@@ -33,7 +33,7 @@ function Form() {
     };
 
     return (
-        <form className="bg-gray-200 dark:bg-gray-800 p-6 rounded-lg shadow-md space-y-4" method="POST" onSubmit={
+        <form className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md space-y-4" method="POST" onSubmit={
             (e) => {
                 e.preventDefault();
                 const form = e.target as HTMLFormElement;
@@ -63,7 +63,7 @@ function Form() {
                 <div>
                     <label htmlFor="reply-way" className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">折り返しの方法</label>
                     <select name="reply-way" id="rep-way" required
-                            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500s dark:bg-gray-700 dark:text-white"
                             value={replyWay}
                             onChange={(e) => setReplyWay(e.target.value)}>
                         <option value="mail">メール</option>
@@ -199,7 +199,7 @@ export default function ContactPage() {
                     <Suspense>
                         <Form />
                     </Suspense>
-                    <div className="bg-gray-200 dark:bg-gray-800 p-6 rounded-lg flex-1/2">
+                    <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg flex-1/2">
                         <h2 className="text-xl font-bold" id="policy">プライバシーポリシー</h2>
                         <p className="mt-4 text-gray-700 dark:text-gray-300">
                             おかゆグループ（以下、「当グループ」）は、お問い合わせフォームを通じて収集する個人情報の保護に努めています。
