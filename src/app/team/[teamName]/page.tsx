@@ -3,11 +3,11 @@ import {Teams} from "@/db/teams";
 import {Header} from "@/components/Header";
 import Link from "next/link";
 import {FaArrowRight, FaRegClock} from "react-icons/fa6";
-import {BlogFindByDate} from "@/components/blog-finder";
 import {TeamIcon} from "@/components/team-icon";
 import {getAllBlogs} from "@/db/blog";
 import {Footer} from "@/components/Footer";
 import {SharedBody} from "@/components/shared-body";
+import {format} from "date-fns";
 
 export async function generateStaticParams() {
     const a = Object.keys(Teams);
@@ -46,7 +46,7 @@ export default async function TeamPage({ params }: Props) {
     return (
         <SharedBody type="admin">
             <Header currentPath={`/team/${team.id}`} />
-            <div className="flex my-18 pl-5 xl:pl-20 gap-10">
+            <div className="flex my-18 px-5 xl:pl-20 xl:pr-0 gap-10">
                 <main className="flex-3/4">
                     <div className="mt-10 py-5 mx-4 mb-4">
                         <div className="flex items-end mb-2">
@@ -60,14 +60,14 @@ export default async function TeamPage({ params }: Props) {
                             <FaRegClock size={14} className="h-full fill-gray-600 dark:text-gray-300" />
                             <p className="text-sm">
                                 <span className="text-gray-400">最終更新: </span>
-                                <BlogFindByDate className="text-gray-600 dark:text-gray-300" date={team.lastUpdated}/>
+                                <Link className="hover:underline" href={`/blog?m=${format(team.lastUpdated, "yyyy-MM-dd")}`}><time dateTime={team.lastUpdated.toISOString()} className="text-gray-600 dark:text-gray-300">{format(team.lastUpdated, "yyyy年MM月dd日")}</time></Link>
                             </p>
                         </div>
                     </div>
-                    <div className="flex gap-6 mb-30">
+                    <div className="flex flex-col md:flex-row gap-6 mb-10 md:mb-30">
                         <section className="flex-1 space-y-6">
-                            <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl p-4">
-                                <TeamIcon id={team.id} className="fill-foreground"/>
+                            <div className="bg-gray-100 dark:bg-gray-200 transition-colors duration-300 rounded-2xl p-4">
+                                <TeamIcon id={team.id}/>
                             </div>
                             <section>
                                 <h2 className="text-2xl font-bold">概要</h2>
@@ -76,8 +76,8 @@ export default async function TeamPage({ params }: Props) {
                                 </div>
                             </section>
                         </section>
-                        <div className="border-l-2 -my-4 border-l-gray-400 dark:border-gray-600"/>
-                        <section className="w-60 space-y-4">
+                        <div className="-my-4 md:border-l-2 border-l-gray-400 dark:border-gray-600"/>
+                        <div className="md:w-60 space-y-4 grid grid-cols-1 sm:grid-cols-3 md:block bg-gray-50 dark:bg-gray-800 md:bg-background md:dark:bg-background py-4 px-8 rounded-2xl md:p-0 md:rounded-none">
                             <section>
                                 <h2 className="font-bold text-lg mb-2">設立</h2>
                                 <div className="mx-1">
@@ -142,9 +142,9 @@ export default async function TeamPage({ params }: Props) {
                                     )}
                                 </nav>
                             </section>
-                        </section>
+                        </div>
                     </div>
-                    <div className="space-y-20">
+                    <div className="space-y-10 md:space-y-20">
                         <section>
                             <h2 className="text-3xl font-bold">お知らせ</h2>
 
@@ -176,7 +176,7 @@ export default async function TeamPage({ params }: Props) {
                         { team.data.addition }
                     </div>
                 </main>
-                <aside className="mt-20 rounded-l-2xl bg-gray-50 dark:bg-gray-800 flex-1/4 p-8">
+                <aside className="mt-20 rounded-l-2xl bg-gray-50 dark:bg-gray-800 flex-1/4 p-8 hidden xl:block">
                     <h2 className="text-xl font-semibold">ここにはたぶんプロジェクトとかを書くことになると思う</h2>
                 </aside>
             </div>

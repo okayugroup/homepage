@@ -6,7 +6,7 @@ import {SharedBody} from "@/components/shared-body";
 import {TeamIcon} from "@/components/team-icon";
 
 function Card({ title, subtitle, children }: { title: string; subtitle: string; children: React.ReactNode }) {
-    return <div className="rounded-lg bg-white dark:bg-gray-800 p-6 shadow-md border border-gray-200 dark:border-gray-700">
+    return <div className="rounded-2xl bg-white dark:bg-gray-800 p-6 shadow-md border border-gray-200 dark:border-gray-700">
         <h2 className="text-2xl font-bold mb-4 pl-5 border-l-8 border-l-cyan-300 dark:border-l-cyan-950">
             {title}
             <span className="text-gray-500 dark:text-gray-400 ml-2 text-xl font-light">
@@ -70,7 +70,7 @@ export default function Home() {
                         おかゆグループは、複数のチームで構成されています。
                         各チームは、それぞれの専門分野や興味に基づいて活動しています。
                     </p>
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                         <Team alt="おかゆグループ Administrators" image="administrators" link="administrators" title="OkayuGroup Administrators">
                             <p className="text-gray-600 dark:text-gray-400">
                                 おかゆグループの運営とプロジェクトの推進を担当するチームです。

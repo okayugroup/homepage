@@ -19,6 +19,13 @@
   --blog-font-scale: 1;
 }
 
+@media (max-width: 640px) {
+    :root {
+        --blog-font-scale: 0.9;
+        font-size: 90% !important;
+    }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
