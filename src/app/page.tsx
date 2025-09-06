@@ -154,7 +154,7 @@ export default function Home() {
             </p>
             <p className="text-gray-600 dark:text-gray-400 mb-8 text-sm">
               なお、おかゆグループのプロジェクト等でご不明な点がある場合については
-              <Link href="/contact?type=question&about=project" className="text-blue-500 hover:underline">
+              <Link href="/contact?question&for=projects" className="text-blue-500 hover:underline">
                 ご質問・お問い合わせフォーム
               </Link>
               からご連絡ください。
