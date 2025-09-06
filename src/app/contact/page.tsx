@@ -12,8 +12,14 @@ import {Footer} from "@/components/Footer";
 
 function Form() {
     const params = useSearchParams();
+    let _type = params.get("type") ?? undefined;
+    if (params.get("question") !== null) _type = "question";
+    if (params.get("feedback") !== null) _type = "feedback";
+    if (params.get("business") !== null) _type = "business";
+    if (params.get("membership") !== null) _type = "membership";
+    if (params.get("other") !== null) _type = "other";
 
-    const [type, setType] = useState(params.get("type") ?? undefined);
+    const [type, setType] = useState(_type);
     const contactFor = type !== undefined ? params.get("for") ?? undefined : undefined;
     const [replyWay, setReplyWay] = useState("mail");
 
