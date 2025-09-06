@@ -64,7 +64,7 @@ export default async function TeamPage({ params }: Props) {
                             </p>
                         </div>
                     </div>
-                    <div className="flex gap-6 mb-30">
+                    <div className="flex flex-col md:flex-row gap-6 mb-10 md:mb-30">
                         <section className="flex-1 space-y-6">
                             <div className="bg-gray-100 dark:bg-gray-200 transition-colors duration-300 rounded-2xl p-4">
                                 <TeamIcon id={team.id}/>
@@ -76,8 +76,8 @@ export default async function TeamPage({ params }: Props) {
                                 </div>
                             </section>
                         </section>
-                        <div className="border-l-2 -my-4 border-l-gray-400 dark:border-gray-600"/>
-                        <section className="w-60 space-y-4">
+                        <div className="-my-4 md:border-l-2 border-l-gray-400 dark:border-gray-600"/>
+                        <div className="md:w-60 space-y-4 grid grid-cols-1 sm:grid-cols-3 md:block bg-gray-50 dark:bg-gray-800 md:bg-background md:dark:bg-background py-4 px-8 rounded-2xl md:p-0 md:rounded-none">
                             <section>
                                 <h2 className="font-bold text-lg mb-2">設立</h2>
                                 <div className="mx-1">
@@ -142,9 +142,9 @@ export default async function TeamPage({ params }: Props) {
                                     )}
                                 </nav>
                             </section>
-                        </section>
+                        </div>
                     </div>
-                    <div className="space-y-20">
+                    <div className="space-y-10 md:space-y-20">
                         <section>
                             <h2 className="text-3xl font-bold">お知らせ</h2>
 
