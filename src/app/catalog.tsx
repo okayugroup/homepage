@@ -1,6 +1,7 @@
 "use client";
 
 import {useRef} from "react";
+import {FaArrowLeft, FaArrowRight} from "react-icons/fa6";
 
 export default function ProjectCatalog({ children }: { children: React.ReactNode }) {
     const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -21,7 +22,7 @@ export default function ProjectCatalog({ children }: { children: React.ReactNode
                 className="rounded-full bg-gray-200 dark:bg-gray-700 p-2 hover:bg-blue-400 transition"
                 aria-label="左へ"
             >
-                ←
+                <FaArrowLeft size={14}/>
             </button>
             <div
                 ref={scrollRef}
@@ -35,7 +36,7 @@ export default function ProjectCatalog({ children }: { children: React.ReactNode
                 className="rounded-full bg-gray-200 dark:bg-gray-700 p-2 hover:bg-blue-400 transition"
                 aria-label="右へ"
             >
-                →
+                <FaArrowRight size={14}/>
             </button>
         </div>
     );

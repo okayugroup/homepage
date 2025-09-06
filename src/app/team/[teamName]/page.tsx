@@ -66,8 +66,8 @@ export default async function TeamPage({ params }: Props) {
                     </div>
                     <div className="flex gap-6 mb-30">
                         <section className="flex-1 space-y-6">
-                            <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl p-4">
-                                <TeamIcon id={team.id} className="fill-foreground"/>
+                            <div className="bg-gray-100 dark:bg-gray-200 transition-colors duration-300 rounded-2xl p-4">
+                                <TeamIcon id={team.id}/>
                             </div>
                             <section>
                                 <h2 className="text-2xl font-bold">概要</h2>
@@ -176,7 +176,7 @@ export default async function TeamPage({ params }: Props) {
                         { team.data.addition }
                     </div>
                 </main>
-                <aside className="mt-20 rounded-l-2xl bg-gray-50 dark:bg-gray-800 flex-1/4 p-8">
+                <aside className="mt-20 rounded-l-2xl bg-gray-50 dark:bg-gray-800 flex-1/4 p-8 hidden xl:block">
                     <h2 className="text-xl font-semibold">ここにはたぶんプロジェクトとかを書くことになると思う</h2>
                 </aside>
             </div>

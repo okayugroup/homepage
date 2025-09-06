@@ -67,8 +67,7 @@ export default function Home() {
         </section>
 
         {/* Activities Section */}
-        <div className="bg-gray-50 dark:bg-gray-800">
-          <section className="py-16 px-8 sm:px-20">
+          <section className="bg-gray-50 dark:bg-gray-800 py-16 px-8 sm:px-20">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">
                 主な活動
@@ -104,7 +103,7 @@ export default function Home() {
               </div>
             </div>
           </section>
-          <section className="py-16 px-8 sm:px-20">
+          <section className="py-16 px-8 sm:px-20 bg-white dark:bg-gray-900">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-3xl font-bold mb-8 text-gray-800 dark:text-white">
                 プロジェクト
@@ -126,7 +125,7 @@ export default function Home() {
                     return getProjectAll().filter(p => p.status == ProjectStatus.InProgress).map((p, i) => (
                         <div
                             key={i}
-                            className="min-w-[220px] snap-center bg-white dark:bg-gray-800 rounded-lg shadow p-6 flex-shrink-0"
+                            className="min-w-[220px] snap-center bg-white dark:bg-gray-700 rounded-lg shadow p-6 flex-shrink-0"
                         >
                           <h3 className="font-bold text-lg mb-2">{p.title}</h3>
                           <p className="text-gray-600 dark:text-gray-300 text-sm">{p.desc}</p>
@@ -142,10 +141,9 @@ export default function Home() {
               </ProjectCatalog>
             </div>
           </section>
-        </div>
 
         {/* Contact Section */}
-        <section className="py-16 px-8 sm:px-20 bg-white dark:bg-gray-900">
+        <section className="py-16 px-8 sm:px-20 bg-gray-50 dark:bg-gray-800">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-8 text-gray-800 dark:text-white">
               お問い合わせ
