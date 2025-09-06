@@ -150,7 +150,7 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
             {/* モバイル: フィルターボタン */}
             <button
                 type="button"
-                className="fixed top-24 left-4 z-50 lg:hidden bg-gray-200/80 dark:bg-gray-800/80 text-gray-800 dark:text-gray-100 px-3 py-2 rounded-md shadow backdrop-blur-md border border-gray-300 dark:border-gray-700"
+                className="fixed top-24 left-4 z-25 lg:hidden bg-gray-200/80 dark:bg-gray-800/80 text-gray-800 dark:text-gray-100 px-3 py-2 rounded-md shadow backdrop-blur-md border border-gray-300 dark:border-gray-700"
                 title="フィルターを開く"
                 onClick={() => setIsFilterOpen(true)}
                 aria-label="フィルターを開く"

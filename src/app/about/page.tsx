@@ -70,7 +70,7 @@ export default function Home() {
                         おかゆグループは、複数のチームで構成されています。
                         各チームは、それぞれの専門分野や興味に基づいて活動しています。
                     </p>
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                         <Team alt="おかゆグループ Administrators" image="administrators" link="administrators" title="OkayuGroup Administrators">
                             <p className="text-gray-600 dark:text-gray-400">
                                 おかゆグループの運営とプロジェクトの推進を担当するチームです。

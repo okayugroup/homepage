@@ -46,7 +46,7 @@ export default async function TeamPage({ params }: Props) {
     return (
         <SharedBody type="admin">
             <Header currentPath={`/team/${team.id}`} />
-            <div className="flex my-18 pl-5 xl:pl-20 gap-10">
+            <div className="flex my-18 px-5 xl:pl-20 xl:pr-0 gap-10">
                 <main className="flex-3/4">
                     <div className="mt-10 py-5 mx-4 mb-4">
                         <div className="flex items-end mb-2">

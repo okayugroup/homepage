@@ -13,6 +13,7 @@ export function Footer(): JSX.Element {
                     <ul className="space-y-1 text-sm">
                         <li><Link href="/about" className="hover:underline">私たちについて</Link></li>
                         <li><Link href="/team" className="hover:underline">チーム</Link></li>
+                        <li><Link href="/member" className="hover:underline">メンバー</Link></li>
                         <li><Link href="/blog" className="hover:underline">ブログ</Link></li>
                     </ul>
                     <ul className="space-y-1 text-sm">

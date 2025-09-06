@@ -27,13 +27,13 @@ export default function Home() {
         <Header currentPath="/team" />
         <main className="flex flex-col justify-center gap-4 mb-16">
             <div className="pt-20 pb-5 text-center bg-gray-600 dark:bg-blue-900">
-                <h1 className="text-white font-semibold text-3xl">チーム</h1>
+                <h1 className="text-white font-extrabold text-3xl">チーム</h1>
                 <p className="text-gray-300 text-sm px-5 mt-1">
                     おかゆグループのチーム一覧
                 </p>
             </div>
-            <div className="px-10 lg:px-30 space-y-6 lg:space-y-10 mt-5">
-                <div className="grid grid-cols-3 gap-4">
+            <div className="px-10 lg:px-20 space-y-6 lg:space-y-10 mt-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <Team alt="おかゆグループ Administrators" image="administrators" link="administrators" title="OkayuGroup Administrators">
                         <p className="text-gray-600 dark:text-gray-400">
                             おかゆグループの運営とプロジェクトの推進を担当するチームです。

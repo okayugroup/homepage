@@ -3,17 +3,20 @@ import { SharedBody } from "@/components/shared-body";
 import Link from "next/link";
 import {Members} from "@/db/members";
 import Image from "next/image";
+import React from "react";
 
 export default function MembersPage() {
     return (
         <SharedBody>
             <Header currentPath={`/member`} />
-            <main className="mt-24 m-10">
-                <div className="text-center mt-20">
-                    <h1 className="text-2xl font-bold">メンバー一覧</h1>
-                    <p className="text-gray-500">メンバーの詳細は、各メンバーのページをご覧ください。</p>
+            <main className="flex flex-col justify-center gap-4 mb-16">
+                <div className="pt-20 pb-5 text-center bg-gray-600 dark:bg-blue-900">
+                    <h1 className="text-white font-extrabold text-3xl">メンバー</h1>
+                    <p className="text-gray-300 text-sm px-5 mt-1">
+                        メンバーについての詳細は、各メンバーのページをご覧ください。
+                    </p>
                 </div>
-                <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     { Object.values(Members).map((member, i) => (
                         <Link key={i} href={`/member/${member.id}`}>
                             <div className="rounded-lg bg-white dark:bg-gray-800 p-6 shadow-md border border-gray-200 dark:border-gray-700">
