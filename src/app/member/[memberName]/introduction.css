@@ -1,0 +1,27 @@
+.markdown-body {
+    font-size: 14px;
+}
+
+.markdown-body h1 {
+    font-size: 1.8rem;
+    line-height: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+}
+
+.markdown-body h2 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 600;
+}
+
+.markdown-body h3 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+}
+
+.markdown-body p {
+    line-height: 1.5rem;
+    margin-bottom: 0.5rem;
+}
