@@ -415,7 +415,7 @@ export default function Posts({ blogs }: { blogs: Blog[] }) {
                                 const date = item.createdAt ?? item.updatedAt;
                                 return <article key={i} className="mb-6 p-4 bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-none">
                                     <h2 className="text-xl font-bold mb-2">{item.title}</h2>
-                                    <p className="text-gray-600 dark:text-gray-400 mb-2">{item.description || "No description available."}</p>
+                                    <p className="text-gray-600 dark:text-gray-400 mb-2">{item.description ?? "No description available."}</p>
                                     <div className="flex items-center space-x-2 mb-2">
                                         { item.author && Members[item.author] ? <Link href={`/member/${item.author}`} className="inline-flex items-center space-x-2 p-1 rounded-md transition-colors hover:bg-gray-400/20 dark:hover:bg-white/20">
                                             <Image src={`/members/${item.author}.webp`} alt={`${item.author}'s icon`} width={24} height={24} className="h-6 w-6 rounded-full bg-white"/>
