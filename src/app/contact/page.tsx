@@ -13,7 +13,7 @@ export default function ContactPage() {
     const params = useSearchParams();
 
     const [type, setType] = useState(params.get("type") ?? undefined);
-
+    const contactFor = type !== undefined ? params.get("for") ?? undefined : undefined;
     const [replyWay, setReplyWay] = useState("mail");
 
     const replyWayMap: { [key: string]: { label: string, placeHolder: string } } = {
@@ -112,19 +112,27 @@ export default function ContactPage() {
                                 {
                                     type === "membership" ?
                                         (
-                                            <select id="contact-type" name="contact-type" className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
+                                            <select
+                                                id="contact-type"
+                                                name="contact-type"
+                                                defaultValue={contactFor}
+                                                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
                                                 <option value="" disabled>選択してください</option>
                                                 <option value="general">おかゆグループ全般について</option>
                                                 { Object.entries(Teams).map(([k, v]) => (
-                                                    <option key={k} value={k}>チーム: {v.data.name}</option>
+                                                    <option key={k} value={"team-" + k}>チーム: {v.data.name}</option>
                                                 )) }
                                             </select>
                                         ) :
                                         type === "business" ?
-                                            (<select id="about" name="about" className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
+                                            (<select
+                                                    id="about"
+                                                    name="about"
+                                                    defaultValue={contactFor}
+                                                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
                                                 <option value="" disabled>選択してください</option>
                                                 { Object.entries(Members).map(([k, v]) => (
-                                                    <option key={k} value={k}>{v.data.name}</option>
+                                                    <option key={k} value={"member-" + k}>{v.data.name}</option>
                                                 )) }
                                             </select>
                                         ) :
@@ -134,10 +142,13 @@ export default function ContactPage() {
                                                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
                                                     placeholder="対象を具体的にご記入ください。" />) :
                                                 type === "question" || type === "feedback" || type == null ?
-                                                    (<select id="about" name="about" className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
+                                                    (<select id="about"
+                                                             name="about"
+                                                             defaultValue={contactFor}
+                                                             className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white" required>
                                                         <option value="" disabled>選択してください</option>
                                                         { Object.entries(Teams).map(([k, v]) => (
-                                                            <option key={k} value={k}>チーム: {v.data.name}</option>
+                                                            <option key={k} value={"team-" + k}>チーム: {v.data.name}</option>
                                                         )) }
                                                         <option value="projects">プロジェクトについて</option>
                                                         <option value="website">ウェブサイトについて</option>
