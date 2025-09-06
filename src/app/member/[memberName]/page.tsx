@@ -52,8 +52,8 @@ export default async function TeamPage({ params }: Props) {
     return <SharedBody>
         <Header currentPath={`/member/${memberName}`} />
         <main className="mt-24 m-10">
-            <div className="flex flex-row gap-6">
-                <div className="p-1 ml-20">
+            <div className="flex flex-col md:flex-row gap-6 lg:mx-20">
+                <div className="p-1 flex flex-col items-center mb-4 md:mb-0">
                     <Image alt={`${member.data.name}のアイコン`} src={`/members/${member.id}.webp`} width={256} height={256} className="rounded-full mb-4 border border-gray-300 dark:border-gray-600"/>
                     <section>
                         <h2 className="text-2xl font-bold mb-1">{member.data.name}</h2>
@@ -109,7 +109,7 @@ export default async function TeamPage({ params }: Props) {
                     </section>
 
                 </div>
-                <div className="flex-1 mr-40">
+                <div className="flex-1">
                     <section className="px-6 py-4 rounded-lg border border-gray-300 dark:border-gray-600">
                         <div className="flex justify-between">
                             <p className={`font-mono text-xs`}>about-me<span className="text-gray-500 dark:text-gray-400">.md</span></p>
@@ -121,10 +121,10 @@ export default async function TeamPage({ params }: Props) {
                             </ReactMarkdown>
                         </div>
                     </section>
-                    <div className="mt-8 px-6 space-y-10 mb-12">
+                    <div className="mt-8 md:px-6 space-y-10 mb-12">
                         {(member.data.languages || member.data.skills) ? <section className="max-w-full">
                             <h2 className="text-2xl font-bold">開発</h2>
-                            <div className="flex flex-nowrap w-full h-120">
+                            <div className="flex flex-nowrap flex-col lg:flex-row w-full h-180 lg:h-120">
                                 {member.data.skills ? <div className={"flex-2/3"}><Skills skills={member.data.skills!}/></div> : <></>}
                                 {member.data.languages ? <div className={"flex-1/3"}><Lang languages={member.data.languages!}/></div> : <></>}
                             </div>
