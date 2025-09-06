@@ -52,7 +52,7 @@ const SoftwareDevelopment =
             links: [
                 {
                     label: "お問い合わせ",
-                    url: "/contact?team=software"
+                    url: "/contact?question&for=software"
                 }
             ],
             roles: [
@@ -82,7 +82,7 @@ const Creators =
             links: [
                 {
                     label: "お問い合わせ",
-                    url: "/contact?team=creators"
+                    url: "/contact?question&for=team-creators"
                 }
             ],
             roles: [
@@ -135,7 +135,7 @@ const Admin =
             links: [
                 {
                     label: "お問い合わせ",
-                    url: "/contact?team=administrators"
+                    url: "/contact?question&for=administrators"
                 }
             ],
             roles: [
