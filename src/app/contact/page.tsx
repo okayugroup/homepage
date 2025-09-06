@@ -146,6 +146,9 @@ function Form() {
                                             )) }
                                             <option value="projects">プロジェクトについて</option>
                                             <option value="website">ウェブサイトについて</option>
+                                            <option value="other-software">その他のソフトウェアについて</option>
+                                            <option value="general">おかゆグループ全般について</option>
+                                            <option value="privacy">プライバシー・個人情報について</option>
                                             <option value="other">その他</option>
                                         </select>) :
                                         <input type="text" id="about" name="about"
@@ -231,7 +234,7 @@ export default function ContactPage() {
                         </p>
                         <h3 className="text-lg font-semibold mt-4">5. お問い合わせ</h3>
                         <p className="mt-2 text-gray-700 dark:text-gray-300">
-                            個人情報の取り扱いに関するお問い合わせは、<a href="/contact" className="text-blue-600 dark:text-blue-400 underline">お問い合わせフォーム</a>からご連絡ください。
+                            個人情報の取り扱いに関するお問い合わせは、<a href="/contact?question&for=privacy" className="text-blue-600 dark:text-blue-400 underline">お問い合わせフォーム</a>からご連絡ください。
                         </p>
                         <p className="mt-4 text-gray-700 dark:text-gray-300">
                             最終更新日: 2025年8月4日
