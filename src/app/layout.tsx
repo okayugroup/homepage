@@ -14,9 +14,12 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="ja">
-            <body className="antialiased">
-                {children}
-            </body>
+        <body className="antialiased">
+        {children}
+        <script async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7367654954874406"
+                crossOrigin="anonymous"></script>
+        </body>
         </html>
     );
 }
